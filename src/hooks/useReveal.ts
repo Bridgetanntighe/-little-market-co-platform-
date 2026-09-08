@@ -29,8 +29,16 @@ export function scrollToId(id: string) {
 
 export const ENQUIRY_PREFILL_KEY = "tlmc-enquiry-prefill";
 
-export function enquireWithOption(option: string) {
-  sessionStorage.setItem(ENQUIRY_PREFILL_KEY, option);
-  window.dispatchEvent(new CustomEvent("tlmc-enquiry-prefill", { detail: option }));
+export type EnquiryPrefill = {
+  packageChoice?: string;
+  christmasBooking?: string;
+  brandPersonalisation?: string;
+};
+
+export function enquireWithOption(prefill: string | EnquiryPrefill) {
+  const detail: EnquiryPrefill =
+    typeof prefill === "string" ? { packageChoice: prefill } : prefill;
+  sessionStorage.setItem(ENQUIRY_PREFILL_KEY, JSON.stringify(detail));
+  window.dispatchEvent(new CustomEvent("tlmc-enquiry-prefill", { detail }));
   scrollToId("enquire");
 }

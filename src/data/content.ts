@@ -1,117 +1,117 @@
+/** Kept for modular stall visuals — not advertised publicly. */
 export type MarketId = "bloom" | "harvest" | "celebration";
 
-export const markets = [
+export const bloomMarket = {
+  id: "bloom" as const,
+  name: "The Little Bloom Market",
+  shortName: "Bloom Market",
+  description:
+    "A premium self-serve flower market delivered to London offices, events and brand activations. We deliver it fully styled and ready for guests. Guests select stems, wrap a small bouquet and take it home. We return later to collect the structure.",
+  occasions: [
+    "Corporate offices",
+    "Workplace & People teams",
+    "Brand activations",
+    "PR & experiential",
+    "Beauty, fashion & wellness",
+    "Event planners",
+  ],
+  secondaryUses: ["Private celebrations", "Weddings"],
+  accent: "#e6c7bd",
+  accentSoft: "#f0d9d1",
+};
+
+export const experienceBenefits = [
   {
-    id: "bloom" as MarketId,
-    name: "The Bloom Market",
-    shortName: "Bloom",
-    description:
-      "A beautiful self-serve flower experience where guests can select stems, fill a picking basket and take home their own bouquet.",
-    occasions: [
-      "Bridal showers",
-      "Weddings",
-      "Private celebrations",
-      "Brand experiences",
-      "Press days",
-      "Team events",
-    ],
-    accent: "#e6c7bd",
-    accentSoft: "#f0d9d1",
+    title: "A memorable guest activity",
+    copy: "Guests select seasonal stems and create their own small bouquet — a hands-on moment that feels considered, not staged.",
   },
   {
-    id: "harvest" as MarketId,
-    name: "The Harvest Market",
-    shortName: "Harvest",
-    description:
-      "An abundant market-style installation filled with fruit, vegetables, herbs or artisan produce—ideal for celebrations, hospitality and brand activations.",
-    occasions: [
-      "Hospitality events",
-      "Summer celebrations",
-      "Brand activations",
-      "Wellness gatherings",
-      "Editorial shoots",
-      "Venue installations",
-    ],
-    accent: "#c55d48",
-    accentSoft: "#e7c96b",
+    title: "A styled feature for the event",
+    copy: "The market arrives as a finished floral installation, prepared around your event or brand palette.",
   },
   {
-    id: "celebration" as MarketId,
-    name: "The Celebration Market",
-    shortName: "Celebration",
-    description:
-      "A personalised market display for favours, gifts, sweets, products and guest welcome items.",
-    occasions: [
-      "Wedding favours",
-      "Guest welcome gifts",
-      "Product launches",
-      "Corporate gifting",
-      "Seasonal celebrations",
-      "Private events",
-    ],
-    accent: "#e7c96b",
-    accentSoft: "#e6c7bd",
+    title: "A bouquet for every guest",
+    copy: "Everyone leaves with a wrapped take-home gift, without needing a full-length workshop.",
   },
 ];
 
 export const hireOptions = [
   {
-    id: "market-hire",
-    name: "Market Hire",
-    price: "From £275",
-    note: "plus delivery",
+    id: "styled-bloom",
+    name: "Styled Bloom Market",
+    price: "From £695",
+    note: "for up to 20 guests",
     description:
-      "We deliver and assemble the market structure and its standard accessories. You provide and arrange the contents.",
+      "The Little Bloom Market delivered, styled and ready for guests — with curated flowers, wrapping and clear instructions.",
     includes: [
-      "Market structure",
-      "Standard display accessories",
-      "Plain or Little Market Co. signage",
-      "Setup and collection",
-      "Personalised panels available as an add-on",
+      "The Little Bloom Market structure",
+      "Curated seasonal flowers and foliage",
+      "Wrapping paper and ribbon",
+      "Coordinated styling",
+      "Guest instruction signage",
+      "Delivery setup and later collection",
+      "A choice of curated colour palette",
     ],
-    cta: "Hire the Market",
-    enquiryValue: "Market Hire",
+    cta: "Check Availability",
+    enquiryValue: "Styled Bloom Market",
   },
   {
-    id: "styled-market",
-    name: "Styled Market",
-    price: "From £695",
-    note: "plus delivery",
+    id: "branded-bloom",
+    name: "Branded Bloom Market",
+    price: "From £895",
+    note: "for up to 20 guests",
     description:
-      "We personalise, source, fill and style everything to the agreed theme. Your market arrives completely ready for guests to enjoy.",
+      "Everything in the Styled Bloom Market, with brand-led styling suited to launches, press days and customer gifting.",
     includes: [
-      "Market structure and accessories",
-      "Styling and colour direction",
-      "Personalised removable signage",
-      "Agreed flowers, produce, favours or products",
-      "Guest instruction signage",
-      "Setup and collection",
+      "Everything in the Styled Bloom Market",
+      "Removable logo signage",
+      "Brand or campaign colour direction",
+      "Personalised bouquet tags or stickers",
+      "Branded wrapping details",
+      "Styling suitable for content and photography",
+      "Support for launches, press days and customer gifting",
     ],
-    cta: "Have It Styled",
-    enquiryValue: "Styled Market",
+    cta: "Plan a Brand Activation",
+    enquiryValue: "Branded Bloom Market",
   },
 ];
+
+export const winterBloom = {
+  heading: "The Winter Bloom Market",
+  lead: "A festive self-serve flower experience for office Christmas celebrations, client gifting and seasonal brand activations.",
+  copy: "Guests can drop in, select winter-inspired stems and foliage, wrap their bouquet and add a ribbon or message card. It gives them a thoughtful gift to take home without requiring a full-length workshop.",
+  includes: [
+    "Curated winter flower palette",
+    "Seasonal foliage",
+    "Bouquet wrapping and ribbon",
+    "Optional company branding",
+    "Message cards or personalised tags",
+    "Full setup and collection",
+    "Suitable for approximately 20 guests upwards",
+  ],
+  cta: "Check December Availability",
+};
 
 export const howItWorks = [
   {
     step: "01",
-    title: "Choose your market",
-    copy: "Select Bloom, Harvest or Celebration — three curated installations from one signature structure.",
+    title: "Tell us about your event",
+    copy: "Share the date, location, guest number and the experience you are planning.",
   },
   {
     step: "02",
-    title: "Choose how you book",
-    copy: "Hire the equipment alone, or commission a fully personalised and styled market.",
+    title: "Choose your package",
+    copy: "Select the Styled Bloom Market or a fully branded activation.",
   },
   {
     step: "03",
-    title: "Personalise the details",
-    copy: "Agree theme, colours, signage and — where required — the contents we source and arrange.",
+    title: "We prepare every detail",
+    copy: "We source and condition the flowers then prepare the wrapping, signage and styling.",
   },
   {
     step: "04",
-    title: "We deliver, set up and collect",
-    copy: "Your installation arrives assembled and prepared, then we return at the agreed time for collection.",
+    title: "We deliver and collect",
+    copy: "The market is assembled before guests arrive and collected at the agreed time.",
   },
 ];
 
@@ -121,28 +121,32 @@ export const faqs = [
     a: "We deliver, set up and collect across London and surrounding areas. Share your venue or postcode with your enquiry and we will confirm availability.",
   },
   {
-    q: "What is the difference between Market Hire and Styled Market?",
-    a: "Market Hire is the structure and standard accessories only — you provide and arrange the contents. Styled Market includes agreed personalisation, sourcing, filling and styling so the installation arrives ready for guests.",
+    q: "What is The Little Bloom Market?",
+    a: "It is a premium self-serve flower market. Guests select seasonal stems, wrap a small bouquet and take it home. We deliver it fully styled, then return later to collect the structure.",
+  },
+  {
+    q: "What is the difference between Styled and Branded?",
+    a: "Styled Bloom Market includes the structure, curated flowers, wrapping, styling, signage, setup and collection. Branded Bloom Market adds logo signage, campaign colour direction, personalised tags or stickers and wrapping details suited to launches and press days.",
   },
   {
     q: "Is delivery included?",
-    a: "Delivery and collection are quoted according to location and access. Guide prices are shown plus delivery.",
+    a: "Delivery is calculated according to location and access. Guide package prices are shown from the base guest number; delivery is quoted separately.",
   },
   {
-    q: "Can we supply our own contents?",
-    a: "Yes. Market Hire is designed for clients who wish to fill the installation themselves. With Styled Market you may still supply selected items; we agree the approach in advance.",
+    q: "Can the market be personalised for a brand?",
+    a: "Yes. Removable logo panels, campaign colours, branded bouquet sleeves, tags and custom guest messaging can all be coordinated with your campaign.",
   },
   {
-    q: "Can the market be personalised?",
-    a: "Yes. Removable signage, campaign colours and branding can be added. Personalised panels are available as an add-on on Market Hire and included as agreed on Styled Market.",
-  },
-  {
-    q: "Do contents affect the price?",
-    a: "Yes. Final pricing depends on guest numbers, quantities, contents, location and personalisation. We never promise unlimited flowers, produce, favours or guest quantities.",
+    q: "Do guest numbers affect the price?",
+    a: "Yes. Packages start from pricing for up to 20 guests. Additional guests, premium flower requests and extended hire can be quoted separately.",
   },
   {
     q: "Will someone stay with the market during the event?",
-    a: "Our standard service is unattended following setup. We deliver, assemble and prepare your market, provide clear guest instructions and return for collection. Optional attendants may be quoted separately where required.",
+    a: "Our standard service is unattended following setup. We deliver, assemble and prepare the market, provide clear guest instructions and return for collection. Optional attendants may be quoted separately where required.",
+  },
+  {
+    q: "Do you offer a Christmas version?",
+    a: "Yes. The Winter Bloom Market is designed for office Christmas celebrations, client gifting and seasonal brand activations, with a winter flower palette and optional company branding.",
   },
   {
     q: "How long is the hire period?",
@@ -152,99 +156,75 @@ export const faqs = [
     q: "Is a damage deposit required?",
     a: "Yes. A refundable damage deposit is typically required and returned after collection, subject to the condition of the hire.",
   },
-  {
-    q: "Can you create branded installations for brands?",
-    a: "Yes. Brand activations receive a tailored quote covering removable panels, campaign colours, custom packaging and personalised take-home details as agreed.",
-  },
 ];
 
-export const customerTypes = [
+export const eventTypes = [
+  "Corporate office / workplace",
+  "Brand activation",
+  "PR / press day",
+  "Product launch",
   "Private celebration",
   "Wedding",
-  "Corporate event",
-  "Venue",
-  "Event planner or stylist",
-  "Caterer",
-  "Production or photography",
   "Other",
 ];
 
-export const enquiryOptions = [
-  "Market Hire",
-  "Styled Market",
-  "Brand activation",
+export const packageChoices = [
+  "Styled Bloom Market",
+  "Branded Bloom Market",
   "Not sure yet",
 ];
 
-export const enquiryMarkets = [
-  "Bloom Market",
-  "Harvest Market",
-  "Celebration Market",
-  "Bespoke idea",
-];
+export const yesNoChoices = ["Yes", "No"] as const;
 
-export const personalisationChoices = [
-  "No, keep it plain",
-  "The Little Market Co. styling",
-  "Personal event wording",
-  "Corporate branding",
-];
+/**
+ * Gallery items are concept previews only.
+ * Replace `imageSrc` with real event photography when available;
+ * leave undefined to keep the atmospheric placeholder treatment.
+ */
+export type GalleryItem = {
+  id: string;
+  /** Optional real photo path under /public — swap in when ready */
+  imageSrc?: string;
+  imageAlt: string;
+  title: string;
+  caption: string;
+};
 
-export const supplyingOwnChoices = ["Yes", "No", "Partly / to discuss"];
-
-export const galleryItems = [
+export const galleryItems: GalleryItem[] = [
   {
     id: "g1",
-    market: "bloom" as MarketId,
+    imageAlt: "Concept preview of a self-serve flower bar with seasonal stems",
     title: "Self-serve stem station",
-    caption: "Concept Preview — bloom market atmosphere",
+    caption: "Concept preview — guests choosing seasonal stems",
   },
   {
     id: "g2",
-    market: "bloom" as MarketId,
+    imageAlt: "Concept preview of bouquet wrapping paper and ribbon details",
     title: "Ribbon and wrap detail",
-    caption: "Concept Preview — finishing touches for take-home bouquets",
+    caption: "Concept preview — finishing touches for take-home bouquets",
   },
   {
     id: "g3",
-    market: "bloom" as MarketId,
-    title: "Picking basket moment",
-    caption: "Concept Preview — guests composing their own arrangements",
+    imageAlt: "Concept preview of guests composing small take-home bouquets",
+    title: "Bouquet-making moment",
+    caption: "Concept preview — wrapping a small bouquet to take home",
   },
   {
     id: "g4",
-    market: "harvest" as MarketId,
-    title: "Abundant produce installation",
-    caption: "Concept Preview — market colour for hospitality settings",
+    imageAlt: "Concept preview of The Little Bloom Market styled for a London office event",
+    title: "Office flower market",
+    caption: "Concept preview — workplace and People-team gatherings",
   },
   {
     id: "g5",
-    market: "harvest" as MarketId,
-    title: "Herb and crate display",
-    caption: "Concept Preview — curated harvest styling",
+    imageAlt: "Concept preview of a branded flower bar for a campaign activation",
+    title: "Brand activation styling",
+    caption: "Concept preview — campaign colours and photography-ready detail",
   },
   {
     id: "g6",
-    market: "harvest" as MarketId,
-    title: "Editorial market layout",
-    caption: "Concept Preview — brand and press-day atmosphere",
-  },
-  {
-    id: "g7",
-    market: "celebration" as MarketId,
-    title: "Favour presentation",
-    caption: "Concept Preview — personalised guest gifts",
-  },
-  {
-    id: "g8",
-    market: "celebration" as MarketId,
-    title: "Product welcome display",
-    caption: "Concept Preview — launches and sampling",
-  },
-  {
-    id: "g9",
-    market: "celebration" as MarketId,
-    title: "Seasonal celebration market",
-    caption: "Concept Preview — gifts and welcome items",
+    imageAlt: "Concept preview of a winter flower market with seasonal foliage",
+    title: "Winter Bloom atmosphere",
+    caption: "Concept preview — festive stems and seasonal foliage",
   },
 ];

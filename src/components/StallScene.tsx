@@ -18,10 +18,16 @@ const palettes: Record<MarketId, { awning: string; soft: string; produce: string
   },
 };
 
+const marketLabels: Record<MarketId, string> = {
+  bloom: "The Little Bloom Market concept preview",
+  harvest: "Modular market structure concept preview",
+  celebration: "Modular market structure concept preview",
+};
+
 export function StallScene({ market }: { market: MarketId }) {
   const p = palettes[market];
   return (
-    <svg viewBox="0 0 640 480" role="img" aria-label={`${market} market installation preview`}>
+    <svg viewBox="0 0 640 480" role="img" aria-label={marketLabels[market]}>
       <defs>
         <linearGradient id={`sky-${market}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={p.soft} stopOpacity="0.55" />

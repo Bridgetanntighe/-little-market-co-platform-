@@ -1,41 +1,60 @@
 import {
   useEffect,
-  useMemo,
   useState,
   type ChangeEvent,
-  type CSSProperties,
   type FormEvent,
 } from "react";
 import {
-  customerTypes,
-  enquiryMarkets,
-  enquiryOptions,
+  bloomMarket,
+  eventTypes,
+  experienceBenefits,
   faqs,
   galleryItems,
   hireOptions,
   howItWorks,
-  markets,
-  personalisationChoices,
-  supplyingOwnChoices,
-  type MarketId,
+  packageChoices,
+  winterBloom,
+  yesNoChoices,
 } from "./data/content";
+import { contact, submitEnquiry } from "./data/contact";
 import {
   enquireWithOption,
   ENQUIRY_PREFILL_KEY,
   scrollToId,
   useReveal,
+  type EnquiryPrefill,
 } from "./hooks/useReveal";
 import { StallScene } from "./components/StallScene";
 import "./styles/global.css";
 import "./styles/sections.css";
 
 const nav = [
-  { id: "markets", label: "Our Markets" },
-  { id: "packages", label: "Ways to Book" },
+  { id: "bloom-market", label: "The Bloom Market" },
+  { id: "packages", label: "Packages" },
+  { id: "christmas", label: "Christmas" },
   { id: "brands", label: "For Brands" },
   { id: "about", label: "About" },
+  { id: "faq", label: "FAQs" },
   { id: "enquire", label: "Enquire" },
 ];
+
+function Announcement() {
+  return (
+    <div className="announcement">
+      <div className="container">
+        <a
+          href="#christmas"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToId("christmas");
+          }}
+        >
+          Christmas 2026 bookings are now open — limited December dates available
+        </a>
+      </div>
+    </div>
+  );
+}
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -56,7 +75,7 @@ function Header() {
           }}
         >
           <span className="brand__name">The Little Market Co.</span>
-          <span className="brand__tag">Curated Event Hire &amp; Styling</span>
+          <span className="brand__tag">Flower Bar Hire · London</span>
         </a>
         <nav className={`nav ${open ? "is-open" : ""}`} aria-label="Primary">
           {nav.map((l) => (
@@ -71,13 +90,7 @@ function Header() {
               {l.label}
             </a>
           ))}
-          <button className="btn btn-accent" type="button" onClick={() => go("enquire")}>
-            Request a Quote
-          </button>
         </nav>
-        <button className="btn btn-accent header-cta" type="button" onClick={() => go("enquire")}>
-          Request a Quote
-        </button>
         <button
           className={`menu-toggle ${open ? "is-open" : ""}`}
           type="button"
@@ -94,63 +107,54 @@ function Header() {
   );
 }
 
-function Markets() {
-  const [active, setActive] = useState<MarketId>("bloom");
-  const market = markets.find((m) => m.id === active)!;
+function Experience() {
   const { ref, visible } = useReveal<HTMLElement>();
 
   return (
     <section
-      className={`section markets reveal ${visible ? "is-visible" : ""}`}
-      id="markets"
+      className={`section experience reveal ${visible ? "is-visible" : ""}`}
+      id="bloom-market"
       ref={ref}
     >
       <div className="container">
-        <span className="section-eyebrow">Signature installations</span>
-        <h2 className="section-title">Choose Your Market</h2>
+        <span className="section-eyebrow">The experience</span>
+        <h2 className="section-title">
+          Part flower bar. Part guest experience. Part take-home gift.
+        </h2>
         <p className="section-lead">
-          The Little Market Co. creates beautifully designed pop-up markets for events, celebrations
-          and brands. One signature structure, three curated experiences.
+          The Little Bloom Market gives guests the chance to select seasonal stems and create their
+          own small bouquet. Every market is prepared around your event or brand palette with
+          wrapping, ribbon and simple guest instructions included. We set everything up before your
+          event and return later to collect it.
         </p>
-        <p className="markets__note">
-          Hire the equipment alone, or have your market personalised, filled and styled. Every
-          installation is delivered, assembled and later collected.
-        </p>
-        <div className="markets__tabs" role="tablist" aria-label="Market concepts">
-          {markets.map((m) => (
-            <button
-              key={m.id}
-              type="button"
-              role="tab"
-              aria-selected={active === m.id}
-              className={`markets__tab ${active === m.id ? "is-active" : ""}`}
-              onClick={() => setActive(m.id)}
-            >
-              {m.shortName}
-            </button>
-          ))}
-        </div>
-        <div
-          className="markets__panel"
-          role="tabpanel"
-          style={{ "--panel-soft": market.accentSoft } as CSSProperties}
-        >
-          <div className="markets__art">
-            <StallScene market={market.id} />
+        <div className="experience__panel">
+          <div className="experience__art">
+            <StallScene market="bloom" />
             <span className="preview-label">Concept Preview</span>
           </div>
-          <div className="markets__content">
-            <h3>{market.name}</h3>
-            <p>{market.description}</p>
+          <div className="experience__content">
+            <h3>{bloomMarket.name}</h3>
+            <p>{bloomMarket.description}</p>
             <div className="block-title">Well suited to</div>
             <div className="chip-row">
-              {market.occasions.map((o) => (
+              {bloomMarket.occasions.map((o) => (
                 <span className="chip" key={o}>
                   {o}
                 </span>
               ))}
             </div>
+            <p className="experience__secondary">
+              Also lovely for {bloomMarket.secondaryUses.join(" and ").toLowerCase()}.
+            </p>
           </div>
+        </div>
+        <div className="benefits">
+          {experienceBenefits.map((b) => (
+            <article className="benefit" key={b.title}>
+              <h3>{b.title}</h3>
+              <p>{b.copy}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -165,7 +169,7 @@ function HowItWorks() {
         <span className="section-eyebrow">Simple process</span>
         <h2 className="section-title">How It Works</h2>
         <p className="section-lead">
-          From first enquiry to collection day, every installation is curated with clarity and care.
+          From first enquiry to collection day, every Bloom Market is prepared with clarity and care.
         </p>
         <div className="steps">
           {howItWorks.map((s) => (
@@ -190,11 +194,11 @@ function Packages() {
       ref={ref}
     >
       <div className="container">
-        <span className="section-eyebrow">How to book</span>
-        <h2 className="section-title">Two Ways to Book</h2>
+        <span className="section-eyebrow">Packages</span>
+        <h2 className="section-title">Two ways to book</h2>
         <p className="section-lead">
-          Clients can hire the equipment alone or have their market personalised, filled and styled.
-          Choose the level of curation that suits your occasion.
+          Choose a styled flower market for your guests, or a fully branded activation for your
+          campaign.
         </p>
         <div className="packages__grid">
           {hireOptions.map((pkg) => (
@@ -211,7 +215,12 @@ function Packages() {
               <button
                 className="btn btn-accent"
                 type="button"
-                onClick={() => enquireWithOption(pkg.enquiryValue)}
+                onClick={() =>
+                  enquireWithOption({
+                    packageChoice: pkg.enquiryValue,
+                    brandPersonalisation: pkg.id === "branded-bloom" ? "Yes" : undefined,
+                  })
+                }
               >
                 {pkg.cta}
               </button>
@@ -219,8 +228,52 @@ function Packages() {
           ))}
         </div>
         <p className="packages__note">
-          Final pricing depends on guest numbers, quantities, contents, location and personalisation.
+          Additional guests, premium flower requests and extended hire can be quoted separately.
+          Delivery is calculated according to location and access.
         </p>
+      </div>
+    </section>
+  );
+}
+
+function Christmas() {
+  const { ref, visible } = useReveal<HTMLElement>();
+  return (
+    <section
+      className={`section christmas reveal ${visible ? "is-visible" : ""}`}
+      id="christmas"
+      ref={ref}
+    >
+      <div className="container christmas__panel">
+        <div>
+          <span className="section-eyebrow">Christmas 2026</span>
+          <h2 className="section-title">{winterBloom.heading}</h2>
+          <p className="section-lead">{winterBloom.lead}</p>
+          <p className="christmas__copy">{winterBloom.copy}</p>
+          <ul className="christmas__list">
+            {winterBloom.includes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={() =>
+              enquireWithOption({
+                christmasBooking: "Yes",
+                packageChoice: "Styled Bloom Market",
+              })
+            }
+          >
+            {winterBloom.cta}
+          </button>
+        </div>
+        <aside className="christmas__aside" aria-hidden="true">
+          <span>Winter stems</span>
+          <span>Office parties</span>
+          <span>Client gifts</span>
+          <span>Brand moments</span>
+        </aside>
       </div>
     </section>
   );
@@ -233,48 +286,35 @@ function Brands() {
       <div className="container brands__panel">
         <div>
           <span className="section-eyebrow">For brands &amp; campaigns</span>
-          <h2 className="section-title">Made for Brands</h2>
+          <h2 className="section-title">A flower market made for your brand</h2>
           <p className="section-lead">
-            From launches and press days to team events and customer gifting, our markets can be
-            transformed into a branded guest experience with removable panels, campaign colours,
-            custom packaging and personalised take-home details.
+            Turn The Little Bloom Market into a branded guest experience for product launches, press
+            days, retail moments and client events. We can coordinate the flowers, signage, wrapping
+            and take-home details with your campaign.
+          </p>
+          <p className="brands__detail">
+            Logo panels, campaign colours, branded bouquet sleeves, tags and custom guest messaging
+            can all be prepared so the market works for content, photography and guest gifting.
           </p>
           <button
             className="btn btn-primary"
             type="button"
-            onClick={() => enquireWithOption("Brand activation")}
+            onClick={() =>
+              enquireWithOption({
+                packageChoice: "Branded Bloom Market",
+                brandPersonalisation: "Yes",
+              })
+            }
           >
             Plan a Brand Activation
           </button>
         </div>
         <aside className="brands__aside" aria-hidden="true">
-          <span>Curated</span>
-          <span>Personalised</span>
-          <span>Unattended</span>
-          <span>Collected</span>
+          <span>Logo panels</span>
+          <span>Campaign colour</span>
+          <span>Branded sleeves</span>
+          <span>Custom tags</span>
         </aside>
-      </div>
-    </section>
-  );
-}
-
-function Unattended() {
-  const { ref, visible } = useReveal<HTMLElement>();
-  return (
-    <section
-      className={`section unattended reveal ${visible ? "is-visible" : ""}`}
-      id="unattended"
-      ref={ref}
-    >
-      <div className="container">
-        <span className="section-eyebrow">Unattended by design</span>
-        <h2 className="section-title">Set Up Beautifully. Left Ready to Enjoy.</h2>
-        <p className="section-lead">
-          Our standard service does not require a member of our team to remain at your event. We
-          deliver, assemble and prepare your market, provide clear guest instructions and return at
-          the agreed time for collection. Optional attendants may be quoted separately where
-          required.
-        </p>
       </div>
     </section>
   );
@@ -290,19 +330,12 @@ function About() {
         </div>
         <div>
           <span className="section-eyebrow">About us</span>
-          <h2 className="section-title">Design-led installations. Family-run care.</h2>
+          <h2 className="section-title">Mother-and-daughter care. Flower experiences.</h2>
           <p>
-            The Little Market Co. is an independent mother-and-daughter event installation and hire
-            studio based in London.
-          </p>
-          <p>
-            We create beautifully designed pop-up markets for events, celebrations and brands —
-            premium, curated experiences that feel editorial and considered, never generic.
-          </p>
-          <p>
-            Clients hire the equipment alone or have their market personalised, filled and styled.
-            Every installation is delivered, assembled and later collected, with no staffing
-            required as standard.
+            The Little Market Co is an independent mother-and-daughter event studio based in London.
+            We create thoughtful flower experiences that feel warm, considered and beautifully put
+            together. Every Bloom Market is prepared with the same care we would give to our own
+            celebration.
           </p>
         </div>
       </div>
@@ -311,12 +344,7 @@ function About() {
 }
 
 function Gallery() {
-  const [filter, setFilter] = useState<"all" | MarketId>("all");
   const { ref, visible } = useReveal<HTMLElement>();
-  const items = useMemo(
-    () => (filter === "all" ? galleryItems : galleryItems.filter((g) => g.market === filter)),
-    [filter],
-  );
 
   return (
     <section
@@ -326,35 +354,23 @@ function Gallery() {
     >
       <div className="container">
         <span className="section-eyebrow">Concept Preview</span>
-        <h2 className="section-title">Atmosphere Studies</h2>
+        <h2 className="section-title">Bloom Market atmosphere</h2>
         <p className="section-lead">
           These visuals are concept previews showing intended atmosphere only. They are not previous
-          client bookings. Original event photography will replace them in time.
+          client bookings. Real event photography can replace each preview when available.
         </p>
-        <div className="gallery__filters">
-          {(
-            [
-              ["all", "All"],
-              ["bloom", "Bloom"],
-              ["harvest", "Harvest"],
-              ["celebration", "Celebration"],
-            ] as const
-          ).map(([id, label]) => (
-            <button
-              key={id}
-              type="button"
-              className={`gallery__filter ${filter === id ? "is-active" : ""}`}
-              onClick={() => setFilter(id)}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
         <div className="gallery__grid">
-          {items.map((item) => (
-            <article className={`gallery-card gallery-card--${item.market}`} key={item.id}>
+          {galleryItems.map((item) => (
+            <article className="gallery-card gallery-card--bloom" key={item.id}>
               <div className="gallery-card__visual">
-                <span className="preview-label">Concept Preview</span>
+                {item.imageSrc ? (
+                  <img src={item.imageSrc} alt={item.imageAlt} loading="lazy" />
+                ) : (
+                  <>
+                    <span className="preview-label">Concept Preview</span>
+                    <span className="visually-hidden">{item.imageAlt}</span>
+                  </>
+                )}
               </div>
               <div className="gallery-card__body">
                 <h3>{item.title}</h3>
@@ -368,54 +384,130 @@ function Gallery() {
   );
 }
 
+type FormState = "idle" | "submitting" | "success" | "error";
+
 function Enquiry() {
   const empty = {
     name: "",
     email: "",
     phone: "",
-    customerType: "",
-    interest: "",
-    preferredMarket: "",
-    personalisation: "",
+    company: "",
+    eventType: "",
+    packageChoice: "",
     eventDate: "",
     venue: "",
     guests: "",
-    palette: "",
-    displayItems: "",
-    supplyingOwn: "",
+    christmasBooking: "",
+    brandPersonalisation: "",
     additional: "",
   };
   const [form, setForm] = useState(empty);
-  const [done, setDone] = useState(false);
+  const [status, setStatus] = useState<FormState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof typeof empty, string>>>({});
   const { ref, visible } = useReveal<HTMLElement>();
 
   useEffect(() => {
-    const apply = (value: string) => {
-      if (!value) return;
-      setDone(false);
-      setForm((f) => ({ ...f, interest: value }));
+    const apply = (detail: EnquiryPrefill) => {
+      setStatus("idle");
+      setErrorMessage("");
+      setForm((f) => ({
+        ...f,
+        ...(detail.packageChoice ? { packageChoice: detail.packageChoice } : {}),
+        ...(detail.christmasBooking ? { christmasBooking: detail.christmasBooking } : {}),
+        ...(detail.brandPersonalisation
+          ? { brandPersonalisation: detail.brandPersonalisation }
+          : {}),
+      }));
     };
+
     const stored = sessionStorage.getItem(ENQUIRY_PREFILL_KEY);
-    if (stored) apply(stored);
-    const onPrefill = (e: Event) => apply((e as CustomEvent<string>).detail);
+    if (stored) {
+      try {
+        apply(JSON.parse(stored) as EnquiryPrefill);
+      } catch {
+        apply({ packageChoice: stored });
+      }
+    }
+
+    const onPrefill = (e: Event) => apply((e as CustomEvent<EnquiryPrefill>).detail);
     window.addEventListener("tlmc-enquiry-prefill", onPrefill);
     return () => window.removeEventListener("tlmc-enquiry-prefill", onPrefill);
   }, []);
 
   const set =
     (key: keyof typeof empty) =>
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       setForm((f) => ({ ...f, [key]: e.target.value }));
+      setFieldErrors((errs) => {
+        if (!errs[key]) return errs;
+        const next = { ...errs };
+        delete next[key];
+        return next;
+      });
+    };
 
-  const submit = (e: FormEvent) => {
+  const validate = () => {
+    const errs: Partial<Record<keyof typeof empty, string>> = {};
+    if (!form.name.trim()) errs.name = "Please enter your name.";
+    if (!form.email.trim()) errs.email = "Please enter your email address.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
+      errs.email = "Please enter a valid email address.";
+    if (!form.phone.trim()) errs.phone = "Please enter a phone number.";
+    if (!form.company.trim()) errs.company = "Please enter your company or organisation.";
+    if (!form.eventType) errs.eventType = "Please select an event type.";
+    if (!form.packageChoice) errs.packageChoice = "Please select a package.";
+    if (!form.eventDate) errs.eventDate = "Please choose an event date.";
+    if (!form.venue.trim()) errs.venue = "Please enter the venue and postcode.";
+    if (!form.guests.trim()) errs.guests = "Please enter the guest number.";
+    else if (!/^\d+$/.test(form.guests.trim()) || Number(form.guests) < 1)
+      errs.guests = "Please enter a valid guest number.";
+    if (!form.christmasBooking) errs.christmasBooking = "Please select yes or no.";
+    if (!form.brandPersonalisation) errs.brandPersonalisation = "Please select yes or no.";
+    setFieldErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const existing = JSON.parse(localStorage.getItem("tlmc-enquiries") || "[]") as unknown[];
-    localStorage.setItem(
-      "tlmc-enquiries",
-      JSON.stringify([...existing, { ...form, savedAt: new Date().toISOString() }]),
-    );
-    sessionStorage.removeItem(ENQUIRY_PREFILL_KEY);
-    setDone(true);
+    setErrorMessage("");
+    if (!validate()) {
+      setStatus("error");
+      setErrorMessage("Please check the highlighted fields and try again.");
+      return;
+    }
+
+    if (!contact.formConfigured) {
+      setStatus("error");
+      setErrorMessage(
+        "Enquiries cannot be sent yet — a form delivery service has not been connected. Please share your preferred enquiry email or form endpoint so this can be completed.",
+      );
+      return;
+    }
+
+    setStatus("submitting");
+    try {
+      await submitEnquiry({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        company: form.company.trim(),
+        eventType: form.eventType,
+        packageChoice: form.packageChoice,
+        eventDate: form.eventDate,
+        venue: form.venue.trim(),
+        guests: form.guests.trim(),
+        christmasBooking: form.christmasBooking,
+        brandPersonalisation: form.brandPersonalisation,
+        additional: form.additional.trim(),
+      });
+      sessionStorage.removeItem(ENQUIRY_PREFILL_KEY);
+      setStatus("success");
+      setForm(empty);
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -427,143 +519,281 @@ function Enquiry() {
       <div className="container enquire__layout">
         <div>
           <span className="section-eyebrow">Enquiries</span>
-          <h2 className="section-title">Request a Quote</h2>
+          <h2 className="section-title">Check your date</h2>
           <p className="section-lead">
-            Tell us about your event or brand activation. This prototype stores your enquiry locally
-            — no information is sent yet.
+            Tell us about your office event, Christmas celebration or brand activation and we will
+            come back with availability and a tailored quote.
           </p>
+          {!contact.formConfigured && (
+            <p className="enquire__notice" role="status">
+              Form delivery is not connected in this build yet. Submissions will show an error until
+              a real form endpoint or enquiry email is provided.
+            </p>
+          )}
         </div>
         <div className="enquire__form">
-          {done ? (
+          {status === "success" ? (
             <div className="form-success">
               <h3>Thank you</h3>
               <p>
-                Your enquiry has been saved on this device for the prototype. When bookings open,
-                you’ll hear from us with availability and a tailored quote.
+                Your enquiry has been sent. We will reply with availability and next steps for your
+                Bloom Market.
               </p>
-              <button className="btn btn-primary" type="button" onClick={() => setDone(false)}>
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={() => {
+                  setStatus("idle");
+                  setErrorMessage("");
+                }}
+              >
                 Send another enquiry
               </button>
             </div>
           ) : (
-            <form onSubmit={submit}>
+            <form onSubmit={submit} noValidate>
               <div className="form-grid">
-                <div className="field">
+                <div className={`field ${fieldErrors.name ? "has-error" : ""}`}>
                   <label htmlFor="name">Name</label>
-                  <input id="name" required value={form.name} onChange={set("name")} />
-                </div>
-                <div className="field">
-                  <label htmlFor="email">Email address</label>
-                  <input id="email" type="email" required value={form.email} onChange={set("email")} />
-                </div>
-                <div className="field">
-                  <label htmlFor="phone">Phone number</label>
-                  <input id="phone" type="tel" value={form.phone} onChange={set("phone")} />
-                </div>
-                <div className="field">
-                  <label htmlFor="customerType">I am enquiring as</label>
-                  <select
-                    id="customerType"
+                  <input
+                    id="name"
+                    name="name"
+                    autoComplete="name"
                     required
-                    value={form.customerType}
-                    onChange={set("customerType")}
+                    value={form.name}
+                    onChange={set("name")}
+                    aria-invalid={Boolean(fieldErrors.name)}
+                    aria-describedby={fieldErrors.name ? "name-error" : undefined}
+                  />
+                  {fieldErrors.name && (
+                    <span className="field-error" id="name-error">
+                      {fieldErrors.name}
+                    </span>
+                  )}
+                </div>
+                <div className={`field ${fieldErrors.email ? "has-error" : ""}`}>
+                  <label htmlFor="email">Work email or email address</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={form.email}
+                    onChange={set("email")}
+                    aria-invalid={Boolean(fieldErrors.email)}
+                    aria-describedby={fieldErrors.email ? "email-error" : undefined}
+                  />
+                  {fieldErrors.email && (
+                    <span className="field-error" id="email-error">
+                      {fieldErrors.email}
+                    </span>
+                  )}
+                </div>
+                <div className={`field ${fieldErrors.phone ? "has-error" : ""}`}>
+                  <label htmlFor="phone">Phone number</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    required
+                    value={form.phone}
+                    onChange={set("phone")}
+                    aria-invalid={Boolean(fieldErrors.phone)}
+                    aria-describedby={fieldErrors.phone ? "phone-error" : undefined}
+                  />
+                  {fieldErrors.phone && (
+                    <span className="field-error" id="phone-error">
+                      {fieldErrors.phone}
+                    </span>
+                  )}
+                </div>
+                <div className={`field ${fieldErrors.company ? "has-error" : ""}`}>
+                  <label htmlFor="company">Company or organisation</label>
+                  <input
+                    id="company"
+                    name="company"
+                    autoComplete="organization"
+                    required
+                    value={form.company}
+                    onChange={set("company")}
+                    aria-invalid={Boolean(fieldErrors.company)}
+                    aria-describedby={fieldErrors.company ? "company-error" : undefined}
+                  />
+                  {fieldErrors.company && (
+                    <span className="field-error" id="company-error">
+                      {fieldErrors.company}
+                    </span>
+                  )}
+                </div>
+                <div className={`field ${fieldErrors.eventType ? "has-error" : ""}`}>
+                  <label htmlFor="eventType">Event type</label>
+                  <select
+                    id="eventType"
+                    name="eventType"
+                    required
+                    value={form.eventType}
+                    onChange={set("eventType")}
+                    aria-invalid={Boolean(fieldErrors.eventType)}
+                    aria-describedby={fieldErrors.eventType ? "eventType-error" : undefined}
                   >
                     <option value="">Select…</option>
-                    {customerTypes.map((t) => (
+                    {eventTypes.map((t) => (
                       <option key={t}>{t}</option>
                     ))}
                   </select>
+                  {fieldErrors.eventType && (
+                    <span className="field-error" id="eventType-error">
+                      {fieldErrors.eventType}
+                    </span>
+                  )}
                 </div>
-                <div className="field">
-                  <label htmlFor="interest">Which option are you interested in?</label>
-                  <select id="interest" required value={form.interest} onChange={set("interest")}>
+                <div className={`field ${fieldErrors.packageChoice ? "has-error" : ""}`}>
+                  <label htmlFor="packageChoice">Styled or Branded Bloom Market</label>
+                  <select
+                    id="packageChoice"
+                    name="packageChoice"
+                    required
+                    value={form.packageChoice}
+                    onChange={set("packageChoice")}
+                    aria-invalid={Boolean(fieldErrors.packageChoice)}
+                    aria-describedby={fieldErrors.packageChoice ? "packageChoice-error" : undefined}
+                  >
                     <option value="">Select…</option>
-                    {enquiryOptions.map((o) => (
+                    {packageChoices.map((o) => (
                       <option key={o}>{o}</option>
                     ))}
                   </select>
+                  {fieldErrors.packageChoice && (
+                    <span className="field-error" id="packageChoice-error">
+                      {fieldErrors.packageChoice}
+                    </span>
+                  )}
                 </div>
-                <div className="field">
-                  <label htmlFor="preferredMarket">Which market would you like?</label>
-                  <select
-                    id="preferredMarket"
-                    required
-                    value={form.preferredMarket}
-                    onChange={set("preferredMarket")}
-                  >
-                    <option value="">Select…</option>
-                    {enquiryMarkets.map((m) => (
-                      <option key={m}>{m}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="field">
-                  <label htmlFor="personalisation">Would you like personalisation?</label>
-                  <select
-                    id="personalisation"
-                    required
-                    value={form.personalisation}
-                    onChange={set("personalisation")}
-                  >
-                    <option value="">Select…</option>
-                    {personalisationChoices.map((c) => (
-                      <option key={c}>{c}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="field">
+                <div className={`field ${fieldErrors.eventDate ? "has-error" : ""}`}>
                   <label htmlFor="eventDate">Event date</label>
                   <input
                     id="eventDate"
+                    name="eventDate"
                     type="date"
                     required
                     value={form.eventDate}
                     onChange={set("eventDate")}
+                    aria-invalid={Boolean(fieldErrors.eventDate)}
+                    aria-describedby={fieldErrors.eventDate ? "eventDate-error" : undefined}
                   />
+                  {fieldErrors.eventDate && (
+                    <span className="field-error" id="eventDate-error">
+                      {fieldErrors.eventDate}
+                    </span>
+                  )}
                 </div>
-                <div className="field">
+                <div className={`field ${fieldErrors.venue ? "has-error" : ""}`}>
                   <label htmlFor="venue">Venue and postcode</label>
-                  <input id="venue" required value={form.venue} onChange={set("venue")} />
-                </div>
-                <div className="field">
-                  <label htmlFor="guests">Guest number</label>
-                  <input id="guests" required value={form.guests} onChange={set("guests")} />
-                </div>
-                <div className="field">
-                  <label htmlFor="supplyingOwn">Are you supplying your own contents?</label>
-                  <select
-                    id="supplyingOwn"
+                  <input
+                    id="venue"
+                    name="venue"
                     required
-                    value={form.supplyingOwn}
-                    onChange={set("supplyingOwn")}
+                    value={form.venue}
+                    onChange={set("venue")}
+                    aria-invalid={Boolean(fieldErrors.venue)}
+                    aria-describedby={fieldErrors.venue ? "venue-error" : undefined}
+                  />
+                  {fieldErrors.venue && (
+                    <span className="field-error" id="venue-error">
+                      {fieldErrors.venue}
+                    </span>
+                  )}
+                </div>
+                <div className={`field ${fieldErrors.guests ? "has-error" : ""}`}>
+                  <label htmlFor="guests">Guest number</label>
+                  <input
+                    id="guests"
+                    name="guests"
+                    inputMode="numeric"
+                    required
+                    value={form.guests}
+                    onChange={set("guests")}
+                    aria-invalid={Boolean(fieldErrors.guests)}
+                    aria-describedby={fieldErrors.guests ? "guests-error" : undefined}
+                  />
+                  {fieldErrors.guests && (
+                    <span className="field-error" id="guests-error">
+                      {fieldErrors.guests}
+                    </span>
+                  )}
+                </div>
+                <div className={`field ${fieldErrors.christmasBooking ? "has-error" : ""}`}>
+                  <label htmlFor="christmasBooking">Christmas booking</label>
+                  <select
+                    id="christmasBooking"
+                    name="christmasBooking"
+                    required
+                    value={form.christmasBooking}
+                    onChange={set("christmasBooking")}
+                    aria-invalid={Boolean(fieldErrors.christmasBooking)}
+                    aria-describedby={
+                      fieldErrors.christmasBooking ? "christmasBooking-error" : undefined
+                    }
                   >
                     <option value="">Select…</option>
-                    {supplyingOwnChoices.map((c) => (
+                    {yesNoChoices.map((c) => (
                       <option key={c}>{c}</option>
                     ))}
                   </select>
+                  {fieldErrors.christmasBooking && (
+                    <span className="field-error" id="christmasBooking-error">
+                      {fieldErrors.christmasBooking}
+                    </span>
+                  )}
                 </div>
-                <div className="field full">
-                  <label htmlFor="palette">Theme or colour palette</label>
-                  <input id="palette" value={form.palette} onChange={set("palette")} />
-                </div>
-                <div className="field full">
-                  <label htmlFor="displayItems">What would you like displayed?</label>
-                  <textarea
-                    id="displayItems"
+                <div className={`field ${fieldErrors.brandPersonalisation ? "has-error" : ""}`}>
+                  <label htmlFor="brandPersonalisation">Brand personalisation required</label>
+                  <select
+                    id="brandPersonalisation"
+                    name="brandPersonalisation"
                     required
-                    placeholder="Flowers, produce, favours, products, gifts…"
-                    value={form.displayItems}
-                    onChange={set("displayItems")}
-                  />
+                    value={form.brandPersonalisation}
+                    onChange={set("brandPersonalisation")}
+                    aria-invalid={Boolean(fieldErrors.brandPersonalisation)}
+                    aria-describedby={
+                      fieldErrors.brandPersonalisation ? "brandPersonalisation-error" : undefined
+                    }
+                  >
+                    <option value="">Select…</option>
+                    {yesNoChoices.map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
+                  </select>
+                  {fieldErrors.brandPersonalisation && (
+                    <span className="field-error" id="brandPersonalisation-error">
+                      {fieldErrors.brandPersonalisation}
+                    </span>
+                  )}
                 </div>
                 <div className="field full">
                   <label htmlFor="additional">Additional information</label>
-                  <textarea id="additional" value={form.additional} onChange={set("additional")} />
+                  <textarea
+                    id="additional"
+                    name="additional"
+                    value={form.additional}
+                    onChange={set("additional")}
+                  />
                 </div>
               </div>
-              <button className="btn btn-accent" type="submit">
-                Submit enquiry
+              {status === "error" && errorMessage && (
+                <p className="form-error" role="alert">
+                  {errorMessage}
+                </p>
+              )}
+              <button
+                className="btn btn-accent"
+                type="submit"
+                disabled={status === "submitting"}
+                aria-busy={status === "submitting"}
+              >
+                {status === "submitting" ? "Sending…" : "Submit enquiry"}
               </button>
             </form>
           )}
@@ -600,19 +830,33 @@ function Footer() {
         <div className="site-footer__grid">
           <div>
             <div className="site-footer__brand">The Little Market Co.</div>
-            <p>London and surrounding areas</p>
-            <p>Curated Event Hire &amp; Styling</p>
+            <p>{contact.serviceArea}</p>
+            <p>The Little Bloom Market · Flower bar hire</p>
           </div>
-          <div>
-            <div className="site-footer__label">Instagram</div>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
-              @thelittlemarketco
-            </a>
-          </div>
-          <div>
-            <div className="site-footer__label">Email</div>
-            <a href="mailto:hello@thelittlemarketco.example">hello@thelittlemarketco.example</a>
-          </div>
+          {contact.instagramUrl ? (
+            <div>
+              <div className="site-footer__label">Instagram</div>
+              <a href={contact.instagramUrl} target="_blank" rel="noreferrer">
+                {contact.instagramHandle || "Instagram"}
+              </a>
+            </div>
+          ) : (
+            <div>
+              <div className="site-footer__label">Instagram</div>
+              <p>Details coming soon</p>
+            </div>
+          )}
+          {contact.email ? (
+            <div>
+              <div className="site-footer__label">Email</div>
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </div>
+          ) : (
+            <div>
+              <div className="site-footer__label">Email</div>
+              <p>Use the enquiry form above</p>
+            </div>
+          )}
         </div>
         <p className="site-footer__tagline">A little market. Made for your event.</p>
       </div>
@@ -623,46 +867,51 @@ function Footer() {
 export default function App() {
   return (
     <>
+      <Announcement />
       <Header />
       <main>
         <section className="hero" id="top" aria-labelledby="hero-heading">
           <div className="container hero__grid">
             <div>
-              <span className="hero__eyebrow">Curated Event Hire &amp; Styling</span>
-              <h1 id="hero-heading">A Little Market, Made for Your Event</h1>
+              <span className="hero__eyebrow">London Flower Bar Hire</span>
+              <h1 id="hero-heading">The Little Bloom Market</h1>
               <p className="hero__copy">
-                Our signature pop-up markets transform into flower bars, produce displays, favour
-                stations and branded experiences. Hire yours beautifully prepared for you to fill,
-                or let us personalise and style every detail.
+                A self-serve flower market for London events, offices and brand activations. We
+                deliver it beautifully styled and ready for your guests to choose their stems and
+                leave with a bouquet.
               </p>
               <div className="hero__actions">
-                <button className="btn btn-primary" type="button" onClick={() => scrollToId("markets")}>
-                  Explore the Markets
+                <button
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={() => scrollToId("enquire")}
+                >
+                  Check Your Date
                 </button>
                 <button
                   className="btn btn-secondary"
                   type="button"
-                  onClick={() => scrollToId("enquire")}
+                  onClick={() => scrollToId("packages")}
                 >
-                  Request a Quote
+                  View Packages
                 </button>
               </div>
-              <p className="hero__support">Delivered, set up and collected across London.</p>
+              <p className="hero__support">Delivered, styled and collected across London.</p>
             </div>
             <div className="hero__visual">
               <div className="hero__frame">
                 <div className="scallop" aria-hidden="true" />
                 <StallScene market="bloom" />
-                <div className="hero__badge">Concept Preview — curated pop-up market installation</div>
+                <div className="hero__badge">Concept Preview — The Little Bloom Market</div>
               </div>
             </div>
           </div>
         </section>
-        <Markets />
+        <Experience />
         <HowItWorks />
         <Packages />
+        <Christmas />
         <Brands />
-        <Unattended />
         <About />
         <Gallery />
         <Enquiry />
@@ -671,7 +920,7 @@ export default function App() {
       <Footer />
       <div className="sticky-cta">
         <button className="btn btn-accent" type="button" onClick={() => scrollToId("enquire")}>
-          Request a Quote
+          Check Your Date
         </button>
       </div>
     </>
