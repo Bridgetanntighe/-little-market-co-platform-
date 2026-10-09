@@ -156,36 +156,32 @@ export const everyBookingIncludes = [
 
 export const faqs = [
   {
-    q: "Which areas do you cover?",
-    a: "We deliver, set up and collect across London and surrounding areas. Share your venue or postcode with your enquiry and we will confirm availability.",
+    q: "How many guests can the flower bar accommodate?",
+    a: "The Little Bar suits up to 20 guests, The Bloom Market up to 30 guests and The Brand Market up to 40 guests. Planning a larger event? We can create a bespoke quote for higher guest numbers or additional stations.",
   },
   {
-    q: "What is The Little Bloom Market?",
-    a: "It is a self-serve flower bar experience. Guests choose seasonal stems, wrap their own bouquet and take it home. We deliver it fully styled, then return later to collect the structure.",
+    q: "How much does flower bar hire cost?",
+    a: "Flower bar hire starts from £395. Flowers are then tailored to your guest numbers and chosen bouquet style. Package guides start from £495 for The Little Bar, £695 for The Bloom Market and £995 for The Brand Market. The final price depends on guests, flowers, location and branding.",
   },
   {
-    q: "What does the from £395 price mean?",
-    a: "Flower bar hire starts from £395. Flowers are then tailored to your guest numbers and chosen bouquet style, so the final quote depends on guests, flowers, location and branding.",
+    q: "Do guests take the flowers home?",
+    a: "Yes. Guests choose their favourite stems, create their own bouquet and take it home as a beautiful reminder of the event. That take-home moment is the heart of The Little Bloom Market.",
   },
   {
-    q: "How do package prices work?",
-    a: "The Little Bar starts from £495 for up to 20 guests, The Bloom Market from £695 for up to 30 guests, and The Brand Market from £995 for up to 40 guests. Larger events and extras are quoted separately.",
+    q: "Do you provide wrapping?",
+    a: "Yes. Every booking includes wrapping materials, ribbons and care cards so guests can finish their bouquets neatly. Premium and branded wrap options are available with higher packages.",
   },
   {
-    q: "How long is the hire period?",
-    a: "Standard hire includes same-day setup and collection, with guests usually enjoying the market for around 4–6 hours. Next-morning collection or extended hire can be quoted if needed.",
+    q: "Do you stay during the event?",
+    a: "Our standard service is unattended after setup. We deliver, assemble and prepare the market, leave clear guest instructions and return for collection. Optional florist assistance can be quoted separately if you would like someone on hand.",
   },
   {
-    q: "Do you hire flower bars for weddings and birthdays?",
-    a: "Yes. The Little Bloom Market works beautifully for weddings, private celebrations, birthdays and corporate events across London.",
+    q: "Do you provide branded flower bars?",
+    a: "Yes. The Brand Market includes a custom flower colour palette, branded market sign, stickers or tags and custom wrapping for activations, PR events and larger corporate bookings across London.",
   },
   {
-    q: "Will someone stay with the market during the event?",
-    a: "Our standard service is unattended following setup. We deliver, assemble and prepare the market, provide clear guest instructions and return for collection. Optional florist assistance may be quoted separately.",
-  },
-  {
-    q: "Is a damage deposit required?",
-    a: "Yes. A refundable damage deposit is typically required and returned after collection, subject to the condition of the hire.",
+    q: "Where do you cover?",
+    a: "We deliver, set up and collect across London and surrounding areas. Share your venue or postcode with your enquiry and we will confirm availability and timing.",
   },
 ];
 
@@ -225,7 +221,10 @@ export const colourStoryChoices = [
 export type GalleryItem = {
   id: string;
   imageSrc: string;
+  imageWebp: string;
   imageAlt: string;
+  width: number;
+  height: number;
   title: string;
   caption: string;
   credit: string;
@@ -234,48 +233,66 @@ export type GalleryItem = {
 export const galleryItems: GalleryItem[] = [
   {
     id: "g1",
-    imageSrc: "/images/inspiration/flower-stems.jpg",
-    imageAlt: "Inspiration image of seasonal flower stems arranged for guests to choose",
+    imageSrc: "/images/seasonal-flower-stems-self-serve-bar-london.jpg",
+    imageWebp: "/images/seasonal-flower-stems-self-serve-bar-london.webp",
+    imageAlt: "Seasonal flower stems arranged on a self-serve flower bar in London",
+    width: 1200,
+    height: 1200,
     title: "Self-serve stem station",
     caption: "Inspiration — seasonal stems ready for guests to select (not a previous client event)",
     credit: "Photo via Unsplash",
   },
   {
     id: "g2",
-    imageSrc: "/images/inspiration/bouquet-wrap.jpg",
-    imageAlt: "Inspiration image of bouquet wrapping paper and ribbon details",
+    imageSrc: "/images/bouquet-wrapping-ribbon-flower-bar-london.jpg",
+    imageWebp: "/images/bouquet-wrapping-ribbon-flower-bar-london.webp",
+    imageAlt: "Bouquet wrapping paper and ribbon details for a London flower bar",
+    width: 900,
+    height: 1200,
     title: "Ribbon and wrap detail",
     caption: "Inspiration — finishing touches for take-home bouquets (stock photo)",
     credit: "Photo via Pexels",
   },
   {
     id: "g3",
-    imageSrc: "/images/inspiration/bouquet-moment.jpg",
-    imageAlt: "Inspiration image of pink blooms suggesting a bouquet-making moment",
+    imageSrc: "/images/guests-making-bouquets-flower-market.jpg",
+    imageWebp: "/images/guests-making-bouquets-flower-market.webp",
+    imageAlt: "Guests making take-home bouquets at a flower market experience",
+    width: 1200,
+    height: 800,
     title: "Bouquet-making moment",
     caption: "Inspiration — the feel of wrapping a small bouquet to take home (stock photo)",
     credit: "Photo via Unsplash",
   },
   {
     id: "g4",
-    imageSrc: "/images/inspiration/office-flowers.jpg",
-    imageAlt: "Inspiration image of flowers suited to a workplace gathering",
+    imageSrc: "/images/london-corporate-flower-bar-office-event.jpg",
+    imageWebp: "/images/london-corporate-flower-bar-office-event.webp",
+    imageAlt: "Corporate flower bar styled for an office event in London",
+    width: 1200,
+    height: 800,
     title: "Office flower market",
     caption: "Inspiration — workplace and celebration gatherings (not a previous client event)",
     credit: "Photo via Pexels",
   },
   {
     id: "g5",
-    imageSrc: "/images/inspiration/brand-styling.jpg",
-    imageAlt: "Inspiration image of a styled bouquet for a brand or campaign moment",
+    imageSrc: "/images/branded-flower-bar-product-launch-london.jpg",
+    imageWebp: "/images/branded-flower-bar-product-launch-london.webp",
+    imageAlt: "Branded flower bar styling for a product launch in London",
+    width: 1200,
+    height: 1600,
     title: "Brand activation styling",
     caption: "Inspiration — photography-ready floral detail for campaigns (stock photo)",
     credit: "Photo via Unsplash",
   },
   {
     id: "g6",
-    imageSrc: "/images/inspiration/winter-blooms.jpg",
-    imageAlt: "Inspiration image of winter foliage and seasonal blooms",
+    imageSrc: "/images/christmas-flower-bar-winter-blooms-london.jpg",
+    imageWebp: "/images/christmas-flower-bar-winter-blooms-london.webp",
+    imageAlt: "Winter blooms suited to a Christmas flower bar in London",
+    width: 1200,
+    height: 800,
     title: "Seasonal atmosphere",
     caption: "Inspiration — festive stems and seasonal foliage (stock photo)",
     credit: "Photo via Unsplash",

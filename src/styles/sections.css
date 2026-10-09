@@ -18,7 +18,8 @@
   overflow: hidden;
 }
 
-.announcement a {
+.announcement a,
+.announcement__btn {
   display: block;
   width: 100%;
   padding-block: 0.55rem;
@@ -29,9 +30,15 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background: none;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: center;
 }
 
-.announcement a:hover {
+.announcement a:hover,
+.announcement__btn:hover {
   color: var(--champagne);
 }
 
@@ -376,6 +383,10 @@
 
 .packages .section-lead {
   opacity: 0.88;
+}
+
+.packages a {
+  color: var(--butter);
 }
 
 .packages__grid {
@@ -877,43 +888,124 @@
 .faq__list {
   margin-top: 2.25rem;
   display: grid;
-  gap: 0.65rem;
+  gap: 0.9rem;
   max-width: 48rem;
 }
 
-.faq details {
+.faq-item {
+  padding: 1.1rem 0;
   border-bottom: 1px solid color-mix(in srgb, var(--market-green) 14%, transparent);
-  padding: 0.85rem 0;
 }
 
-.faq summary {
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+.faq-item__q {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   color: var(--market-green);
+  margin-bottom: 0.45rem;
 }
 
-.faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq summary::after {
-  content: "+";
-  color: var(--tomato);
-}
-
-.faq details[open] summary::after {
-  content: "–";
-}
-
-.faq details p {
-  margin-top: 0.65rem;
+.faq-item__a {
+  margin: 0;
   color: var(--ink-muted);
   max-width: 42rem;
+}
+
+.seo-copy__grid,
+.seo-hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.seo-copy__figure img,
+.seo-hero__figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.seo-copy__figure figcaption {
+  margin-top: 0.65rem;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+.seo-copy p {
+  color: var(--ink-muted);
+  margin-bottom: 1rem;
+  max-width: 40rem;
+}
+
+.seo-copy a,
+.related-links a,
+.breadcrumbs a {
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.breadcrumbs {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin-bottom: 1rem;
+}
+
+.seo-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  color: var(--botanical);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.seo-hero__intro,
+.seo-section__p {
+  color: var(--ink-muted);
+  margin-bottom: 1rem;
+  max-width: 42rem;
+}
+
+.seo-hero__intro {
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.container.narrow {
+  max-width: 48rem;
+}
+
+.related-links {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+  opacity: 0.9;
+}
+
+.gallery-card__visual picture,
+.gallery-card__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .site-footer {
@@ -1029,7 +1121,9 @@
   .christmas__panel,
   .brands__panel,
   .about__grid,
-  .enquire__layout {
+  .enquire__layout,
+  .seo-copy__grid,
+  .seo-hero__grid {
     grid-template-columns: 1fr;
   }
 
