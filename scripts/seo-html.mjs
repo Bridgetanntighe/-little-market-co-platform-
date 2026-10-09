@@ -60,7 +60,7 @@ const ogImage = `${site}/images/og-flower-bar-hire-london.jpg`;
 let html = readFileSync(indexPath, "utf8");
 
 function replaceMeta(doc, { title, description, path }) {
-  const canonical = path === "/" ? `${site}/` : `${site}${path}`;
+  const canonical = path === "/" ? `${site}/` : `${site}${path}/`;
   let out = doc;
   out = out.replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`);
   out = out.replace(

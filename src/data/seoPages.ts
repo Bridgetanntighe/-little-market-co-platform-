@@ -32,7 +32,7 @@ export function packagesFor(ids: string[]) {
 export const seoPages: SeoPageContent[] = [
   {
     slug: "flower-bar-hire-london",
-    path: "/flower-bar-hire-london",
+    path: "/flower-bar-hire-london/",
     title: "Flower Bar Hire London | Self-Serve Bloom Market | The Little Market Co",
     description:
       "Book flower bar hire in London for parties, weddings and celebrations. Guests choose stems, wrap a bouquet and take it home. Delivered, styled and collected across London.",
@@ -104,15 +104,15 @@ export const seoPages: SeoPageContent[] = [
       height: 800,
     },
     related: [
-      { to: "/corporate-flower-bar-london", label: "corporate flower experiences" },
-      { to: "/brand-activation-flower-bar", label: "branded flower bar hire" },
-      { to: "/christmas-flower-bar-london", label: "Christmas flower bar" },
-      { to: "/flower-workshop-london", label: "bouquet-making workshops" },
+      { to: "/corporate-flower-bar-london/", label: "corporate flower experiences" },
+      { to: "/brand-activation-flower-bar/", label: "branded flower bar hire" },
+      { to: "/christmas-flower-bar-london/", label: "Christmas flower bar" },
+      { to: "/flower-workshop-london/", label: "bouquet-making workshops" },
     ],
   },
   {
     slug: "corporate-flower-bar-london",
-    path: "/corporate-flower-bar-london",
+    path: "/corporate-flower-bar-london/",
     title: "Corporate Flower Bar London | Office Events & Team Experiences",
     description:
       "Book a corporate flower bar in London for office wellbeing days, client entertainment and team celebrations. A polished self-serve bloom market delivered to your workplace.",
@@ -183,15 +183,15 @@ export const seoPages: SeoPageContent[] = [
       height: 800,
     },
     related: [
-      { to: "/flower-bar-hire-london", label: "flower bar hire in London" },
-      { to: "/brand-activation-flower-bar", label: "branded flower bar hire" },
-      { to: "/flower-workshop-london", label: "bouquet-making workshops" },
-      { to: "/christmas-flower-bar-london", label: "Christmas flower bar" },
+      { to: "/flower-bar-hire-london/", label: "flower bar hire in London" },
+      { to: "/brand-activation-flower-bar/", label: "branded flower bar hire" },
+      { to: "/flower-workshop-london/", label: "bouquet-making workshops" },
+      { to: "/christmas-flower-bar-london/", label: "Christmas flower bar" },
     ],
   },
   {
     slug: "brand-activation-flower-bar",
-    path: "/brand-activation-flower-bar",
+    path: "/brand-activation-flower-bar/",
     title: "Branded Flower Bar Hire London | Activations & PR Events",
     description:
       "Create a branded flower bar for product launches, PR events and campaign activations in London. Custom palettes, signage and wrap matched to your brand.",
@@ -263,15 +263,15 @@ export const seoPages: SeoPageContent[] = [
       height: 1600,
     },
     related: [
-      { to: "/flower-bar-hire-london", label: "flower bar hire in London" },
-      { to: "/corporate-flower-bar-london", label: "corporate flower experiences" },
-      { to: "/christmas-flower-bar-london", label: "Christmas flower bar" },
-      { to: "/flower-workshop-london", label: "bouquet-making workshops" },
+      { to: "/flower-bar-hire-london/", label: "flower bar hire in London" },
+      { to: "/corporate-flower-bar-london/", label: "corporate flower experiences" },
+      { to: "/christmas-flower-bar-london/", label: "Christmas flower bar" },
+      { to: "/flower-workshop-london/", label: "bouquet-making workshops" },
     ],
   },
   {
     slug: "christmas-flower-bar-london",
-    path: "/christmas-flower-bar-london",
+    path: "/christmas-flower-bar-london/",
     title: "Christmas Flower Bar London | Festive Office & Party Hire",
     description:
       "Hire a Christmas flower bar in London for festive office parties and winter celebrations. Seasonal stems, warm palettes and take-home bouquets for December events.",
@@ -344,15 +344,15 @@ export const seoPages: SeoPageContent[] = [
       height: 800,
     },
     related: [
-      { to: "/flower-bar-hire-london", label: "flower bar hire in London" },
-      { to: "/corporate-flower-bar-london", label: "corporate flower experiences" },
-      { to: "/brand-activation-flower-bar", label: "branded flower bar hire" },
-      { to: "/flower-workshop-london", label: "bouquet-making workshops" },
+      { to: "/flower-bar-hire-london/", label: "flower bar hire in London" },
+      { to: "/corporate-flower-bar-london/", label: "corporate flower experiences" },
+      { to: "/brand-activation-flower-bar/", label: "branded flower bar hire" },
+      { to: "/flower-workshop-london/", label: "bouquet-making workshops" },
     ],
   },
   {
     slug: "flower-workshop-london",
-    path: "/flower-workshop-london",
+    path: "/flower-workshop-london/",
     title: "Flower Workshop London | Bouquet-Making Experiences",
     description:
       "Host a bouquet-making flower workshop in London with The Little Market Co. A guided or self-serve bloom market for teams, celebrations and brand events.",
@@ -428,10 +428,10 @@ export const seoPages: SeoPageContent[] = [
       height: 1200,
     },
     related: [
-      { to: "/flower-bar-hire-london", label: "flower bar hire in London" },
-      { to: "/corporate-flower-bar-london", label: "corporate flower experiences" },
-      { to: "/brand-activation-flower-bar", label: "branded flower bar hire" },
-      { to: "/christmas-flower-bar-london", label: "Christmas flower bar" },
+      { to: "/flower-bar-hire-london/", label: "flower bar hire in London" },
+      { to: "/corporate-flower-bar-london/", label: "corporate flower experiences" },
+      { to: "/brand-activation-flower-bar/", label: "branded flower bar hire" },
+      { to: "/christmas-flower-bar-london/", label: "Christmas flower bar" },
     ],
   },
 ];

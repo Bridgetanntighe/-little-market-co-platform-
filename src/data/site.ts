@@ -15,23 +15,23 @@ export const site = {
 
 export const seoRoutes = [
   {
-    path: "/flower-bar-hire-london",
+    path: "/flower-bar-hire-london/",
     slug: "flower-bar-hire-london",
   },
   {
-    path: "/corporate-flower-bar-london",
+    path: "/corporate-flower-bar-london/",
     slug: "corporate-flower-bar-london",
   },
   {
-    path: "/brand-activation-flower-bar",
+    path: "/brand-activation-flower-bar/",
     slug: "brand-activation-flower-bar",
   },
   {
-    path: "/christmas-flower-bar-london",
+    path: "/christmas-flower-bar-london/",
     slug: "christmas-flower-bar-london",
   },
   {
-    path: "/flower-workshop-london",
+    path: "/flower-workshop-london/",
     slug: "flower-workshop-london",
   },
 ] as const;

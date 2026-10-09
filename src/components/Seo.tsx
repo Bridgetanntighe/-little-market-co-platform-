@@ -18,7 +18,9 @@ export function Seo({
   type = "website",
   jsonLd,
 }: SeoProps) {
-  const canonical = `${site.url}${path === "/" ? "/" : path}`;
+  const normalized =
+    path === "/" ? "/" : path.endsWith("/") ? path : `${path}/`;
+  const canonical = `${site.url}${normalized === "/" ? "/" : normalized}`;
   const graph = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 
   return (

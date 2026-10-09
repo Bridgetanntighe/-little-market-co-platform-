@@ -1157,7 +1157,8 @@
     font-size: 0.75rem;
   }
 
-  .announcement a {
+  .announcement a,
+  .announcement__btn {
     line-height: 1.4;
   }
 

@@ -255,23 +255,23 @@ function SeoCopy() {
           <h2 className="section-title">Styled flower market hire for real events</h2>
           <p>
             The Little Market Co specialises in{" "}
-            <Link to="/flower-bar-hire-london">flower bar hire in London</Link> for hosts who want
+            <Link to="/flower-bar-hire-london/">flower bar hire in London</Link> for hosts who want
             guests to leave with something they made. Our Little Bloom Market is a self-serve
             station of seasonal stems, wrapping and care cards — delivered to your venue, styled for
             photographs, then collected when the evening ends.
           </p>
           <p>
             Teams book us for an{" "}
-            <Link to="/corporate-flower-bar-london">office flower activity</Link> that feels calmer
+            <Link to="/corporate-flower-bar-london/">office flower activity</Link> that feels calmer
             than typical entertainment, while producers look to us for a{" "}
-            <Link to="/brand-activation-flower-bar">brand activation flower bar</Link> with custom
+            <Link to="/brand-activation-flower-bar/">brand activation flower bar</Link> with custom
             colour stories. Private celebrations and{" "}
-            <Link to="/flower-workshop-london">bouquet-making workshops</Link> use the same market
+            <Link to="/flower-workshop-london/">bouquet-making workshops</Link> use the same market
             format with a little more guidance when needed.
           </p>
           <p>
             If you are planning a festive party, explore our{" "}
-            <Link to="/christmas-flower-bar-london">Christmas flower bar</Link> options, or compare{" "}
+            <Link to="/christmas-flower-bar-london/">Christmas flower bar</Link> options, or compare{" "}
             <a
               href="#packages"
               onClick={(e) => {

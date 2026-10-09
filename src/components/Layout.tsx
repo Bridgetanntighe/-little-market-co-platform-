@@ -13,11 +13,11 @@ const homeNav = [
 ];
 
 const pageNav = [
-  { to: "/flower-bar-hire-london", label: "Flower bar hire" },
-  { to: "/corporate-flower-bar-london", label: "Corporate" },
-  { to: "/brand-activation-flower-bar", label: "Brand activations" },
-  { to: "/christmas-flower-bar-london", label: "Christmas" },
-  { to: "/flower-workshop-london", label: "Workshops" },
+  { to: "/flower-bar-hire-london/", label: "Flower bar hire" },
+  { to: "/corporate-flower-bar-london/", label: "Corporate" },
+  { to: "/brand-activation-flower-bar/", label: "Brand activations" },
+  { to: "/christmas-flower-bar-london/", label: "Christmas" },
+  { to: "/flower-workshop-london/", label: "Workshops" },
 ];
 
 function Announcement() {
@@ -95,19 +95,19 @@ function Footer() {
             <div className="site-footer__label">Explore</div>
             <ul className="footer-links">
               <li>
-                <Link to="/flower-bar-hire-london">Flower bar hire in London</Link>
+                <Link to="/flower-bar-hire-london/">Flower bar hire in London</Link>
               </li>
               <li>
-                <Link to="/corporate-flower-bar-london">Corporate flower experiences</Link>
+                <Link to="/corporate-flower-bar-london/">Corporate flower experiences</Link>
               </li>
               <li>
-                <Link to="/brand-activation-flower-bar">Branded flower bar hire</Link>
+                <Link to="/brand-activation-flower-bar/">Branded flower bar hire</Link>
               </li>
               <li>
-                <Link to="/christmas-flower-bar-london">Christmas flower bar</Link>
+                <Link to="/christmas-flower-bar-london/">Christmas flower bar</Link>
               </li>
               <li>
-                <Link to="/flower-workshop-london">Bouquet-making workshops</Link>
+                <Link to="/flower-workshop-london/">Bouquet-making workshops</Link>
               </li>
               <li>
                 <a
