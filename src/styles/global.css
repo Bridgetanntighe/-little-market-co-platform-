@@ -132,6 +132,10 @@ ul {
   font-weight: 400;
 }
 
+a.btn {
+  text-decoration: none;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
