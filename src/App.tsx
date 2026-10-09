@@ -885,8 +885,10 @@ function Footer() {
 export default function App() {
   return (
     <>
-      <Announcement />
-      <Header />
+      <div className="site-top">
+        <Announcement />
+        <Header />
+      </div>
       <main>
         <section className="hero" id="top" aria-labelledby="hero-heading">
           <div className="container hero__grid">

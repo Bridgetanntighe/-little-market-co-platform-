@@ -1,8 +1,11 @@
-.announcement {
+.site-top {
   position: sticky;
   top: 0;
   z-index: 110;
-  min-height: var(--announce-h);
+}
+
+.announcement {
+  height: var(--announce-h);
   display: flex;
   align-items: center;
   background: var(--market-green);
@@ -10,15 +13,20 @@
   text-align: center;
   font-size: 0.82rem;
   letter-spacing: 0.04em;
+  overflow: hidden;
 }
 
 .announcement a {
-  display: inline-block;
+  display: block;
+  width: 100%;
   padding-block: 0.55rem;
   color: var(--ivory);
   text-decoration: underline;
   text-underline-offset: 0.2em;
   text-decoration-color: color-mix(in srgb, var(--butter) 70%, transparent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .announcement a:hover {
@@ -26,9 +34,6 @@
 }
 
 .site-header {
-  position: sticky;
-  top: var(--announce-h);
-  z-index: 100;
   height: var(--header-h);
   backdrop-filter: blur(12px);
   background: color-mix(in srgb, var(--ivory) 88%, transparent);
@@ -705,11 +710,14 @@
 @media (max-width: 920px) {
   .menu-toggle {
     display: inline-flex;
+    position: relative;
+    z-index: 2;
   }
 
   .nav {
     position: fixed;
     inset: calc(var(--announce-h) + var(--header-h)) 0 auto 0;
+    z-index: 105;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
