@@ -863,6 +863,224 @@
   margin-top: 2.5rem;
 }
 
+/* Floral style collections */
+.style-preview,
+.style-selector {
+  margin-top: 2rem;
+}
+
+.style-preview__grid,
+.style-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.style-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.style-card--selected {
+  border-color: var(--botanical);
+  box-shadow: 0 0 0 1px var(--botanical);
+}
+
+.style-card__media {
+  position: relative;
+  background: color-mix(in srgb, var(--cream) 70%, white);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.style-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.style-card__media--needed {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: 1.25rem 1.15rem;
+  background:
+    linear-gradient(160deg, #f7f3ec 0%, #ebe4d8 55%, #e2ddd2 100%);
+  color: var(--botanical);
+}
+
+.style-card__needed-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.style-card__needed-brief {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--botanical);
+}
+
+.style-card__needed-copy {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  max-width: 28ch;
+}
+
+.style-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.1rem 1.15rem 1.25rem;
+  flex: 1;
+  background: var(--paper);
+}
+
+.style-card--preview .style-card__body {
+  padding: 0.95rem 1rem 1.1rem;
+}
+
+.style-card__heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.style-card__body h3 {
+  font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+  color: var(--botanical);
+}
+
+.style-card__body p {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.style-card--preview .style-card__body p {
+  font-size: 0.9rem;
+}
+
+.style-card__body .btn {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+}
+
+.style-card__selected-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--botanical);
+}
+
+.style-card__check {
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  background: var(--botanical);
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.style-card__check::after {
+  content: "";
+  position: absolute;
+  left: 0.28rem;
+  top: 0.18rem;
+  width: 0.28rem;
+  height: 0.48rem;
+  border-right: 2px solid var(--cream);
+  border-bottom: 2px solid var(--cream);
+  transform: rotate(40deg);
+}
+
+.style-selector__seasonal {
+  margin-top: 2rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--cream) 65%, white);
+  max-width: 40rem;
+}
+
+.style-selector__seasonal h3 {
+  font-size: 1.45rem;
+  color: var(--botanical);
+  margin-bottom: 0.4rem;
+}
+
+.style-selector__seasonal p {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.65rem;
+}
+
+.style-selector__own {
+  margin-top: 1.1rem;
+}
+
+.style-selector__note {
+  margin-top: 1.25rem;
+  max-width: 42rem;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+
+.style-selector__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.style-preview .btn {
+  margin-top: 1.5rem;
+}
+
+.text-link {
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  font-weight: 500;
+}
+
+.text-link:hover {
+  color: var(--rose);
+}
+
+.brand-match-panel {
+  margin-top: 2rem;
+  padding: 1.35rem 1.4rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 80%, white);
+  max-width: 40rem;
+}
+
+.brand-match-panel h2,
+.brand-match-panel h3 {
+  font-size: 1.55rem;
+  color: var(--botanical);
+  margin-bottom: 0.45rem;
+}
+
+.brand-match-panel p {
+  color: var(--ink-muted);
+  margin-bottom: 1rem;
+}
+
 .colour-card {
   display: flex;
   flex-direction: column;
@@ -1826,8 +2044,15 @@
 @media (max-width: 1040px) {
   .packages__grid--three,
   .colour-stories__grid,
-  .occasions__cards {
+  .occasions__cards,
+  .style-preview__grid,
+  .style-selector__grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .style-selector__grid .style-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 28rem;
   }
 
   .occasion-card--featured {
@@ -1904,7 +2129,7 @@
   }
 
   main {
-    padding-bottom: 5.5rem;
+    padding-bottom: calc(7.25rem + env(safe-area-inset-bottom, 0px));
   }
 
   .announcement {
@@ -1914,6 +2139,33 @@
   .announcement a,
   .announcement__btn {
     line-height: 1.4;
+  }
+
+  .style-preview__grid,
+  .style-selector__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .style-card__body {
+    padding: 0.9rem 1rem 1.05rem;
+    gap: 0.4rem;
+  }
+
+  .style-card__body p {
+    font-size: 0.9rem;
+  }
+
+  .style-card__media {
+    aspect-ratio: 5 / 4;
+  }
+
+  .style-selector__actions {
+    flex-direction: column;
+  }
+
+  .style-selector__actions .btn {
+    width: 100%;
   }
 
   .sticky-cta {

@@ -5,7 +5,6 @@ import { Seo } from "../components/Seo";
 import { WorkWithUs } from "../components/WorkWithUs";
 import {
   bloomMarket,
-  colourStories,
   experienceSteps,
   faqs,
   hireOptions,
@@ -14,6 +13,7 @@ import { pageSeo } from "../data/pageSeo";
 import { site } from "../data/site";
 import { enquireHref, scrollToId, useReveal } from "../hooks/useReveal";
 import { FaqList } from "../components/FaqList";
+import { FloralStylePreview } from "../components/FloralStyleSelector";
 
 const occasions = [
   {
@@ -154,27 +154,12 @@ function Styling() {
     >
       <div className="container">
         <span className="section-eyebrow">Styling</span>
-        <h2 className="section-title">Flowers that feel like your day</h2>
+        <h2 className="section-title">Find your floral style</h2>
         <p className="section-lead">
-          Choose one of our palettes or share your own colours. We’ll suggest seasonal flowers to
-          complement your celebration.
+          Soft and romantic, fresh and understated, or full of colour. Choose a starting point and
+          we’ll shape the flowers around your celebration.
         </p>
-        <div className="colour-stories__grid">
-          {colourStories.map((story) => (
-            <article className="colour-card" key={story.id}>
-              <div className="colour-card__swatches" aria-hidden="true">
-                {story.colours.map((colour) => (
-                  <span key={colour} style={{ background: colour }} />
-                ))}
-              </div>
-              <h3>{story.name}</h3>
-              <p>{story.copy}</p>
-            </article>
-          ))}
-        </div>
-        <Link className="btn btn-secondary" style={{ marginTop: "1.75rem" }} to="/packages/">
-          See full styling details
-        </Link>
+        <FloralStylePreview />
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaqList } from "../components/FaqList";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
-import { corporateFaqs, hireOptions } from "../data/content";
+import { brandMatchCollection, corporateFaqs, hireOptions } from "../data/content";
 import { breadcrumbList, faqPageJsonLd, pageSeo } from "../data/pageSeo";
 import { enquireHref, useReveal } from "../hooks/useReveal";
 
@@ -89,6 +89,20 @@ export default function CorporatePage() {
                   artwork and timeline.
                 </p>
               </article>
+            </div>
+            <div className="brand-match-panel">
+              <h3>{brandMatchCollection.name}</h3>
+              <p>{brandMatchCollection.copy}</p>
+              <Link
+                className="btn btn-secondary"
+                to={enquireHref({
+                  eventType: "Brand activation",
+                  colourIdeas: brandMatchCollection.enquiryValue,
+                  packageChoice: "The Brand Market",
+                })}
+              >
+                Enquire about Brand Match
+              </Link>
             </div>
             <p className="section-lead" style={{ marginTop: "1.5rem" }}>
               Looking for a private party instead? Explore{" "}

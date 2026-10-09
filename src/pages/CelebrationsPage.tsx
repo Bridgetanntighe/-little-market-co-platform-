@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { FaqList } from "../components/FaqList";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
-import { celebrationFaqs, colourStories, hireOptions } from "../data/content";
+import { FloralStylePreview } from "../components/FloralStyleSelector";
+import { celebrationFaqs, hireOptions } from "../data/content";
 import { breadcrumbList, faqPageJsonLd, pageSeo } from "../data/pageSeo";
 import { enquireHref, useReveal } from "../hooks/useReveal";
 
@@ -97,20 +98,12 @@ export default function CelebrationsPage() {
 
         <section className="section colour-stories">
           <div className="container">
-            <h2 className="section-title">Colours for your gathering</h2>
-            <div className="colour-stories__grid wedding-palettes">
-              {colourStories.map((story) => (
-                <article className="colour-card" key={story.id}>
-                  <div className="colour-card__swatches" aria-hidden="true">
-                    {story.colours.map((c) => (
-                      <span key={c} style={{ background: c }} />
-                    ))}
-                  </div>
-                  <h3>{story.name}</h3>
-                  <p>{story.copy}</p>
-                </article>
-              ))}
-            </div>
+            <h2 className="section-title">Find your floral style</h2>
+            <p className="section-lead">
+              Soft and romantic, fresh and understated, or full of colour — a starting point for
+              your shower or birthday.
+            </p>
+            <FloralStylePreview />
           </div>
         </section>
 

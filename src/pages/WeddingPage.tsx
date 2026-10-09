@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaqList } from "../components/FaqList";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
+import { FloralStylePreview } from "../components/FloralStyleSelector";
 import { hireOptions } from "../data/content";
 import { breadcrumbList, canonicalFor, faqPageJsonLd, pageSeo } from "../data/pageSeo";
 import { site } from "../data/site";
@@ -9,7 +10,6 @@ import {
   weddingFaqs,
   weddingImages,
   weddingIncludes,
-  weddingPalettes,
   weddingSteps,
   weddingTouches,
 } from "../data/wedding";
@@ -151,27 +151,15 @@ export default function WeddingPage() {
         >
           <div className="container">
             <span className="section-eyebrow">Colours and styling</span>
-            <h2 className="section-title">Styled around your wedding</h2>
+            <h2 className="section-title">Find your floral style</h2>
             <p className="section-lead">
-              Particular flower varieties depend on season and availability — we suggest stems that
-              keep the story fresh on your date.
+              Soft and romantic, fresh and understated, or full of colour. Choose a starting point
+              and we’ll shape the flowers around your wedding.
             </p>
-            <div className="colour-stories__grid wedding-palettes">
-              {weddingPalettes.map((palette) => (
-                <article className="colour-card" key={palette.id}>
-                  <div className="colour-card__swatches" aria-hidden="true">
-                    {palette.colours.map((colour) => (
-                      <span key={colour} style={{ background: colour }} />
-                    ))}
-                  </div>
-                  <h3>{palette.name}</h3>
-                  <p>{palette.copy}</p>
-                </article>
-              ))}
-            </div>
+            <FloralStylePreview />
             <p className="wedding-palette-note">
-              Have your own colour palette? Tell us what you’re planning and we’ll suggest seasonal
-              flowers to complement it.
+              Flower varieties vary with the season. Open the full style selector on packages to
+              choose Soft Meadow, Modern Neutral or Colour Pop before you enquire.
             </p>
             <Link className="btn btn-secondary" to={weddingEnquire}>
               Check your wedding date

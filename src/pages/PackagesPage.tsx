@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FaqList } from "../components/FaqList";
+import { FloralStyleSelector } from "../components/FloralStyleSelector";
 import { Seo } from "../components/Seo";
-import { colourStories, hireOptions, packageFaqs } from "../data/content";
+import { hireOptions, packageFaqs } from "../data/content";
 import { breadcrumbList, canonicalFor, faqPageJsonLd, pageSeo } from "../data/pageSeo";
-import { enquireHref, useReveal } from "../hooks/useReveal";
+import { enquireHref, scrollToId, useReveal } from "../hooks/useReveal";
 
 const rows = [
   { key: "bouquets", label: "Bouquets included" },
@@ -19,8 +21,15 @@ const rows = [
 const seo = pageSeo.packages;
 
 export default function PackagesPage() {
+  const location = useLocation();
   const { ref, visible } = useReveal<HTMLElement>();
   const { ref: faqRef, visible: faqVisible } = useReveal<HTMLElement>();
+
+  useEffect(() => {
+    if (location.hash === "#floral-style") {
+      requestAnimationFrame(() => scrollToId("floral-style"));
+    }
+  }, [location.hash]);
 
   return (
     <>
@@ -138,33 +147,15 @@ export default function PackagesPage() {
           </div>
         </section>
 
-        <section className="section colour-stories">
+        <section className="section colour-stories" id="floral-style">
           <div className="container">
-            <h2 className="section-title">Colour stories</h2>
+            <span className="section-eyebrow">Styling</span>
+            <h2 className="section-title">Find your floral style</h2>
             <p className="section-lead">
-              Choose a palette or share your own colours. Seasonal availability shapes the final
-              stem list.
+              Soft and romantic, fresh and understated, or full of colour. Choose a starting point
+              and we’ll shape the flowers around your celebration.
             </p>
-            <div className="colour-stories__grid wedding-palettes">
-              {colourStories.map((story) => (
-                <article className="colour-card" key={story.id}>
-                  <div className="colour-card__swatches" aria-hidden="true">
-                    {story.colours.map((colour) => (
-                      <span key={colour} style={{ background: colour }} />
-                    ))}
-                  </div>
-                  <h3>{story.name}</h3>
-                  <p>{story.copy}</p>
-                </article>
-              ))}
-            </div>
-            <Link
-              className="btn btn-primary"
-              style={{ marginTop: "1.5rem" }}
-              to={enquireHref()}
-            >
-              Check availability
-            </Link>
+            <FloralStyleSelector />
           </div>
         </section>
 

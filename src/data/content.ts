@@ -102,32 +102,92 @@ export const hireOptions = [
   },
 ];
 
-export const colourStories = [
+export type FloralImage = {
+  src: string;
+  webp: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+export type FloralCollection = {
+  id: string;
+  name: string;
+  copy: string;
+  enquiryValue: string;
+  /** Set when a suitable palette photograph is available. */
+  image?: FloralImage;
+  /** Honest brief when no suitable existing photo illustrates this palette. */
+  imageNeeded?: string;
+};
+
+/** Main wedding/celebration collections — shared across homepage preview and packages selector. */
+export const floralCollections: FloralCollection[] = [
   {
     id: "soft-meadow",
     name: "Soft Meadow",
-    colours: ["#f3e7e1", "#e8c9b8", "#f0d9a8", "#c5d4b8"],
-    copy: "Blush, peach, cream and gentle greens",
-    bestFor: "Weddings, showers and soft daytime celebrations.",
+    copy: "Blush, peach and creamy blooms for a soft, romantic feel.",
     enquiryValue: "Soft Meadow",
+    image: {
+      src: "/images/bouquet-wrapping-ribbon-flower-bar-london.jpg",
+      webp: "/images/bouquet-wrapping-ribbon-flower-bar-london.webp",
+      alt: "Styling inspiration — blush and peach blooms for a Soft Meadow palette",
+      width: 900,
+      height: 1200,
+    },
   },
   {
     id: "modern-neutral",
     name: "Modern Neutral",
-    colours: ["#f6f1e8", "#efe6d6", "#d4b59e", "#6b7c59"],
-    copy: "White, cream and soft foliage",
-    bestFor: "Understated weddings, dinners and elegant private events.",
+    copy: "White and cream flowers with natural greenery for an understated celebration.",
     enquiryValue: "Modern Neutral",
+    imageNeeded:
+      "White and cream bouquet with soft foliage on a light neutral background (close-up, styling inspiration).",
   },
   {
     id: "colour-pop",
     name: "Colour Pop",
-    colours: ["#e8a0b0", "#e07a5f", "#f2b705", "#70c1a0"],
-    copy: "Pink, coral and warm seasonal colour",
-    bestFor: "Joyful birthdays, showers and energetic celebrations.",
+    copy: "Playful pinks, coral and sunny yellow for a joyful statement.",
     enquiryValue: "Colour Pop",
+    image: {
+      src: "/images/guests-making-bouquets-flower-market.jpg",
+      webp: "/images/guests-making-bouquets-flower-market.webp",
+      alt: "Styling inspiration — warm sunny blooms for a Colour Pop palette",
+      width: 1200,
+      height: 800,
+    },
   },
 ];
+
+/** @deprecated Prefer floralCollections — kept for any remaining swatch references. */
+export const colourStories = floralCollections.map((c) => ({
+  id: c.id,
+  name: c.name,
+  colours:
+    c.id === "soft-meadow"
+      ? ["#f3e7e1", "#e8c9b8", "#f0d9a8", "#c5d4b8"]
+      : c.id === "modern-neutral"
+        ? ["#f6f1e8", "#efe6d6", "#d4b59e", "#6b7c59"]
+        : ["#e8a0b0", "#e07a5f", "#f2b705", "#70c1a0"],
+  copy: c.copy,
+  bestFor: "",
+  enquiryValue: c.enquiryValue,
+}));
+
+export const seasonalMarketNote = {
+  heading: "Let the season lead",
+  copy: "Love a natural mix? We can suggest a palette using the best flowers available for your date.",
+  enquiryValue: "Seasonal Market",
+};
+
+export const brandMatchCollection = {
+  id: "brand-match",
+  name: "Brand Match",
+  copy: "A custom palette shaped around your brand colours, with optional branded signage and packaging.",
+  enquiryValue: "Brand Match",
+};
+
+export const HELP_ME_CHOOSE_STYLE = "Help me choose";
 
 export const experienceSteps = [
   {

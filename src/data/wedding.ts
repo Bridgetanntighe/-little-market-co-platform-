@@ -1,22 +1,14 @@
-import { colourStories, hireOptions } from "./content";
+import { floralCollections, hireOptions } from "./content";
 
 /** Reuse homepage package data so wedding prices cannot drift. */
 export const weddingPackages = hireOptions;
 
-const weddingPaletteCopy: Record<string, string> = {
-  "soft-meadow": "Blush, peach, cream and gentle greens",
-  "modern-neutral": "White, cream and soft foliage",
-  "colour-pop": "Pink, coral, orange and cheerful seasonal blooms",
-};
-
-export const weddingPalettes = colourStories
-  .filter((story) => ["soft-meadow", "modern-neutral", "colour-pop"].includes(story.id))
-  .map((story) => ({
-    id: story.id,
-    name: story.name,
-    colours: story.colours,
-    copy: weddingPaletteCopy[story.id] ?? story.copy,
-  }));
+export const weddingPalettes = floralCollections.map((collection) => ({
+  id: collection.id,
+  name: collection.name,
+  copy: collection.copy,
+  enquiryValue: collection.enquiryValue,
+}));
 
 export const weddingSteps = [
   {
