@@ -74,7 +74,8 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
   body.set("brandPersonalisation", payload.brandPersonalisation);
   body.set("additional", payload.additional);
 
-  const res = await fetch("/", {
+  // Prefer the static skeleton so SPA redirects cannot intercept form POSTs.
+  const res = await fetch("/__forms.html", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
