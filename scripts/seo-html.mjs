@@ -2,7 +2,7 @@
  * After Vite build, write per-route HTML shells with unique meta tags
  * so crawlers receive correct title/description without waiting on JS.
  */
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -14,44 +14,9 @@ const pages = [
   {
     path: "/",
     file: "index.html",
-    title: "Flower Bar Hire London | The Little Market Co",
+    title: "Flower Bar Hire for Weddings & Events London | The Little Market Co",
     description:
-      "Hire a beautifully styled flower bar in London for office events, brand activations, launches, parties and celebrations. Guests create their own bouquet to take home.",
-  },
-  {
-    path: "/flower-bar-hire-london",
-    file: "flower-bar-hire-london/index.html",
-    title: "Flower Bar Hire London | Self-Serve Bloom Market | The Little Market Co",
-    description:
-      "Book flower bar hire in London for parties, weddings and celebrations. Guests choose stems, wrap a bouquet and take it home. Delivered, styled and collected across London.",
-  },
-  {
-    path: "/corporate-flower-bar-london",
-    file: "corporate-flower-bar-london/index.html",
-    title: "Corporate Flower Bar London | Office Events & Team Experiences",
-    description:
-      "Book a corporate flower bar in London for office wellbeing days, client entertainment and team celebrations. A polished self-serve bloom market delivered to your workplace.",
-  },
-  {
-    path: "/brand-activation-flower-bar",
-    file: "brand-activation-flower-bar/index.html",
-    title: "Branded Flower Bar Hire London | Activations & PR Events",
-    description:
-      "Create a branded flower bar for product launches, PR events and campaign activations in London. Custom palettes, signage and wrap matched to your brand.",
-  },
-  {
-    path: "/christmas-flower-bar-london",
-    file: "christmas-flower-bar-london/index.html",
-    title: "Christmas Flower Bar London | Festive Office & Party Hire",
-    description:
-      "Hire a Christmas flower bar in London for festive office parties and winter celebrations. Seasonal stems, warm palettes and take-home bouquets for December events.",
-  },
-  {
-    path: "/flower-workshop-london",
-    file: "flower-workshop-london/index.html",
-    title: "Flower Workshop London | Bouquet-Making Experiences",
-    description:
-      "Host a bouquet-making flower workshop in London with The Little Market Co. A guided or self-serve bloom market for teams, celebrations and brand events.",
+      "Hire a styled, self-serve flower market for weddings and celebrations in London. Guests choose seasonal stems, wrap a bouquet and take it home.",
   },
   {
     path: "/wedding-flower-bar-hire-london",
@@ -59,6 +24,34 @@ const pages = [
     title: "Wedding Flower Bar Hire London | The Little Market Co",
     description:
       "A self-serve wedding flower bar in London, styled around your celebration. Guests choose seasonal stems, wrap a bouquet and take it home.",
+  },
+  {
+    path: "/celebrations",
+    file: "celebrations/index.html",
+    title: "Private Celebration Flower Bar Hire London | The Little Market Co",
+    description:
+      "Hire a self-serve flower market for bridal showers, baby showers and birthdays in London. Guests wrap a bouquet and take it home.",
+  },
+  {
+    path: "/corporate-flower-bar-london",
+    file: "corporate-flower-bar-london/index.html",
+    title: "Corporate Flower Bar Hire London | The Little Market Co",
+    description:
+      "Flower experiences for teams, launches and brand activations in London. Self-serve Little Bloom Markets with optional branded finishing.",
+  },
+  {
+    path: "/packages",
+    file: "packages/index.html",
+    title: "Flower Market Packages | The Little Market Co",
+    description:
+      "Compare The Little Bar, The Bloom Market and The Brand Market — inclusive bouquet packages for weddings and celebrations in London.",
+  },
+  {
+    path: "/enquire",
+    file: "enquire/index.html",
+    title: "Enquire | The Little Market Co",
+    description:
+      "Tell us about your celebration. We’ll check availability and help you choose the right Little Bloom Market.",
   },
   {
     path: "/partner-with-us",
@@ -132,11 +125,4 @@ for (const page of pages) {
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, outHtml);
   console.log("Wrote", page.file);
-}
-
-// Ensure forms skeleton remains available
-try {
-  copyFileSync(join(dist, "__forms.html"), join(dist, "__forms.html"));
-} catch {
-  /* already present from public/ */
 }

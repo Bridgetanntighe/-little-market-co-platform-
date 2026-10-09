@@ -1,275 +1,20 @@
-import {
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-} from "react";
 import { Link } from "react-router-dom";
 import { FaqList } from "../components/FaqList";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
-import { WEDDING_FORM_NAME, submitWeddingEnquiry } from "../data/contact";
+import { hireOptions } from "../data/content";
 import { site } from "../data/site";
 import {
   weddingFaqs,
   weddingImages,
   weddingIncludes,
-  weddingPackages,
   weddingPalettes,
   weddingSteps,
   weddingTouches,
 } from "../data/wedding";
-import { scrollToId, useReveal } from "../hooks/useReveal";
+import { enquireHref, useReveal } from "../hooks/useReveal";
 
-type FormState = "idle" | "submitting" | "success" | "error";
-
-const empty = {
-  name: "",
-  email: "",
-  weddingDate: "",
-  venue: "",
-  guests: "",
-  bouquets: "",
-  colourIdeas: "",
-  additional: "",
-  "bot-field": "",
-};
-
-function WeddingEnquiryForm() {
-  const [form, setForm] = useState(empty);
-  const [status, setStatus] = useState<FormState>("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof typeof empty, string>>>({});
-
-  const set =
-    (key: keyof typeof empty) =>
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      setForm((f) => ({ ...f, [key]: e.target.value }));
-      setFieldErrors((errs) => {
-        if (!errs[key]) return errs;
-        const next = { ...errs };
-        delete next[key];
-        return next;
-      });
-    };
-
-  const validate = () => {
-    const errs: Partial<Record<keyof typeof empty, string>> = {};
-    if (!form.name.trim()) errs.name = "Please enter your name.";
-    if (!form.email.trim()) errs.email = "Please enter your email address.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
-      errs.email = "Please enter a valid email address.";
-    if (!form.venue.trim()) errs.venue = "Please enter your venue or location.";
-    if (!form.guests.trim()) errs.guests = "Please enter approximate guest numbers.";
-    else if (!/^\d+$/.test(form.guests.trim()) || Number(form.guests) < 1)
-      errs.guests = "Please enter a valid guest number.";
-    setFieldErrors(errs);
-    return Object.keys(errs).length === 0;
-  };
-
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    setErrorMessage("");
-    if (!validate()) {
-      setStatus("error");
-      setErrorMessage("Please check the highlighted fields and try again.");
-      return;
-    }
-    if (form["bot-field"].trim()) {
-      setStatus("error");
-      setErrorMessage("We could not send your wedding enquiry. Please try again shortly.");
-      return;
-    }
-
-    setStatus("submitting");
-    try {
-      await submitWeddingEnquiry({
-        name: form.name.trim(),
-        email: form.email.trim(),
-        weddingDate: form.weddingDate,
-        venue: form.venue.trim(),
-        guests: form.guests.trim(),
-        bouquets: form.bouquets.trim(),
-        colourIdeas: form.colourIdeas.trim(),
-        additional: form.additional.trim(),
-        "bot-field": form["bot-field"],
-      });
-      setStatus("success");
-      setForm(empty);
-    } catch (err) {
-      setStatus("error");
-      setErrorMessage(
-        err instanceof Error ? err.message : "Something went wrong. Please try again.",
-      );
-    }
-  };
-
-  if (status === "success") {
-    return (
-      <div className="form-success" role="status">
-        <h3>Thank you</h3>
-        <p>
-          Thank you for sharing your wedding plans. We’ll check your date and reply with package
-          thoughts within one working day.
-        </p>
-        <button
-          className="btn btn-primary"
-          type="button"
-          onClick={() => {
-            setStatus("idle");
-            setErrorMessage("");
-          }}
-        >
-          Send another enquiry
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <form
-      name={WEDDING_FORM_NAME}
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      onSubmit={submit}
-      noValidate
-    >
-      <input type="hidden" name="form-name" value={WEDDING_FORM_NAME} />
-      <input type="hidden" name="enquiryType" value="Wedding" />
-      <p className="honeypot" aria-hidden="true">
-        <label htmlFor="wedding-bot-field">
-          Do not fill this out
-          <input
-            id="wedding-bot-field"
-            name="bot-field"
-            tabIndex={-1}
-            autoComplete="off"
-            value={form["bot-field"]}
-            onChange={set("bot-field")}
-          />
-        </label>
-      </p>
-      <div className="form-grid">
-        <div className={`field ${fieldErrors.name ? "has-error" : ""}`}>
-          <label htmlFor="wedding-name">Name</label>
-          <input
-            id="wedding-name"
-            name="name"
-            autoComplete="name"
-            required
-            value={form.name}
-            onChange={set("name")}
-            aria-invalid={Boolean(fieldErrors.name)}
-          />
-          {fieldErrors.name && <span className="field-error">{fieldErrors.name}</span>}
-        </div>
-        <div className={`field ${fieldErrors.email ? "has-error" : ""}`}>
-          <label htmlFor="wedding-email">Email</label>
-          <input
-            id="wedding-email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={form.email}
-            onChange={set("email")}
-            aria-invalid={Boolean(fieldErrors.email)}
-          />
-          {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
-        </div>
-        <div className="field">
-          <label htmlFor="wedding-date">
-            Wedding date <span className="optional">(optional if undecided)</span>
-          </label>
-          <input
-            id="wedding-date"
-            name="weddingDate"
-            type="date"
-            value={form.weddingDate}
-            onChange={set("weddingDate")}
-          />
-        </div>
-        <div className={`field ${fieldErrors.venue ? "has-error" : ""}`}>
-          <label htmlFor="wedding-venue">Venue or location</label>
-          <input
-            id="wedding-venue"
-            name="venue"
-            required
-            value={form.venue}
-            onChange={set("venue")}
-            aria-invalid={Boolean(fieldErrors.venue)}
-          />
-          {fieldErrors.venue && <span className="field-error">{fieldErrors.venue}</span>}
-        </div>
-        <div className={`field ${fieldErrors.guests ? "has-error" : ""}`}>
-          <label htmlFor="wedding-guests">Approximate guest numbers</label>
-          <input
-            id="wedding-guests"
-            name="guests"
-            inputMode="numeric"
-            required
-            value={form.guests}
-            onChange={set("guests")}
-            aria-invalid={Boolean(fieldErrors.guests)}
-          />
-          {fieldErrors.guests && <span className="field-error">{fieldErrors.guests}</span>}
-        </div>
-        <div className="field">
-          <label htmlFor="wedding-bouquets">
-            Number of bouquets wanted <span className="optional">(optional)</span>
-          </label>
-          <input
-            id="wedding-bouquets"
-            name="bouquets"
-            inputMode="numeric"
-            value={form.bouquets}
-            onChange={set("bouquets")}
-          />
-        </div>
-        <div className="field full">
-          <label htmlFor="wedding-colourIdeas">
-            Colour palette or styling ideas <span className="optional">(optional)</span>
-          </label>
-          <input
-            id="wedding-colourIdeas"
-            name="colourIdeas"
-            value={form.colourIdeas}
-            onChange={set("colourIdeas")}
-          />
-        </div>
-        <div className="field full">
-          <label htmlFor="wedding-additional">
-            Anything else <span className="optional">(optional)</span>
-          </label>
-          <textarea
-            id="wedding-additional"
-            name="additional"
-            rows={4}
-            value={form.additional}
-            onChange={set("additional")}
-          />
-        </div>
-      </div>
-      <p className="wedding-page__privacy">
-        We’ll use your details to check availability and reply about wedding flower bar options. See
-        our <Link to="/privacy/">privacy policy</Link>.
-      </p>
-      {status === "error" && errorMessage && (
-        <p className="form-error" role="alert">
-          {errorMessage}
-        </p>
-      )}
-      <button
-        className="btn btn-accent"
-        type="submit"
-        disabled={status === "submitting"}
-        aria-busy={status === "submitting"}
-      >
-        {status === "submitting" ? "Sending…" : "Check your wedding date"}
-      </button>
-    </form>
-  );
-}
+const weddingEnquire = enquireHref({ eventType: "Wedding" });
 
 export default function WeddingPage() {
   const pageUrl = `${site.url}/wedding-flower-bar-hire-london/`;
@@ -280,7 +25,7 @@ export default function WeddingPage() {
   const { ref: touchRef, visible: touchVisible } = useReveal<HTMLElement>();
   const { ref: galleryRef, visible: galleryVisible } = useReveal<HTMLElement>();
   const { ref: faqRef, visible: faqVisible } = useReveal<HTMLElement>();
-  const { ref: formSectionRef, visible: formVisible } = useReveal<HTMLElement>();
+  const { ref: ctaRef, visible: ctaVisible } = useReveal<HTMLElement>();
 
   const jsonLd = [
     {
@@ -333,28 +78,20 @@ export default function WeddingPage() {
                 <span>Weddings</span>
               </nav>
               <span className="hero__eyebrow">The Little Bloom Market for Weddings</span>
-              <h1>Wedding Flower Bar Hire in London</h1>
+              <h1>Wedding flower bar hire in London</h1>
               <p className="wedding-hero__kicker">A little flower market for your big day</p>
               <p className="wedding-hero__copy">
-                Give your guests something beautiful to make and take home. Our self-serve flower
-                market brings fresh seasonal flowers, thoughtful styling and a personal touch to
-                your wedding.
+                Give guests something beautiful to make during your drinks reception or celebration
+                — and a bouquet to take home. We prepare, deliver, set up and collect a styled,
+                self-serve flower market around your wedding colours.
               </p>
               <div className="hero__actions">
-                <button
-                  className="btn btn-primary"
-                  type="button"
-                  onClick={() => scrollToId("wedding-enquire")}
-                >
+                <Link className="btn btn-primary" to={weddingEnquire}>
                   Check your wedding date
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  type="button"
-                  onClick={() => scrollToId("wedding-experience")}
-                >
+                </Link>
+                <a className="btn btn-secondary" href="#wedding-experience">
                   Explore the experience
-                </button>
+                </a>
               </div>
             </div>
             <figure className="wedding-hero__figure">
@@ -383,7 +120,8 @@ export default function WeddingPage() {
             <p className="section-lead">
               Guests choose their favourite stems, gather a little bouquet and wrap it to take home.
               A relaxed activity during your drinks reception, a thoughtful wedding favour or a
-              colourful addition to your evening celebration.
+              colourful addition to your evening celebration. Our standard booking is self-serve —
+              a florist does not stay on site after setup.
             </p>
             <div className="steps steps--three">
               {weddingSteps.map((s) => (
@@ -394,14 +132,33 @@ export default function WeddingPage() {
                 </article>
               ))}
             </div>
-            <button
-              className="btn btn-primary"
-              type="button"
-              style={{ marginTop: "2rem" }}
-              onClick={() => scrollToId("wedding-enquire")}
-            >
+            <div className="wedding-split">
+              <figure>
+                <ResponsiveImage
+                  src={weddingImages[1].src}
+                  webp={weddingImages[1].webp}
+                  alt={weddingImages[1].alt}
+                  width={weddingImages[1].width}
+                  height={weddingImages[1].height}
+                  sizes="(max-width: 900px) 100vw, 480px"
+                />
+                <figcaption>{weddingImages[1].caption}</figcaption>
+              </figure>
+              <figure>
+                <ResponsiveImage
+                  src={weddingImages[2].src}
+                  webp={weddingImages[2].webp}
+                  alt={weddingImages[2].alt}
+                  width={weddingImages[2].width}
+                  height={weddingImages[2].height}
+                  sizes="(max-width: 900px) 100vw, 360px"
+                />
+                <figcaption>{weddingImages[2].caption}</figcaption>
+              </figure>
+            </div>
+            <Link className="btn btn-primary" style={{ marginTop: "2rem" }} to={weddingEnquire}>
               Check your wedding date
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -433,13 +190,9 @@ export default function WeddingPage() {
               Have your own colour palette? Tell us what you’re planning and we’ll suggest seasonal
               flowers to complement it.
             </p>
-            <button
-              className="btn btn-secondary"
-              type="button"
-              onClick={() => scrollToId("wedding-enquire")}
-            >
+            <Link className="btn btn-secondary" to={weddingEnquire}>
               Check your wedding date
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -459,13 +212,9 @@ export default function WeddingPage() {
               Our standard experience is self-serve. Assisted options can be discussed when you
               enquire.
             </p>
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={() => scrollToId("wedding-enquire")}
-            >
+            <Link className="btn btn-primary" to={weddingEnquire}>
               Check your wedding date
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -475,42 +224,40 @@ export default function WeddingPage() {
           ref={pricingRef}
         >
           <div className="container">
-            <span className="section-eyebrow">Pricing</span>
-            <h2 className="section-title">A flower market sized for your guest list</h2>
+            <span className="section-eyebrow">Packages</span>
+            <h2 className="section-title">A flower market sized for your celebration</h2>
             <p className="section-lead">
-              Packages and guest allowances match our homepage, so the quote stays consistent.
-              Flower bar hire starts from £395, with flowers tailored to bouquet numbers and style.
+              Packages show how many take-home bouquets are included — not how many wedding guests
+              you can invite. A 100-person wedding might book 20 or 30 bouquets for a selected
+              group; larger bouquet counts can be quoted separately.
             </p>
             <div className="packages__grid packages__grid--three">
-              {weddingPackages.map((pkg) => (
-                <article
-                  className={`package ${pkg.popular ? "package--popular" : ""}`}
-                  key={pkg.id}
-                >
-                  {pkg.popular && <span className="package__badge">Most popular</span>}
+              {hireOptions.map((pkg) => (
+                <article className="package" key={pkg.id}>
                   <h3>{pkg.name}</h3>
                   <div className="package__price">{pkg.price}</div>
-                  <span className="package__note">{pkg.note}</span>
-                  <ul>
-                    {pkg.includes.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                  <button
+                  <span className="package__note">{pkg.bouquets}</span>
+                  <p>{pkg.description}</p>
+                  <Link
                     className="btn btn-accent"
-                    type="button"
-                    onClick={() => scrollToId("wedding-enquire")}
+                    to={enquireHref({
+                      eventType: "Wedding",
+                      packageChoice: pkg.enquiryValue,
+                    })}
                   >
                     Check your wedding date
-                  </button>
+                  </Link>
                 </article>
               ))}
             </div>
             <p className="packages__note">
-              Planning for a larger wedding? We’ll quote for the number of bouquets you would like
-              to provide, your flower choices, styling and venue location. Package guest numbers are
-              bouquet allowances — not unlimited wedding guest lists.
+              Planning a larger wedding or more than 40 bouquets? Share your numbers when you
+              enquire and we’ll quote accordingly. Delivery, setup and collection within London and
+              surrounding areas are included with every package.
             </p>
+            <Link className="btn btn-secondary packages__cta" to="/packages/">
+              Compare packages
+            </Link>
           </div>
         </section>
 
@@ -522,7 +269,8 @@ export default function WeddingPage() {
             <span className="section-eyebrow">Personal touches</span>
             <h2 className="section-title">Make it yours</h2>
             <p className="section-lead">
-              These additions are available by quotation — share what you’d love and we’ll advise.
+              Personalised signs and tags are available by quotation — share what you’d love and
+              we’ll advise.
             </p>
             <div className="partner-cards__grid">
               {weddingTouches.map((item) => (
@@ -532,14 +280,13 @@ export default function WeddingPage() {
                 </article>
               ))}
             </div>
-            <button
+            <Link
               className="btn btn-primary"
-              type="button"
               style={{ marginTop: "1.75rem" }}
-              onClick={() => scrollToId("wedding-enquire")}
+              to={weddingEnquire}
             >
               Check your wedding date
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -585,34 +332,27 @@ export default function WeddingPage() {
             <span className="section-eyebrow">Good to know</span>
             <h2 className="section-title">Wedding flower bar FAQs</h2>
             <FaqList items={weddingFaqs} />
-            <button
-              className="btn btn-primary"
-              type="button"
-              style={{ marginTop: "2rem" }}
-              onClick={() => scrollToId("wedding-enquire")}
-            >
+            <Link className="btn btn-primary" style={{ marginTop: "2rem" }} to={weddingEnquire}>
               Check your wedding date
-            </button>
+            </Link>
           </div>
         </section>
 
         <section
-          className={`section enquire reveal ${formVisible ? "is-visible" : ""}`}
+          className={`section final-cta reveal ${ctaVisible ? "is-visible" : ""}`}
           id="wedding-enquire"
-          ref={formSectionRef}
+          ref={ctaRef}
         >
-          <div className="container enquire__layout">
-            <div>
-              <span className="section-eyebrow">Wedding enquiries</span>
-              <h2 className="section-title">Tell us about your big day</h2>
-              <p className="section-lead">
-                Share your date, venue and guest numbers and we’ll check availability with a clear
-                package recommendation.
-              </p>
-            </div>
-            <div className="enquire__form">
-              <WeddingEnquiryForm />
-            </div>
+          <div className="container narrow">
+            <span className="section-eyebrow">Wedding enquiries</span>
+            <h2 className="section-title">Tell us about your big day</h2>
+            <p className="section-lead">
+              Share your date, venue and approximate bouquet numbers. We’ll check availability and
+              help you choose the right market — submitting an enquiry does not reserve your date.
+            </p>
+            <Link className="btn btn-primary" to={weddingEnquire}>
+              Check your wedding date
+            </Link>
           </div>
         </section>
       </main>

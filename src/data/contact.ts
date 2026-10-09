@@ -5,7 +5,6 @@
 export const NETLIFY_FORM_NAME = "enquiry";
 export const WORK_WITH_US_FORM_NAME = "work-with-us";
 export const PARTNER_FORM_NAME = "partner-with-us";
-export const WEDDING_FORM_NAME = "wedding-enquiry";
 
 export const contact = {
   email: "hello.littlemarketco@gmail.com",
@@ -34,13 +33,14 @@ export const partnerBusinessTypes = [
 export type EnquiryPayload = {
   name: string;
   email: string;
-  company: string;
-  eventDate: string;
-  venue: string;
-  guests: string;
   eventType: string;
+  venue: string;
+  bouquets: string;
+  eventDate: string;
+  dateUndecided: string;
+  guests: string;
   packageChoice: string;
-  colourStory: string;
+  colourIdeas: string;
   additional: string;
   /** Honeypot — must stay empty for real guests */
   "bot-field"?: string;
@@ -64,18 +64,6 @@ export type PartnerPayload = {
   website: string;
   businessType: string;
   partnershipIdea: string;
-  "bot-field"?: string;
-};
-
-export type WeddingEnquiryPayload = {
-  name: string;
-  email: string;
-  weddingDate: string;
-  venue: string;
-  guests: string;
-  bouquets: string;
-  colourIdeas: string;
-  additional: string;
   "bot-field"?: string;
 };
 
@@ -105,13 +93,14 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
       "bot-field": payload["bot-field"] ?? "",
       name: payload.name,
       email: payload.email,
-      company: payload.company,
-      eventDate: payload.eventDate,
-      venue: payload.venue,
-      guests: payload.guests,
       eventType: payload.eventType,
+      venue: payload.venue,
+      bouquets: payload.bouquets,
+      eventDate: payload.eventDate,
+      dateUndecided: payload.dateUndecided,
+      guests: payload.guests,
       packageChoice: payload.packageChoice,
-      colourStory: payload.colourStory,
+      colourIdeas: payload.colourIdeas,
       additional: payload.additional,
     });
   } catch {
@@ -149,24 +138,5 @@ export async function submitPartnerEnquiry(payload: PartnerPayload): Promise<voi
     });
   } catch {
     throw new Error("We could not send your partnership enquiry. Please try again shortly.");
-  }
-}
-
-export async function submitWeddingEnquiry(payload: WeddingEnquiryPayload): Promise<void> {
-  try {
-    await postNetlifyForm(WEDDING_FORM_NAME, {
-      "bot-field": payload["bot-field"] ?? "",
-      name: payload.name,
-      email: payload.email,
-      weddingDate: payload.weddingDate,
-      venue: payload.venue,
-      guests: payload.guests,
-      bouquets: payload.bouquets,
-      colourIdeas: payload.colourIdeas,
-      additional: payload.additional,
-      enquiryType: "Wedding",
-    });
-  } catch {
-    throw new Error("We could not send your wedding enquiry. Please try again shortly.");
   }
 }

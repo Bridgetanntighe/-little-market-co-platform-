@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flower Bar Hire London | The Little Market Co</title>
+    <title>Flower Bar Hire for Weddings & Events London | The Little Market Co</title>
     <meta
       name="description"
-      content="Hire a beautifully styled flower bar in London for office events, brand activations, launches, parties and celebrations. Guests create their own bouquet to take home."
+      content="Hire a styled, self-serve flower market for weddings and celebrations in London. Guests choose seasonal stems, wrap a bouquet and take it home."
     />
     <link rel="canonical" href="https://little-market-co.netlify.app/" />
     <meta name="robots" content="index, follow" />
@@ -17,11 +17,11 @@
     <meta property="og:url" content="https://little-market-co.netlify.app/" />
     <meta
       property="og:title"
-      content="Flower Bar Hire London | The Little Market Co"
+      content="Flower Bar Hire for Weddings & Events London | The Little Market Co"
     />
     <meta
       property="og:description"
-      content="Hire a beautifully styled flower bar in London for office events, brand activations, launches, parties and celebrations. Guests create their own bouquet to take home."
+      content="Hire a styled, self-serve flower market for weddings and celebrations in London. Guests choose seasonal stems, wrap a bouquet and take it home."
     />
     <meta
       property="og:image"
@@ -30,11 +30,11 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Flower Bar Hire London | The Little Market Co"
+      content="Flower Bar Hire for Weddings & Events London | The Little Market Co"
     />
     <meta
       name="twitter:description"
-      content="Hire a beautifully styled flower bar in London for office events, brand activations, launches, parties and celebrations. Guests create their own bouquet to take home."
+      content="Hire a styled, self-serve flower market for weddings and celebrations in London. Guests choose seasonal stems, wrap a bouquet and take it home."
     />
     <meta
       name="twitter:image"
@@ -56,7 +56,7 @@
             "name": "The Little Market Co",
             "url": "https://little-market-co.netlify.app/",
             "email": "hello.littlemarketco@gmail.com",
-            "description": "Flower bar hire, corporate flower experiences and branded floral activations",
+            "description": "Flower bar hire for weddings, private celebrations and corporate events across London",
             "logo": "https://little-market-co.netlify.app/favicon.svg"
           },
           {
@@ -65,7 +65,7 @@
             "name": "The Little Market Co",
             "url": "https://little-market-co.netlify.app/",
             "email": "hello.littlemarketco@gmail.com",
-            "description": "Flower bar hire, corporate flower experiences and branded floral activations",
+            "description": "Flower bar hire for weddings, private celebrations and corporate events across London",
             "image": "https://little-market-co.netlify.app/images/og-flower-bar-hire-london.jpg",
             "priceRange": "££",
             "areaServed": [
@@ -88,28 +88,28 @@
             "serviceType": "Flower bar hire",
             "provider": { "@id": "https://little-market-co.netlify.app/#business" },
             "areaServed": "London",
-            "description": "Self-serve flower bar hire in London for offices, brand activations, launches, parties and celebrations. Guests create a take-home bouquet.",
+            "description": "A styled, self-serve flower market where guests choose seasonal stems, create a bouquet and take it home. We prepare, deliver, set up and collect the display.",
             "offers": [
               {
                 "@type": "Offer",
                 "name": "The Little Bar",
                 "price": "495",
                 "priceCurrency": "GBP",
-                "description": "From £495 for up to 20 guests. Compact self-serve flower station with seasonal flowers, wrapping and care cards."
+                "description": "From £495 with up to 20 bouquets included. Compact self-serve flower station with seasonal flowers, wrapping and care cards."
               },
               {
                 "@type": "Offer",
                 "name": "The Bloom Market",
                 "price": "695",
                 "priceCurrency": "GBP",
-                "description": "From £695 for up to 30 guests. Larger seasonal selection, styled display and choice of colour palette."
+                "description": "From £695 with up to 30 bouquets included. Larger seasonal selection, styled display and choice of colour palette."
               },
               {
                 "@type": "Offer",
                 "name": "The Brand Market",
                 "price": "995",
                 "priceCurrency": "GBP",
-                "description": "From £995 for up to 40 guests. Custom palette, branded signage and wrapping for activations and PR events."
+                "description": "From £995 with up to 40 bouquets included. Custom palette, branded signage and wrapping for activations and larger celebrations."
               }
             ]
           }
@@ -136,13 +136,14 @@
       <input name="bot-field" />
       <input name="name" />
       <input name="email" type="email" />
-      <input name="company" />
-      <input name="eventDate" type="date" />
-      <input name="venue" />
-      <input name="guests" />
       <input name="eventType" />
+      <input name="venue" />
+      <input name="bouquets" />
+      <input name="eventDate" type="date" />
+      <input name="dateUndecided" />
+      <input name="guests" />
       <input name="packageChoice" />
-      <input name="colourStory" />
+      <input name="colourIdeas" />
       <textarea name="additional"></textarea>
     </form>
     <form
@@ -181,27 +182,6 @@
       <input name="website" />
       <input name="businessType" />
       <textarea name="partnershipIdea"></textarea>
-    </form>
-    <form
-      name="wedding-enquiry"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      netlify-honeypot="bot-field"
-      hidden
-      aria-hidden="true"
-    >
-      <input type="hidden" name="form-name" value="wedding-enquiry" />
-      <input name="bot-field" />
-      <input name="enquiryType" />
-      <input name="name" />
-      <input name="email" type="email" />
-      <input name="weddingDate" type="date" />
-      <input name="venue" />
-      <input name="guests" />
-      <input name="bouquets" />
-      <input name="colourIdeas" />
-      <textarea name="additional"></textarea>
     </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>

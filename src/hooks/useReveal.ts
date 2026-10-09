@@ -30,29 +30,47 @@ export function scrollToId(id: string) {
 export const ENQUIRY_PREFILL_KEY = "tlmc-enquiry-prefill";
 
 export type EnquiryPrefill = {
+  eventType?: string;
   packageChoice?: string;
-  colourStory?: string;
+  colourIdeas?: string;
+  bouquets?: string;
 };
 
-export function enquireWithOption(prefill: string | EnquiryPrefill) {
+export function enquireHref(prefill?: EnquiryPrefill) {
+  if (!prefill) return "/enquire/";
+  const params = new URLSearchParams();
+  if (prefill.eventType) params.set("eventType", prefill.eventType);
+  if (prefill.packageChoice) params.set("package", prefill.packageChoice);
+  if (prefill.colourIdeas) params.set("colour", prefill.colourIdeas);
+  if (prefill.bouquets) params.set("bouquets", prefill.bouquets);
+  const qs = params.toString();
+  return qs ? `/enquire/?${qs}` : "/enquire/";
+}
+
+export function enquireWithOption(prefill: string | EnquiryPrefill = {}) {
   const detail: EnquiryPrefill =
     typeof prefill === "string" ? { packageChoice: prefill } : prefill;
   sessionStorage.setItem(ENQUIRY_PREFILL_KEY, JSON.stringify(detail));
-  window.dispatchEvent(new CustomEvent("tlmc-enquiry-prefill", { detail }));
-
-  if (window.location.pathname !== "/") {
-    window.location.assign("/#enquire");
-    return;
-  }
-  scrollToId("enquire");
+  window.location.assign(enquireHref(detail));
 }
 
-/** Homepage section anchors — use as <a href> for reliable cross-page navigation. */
+/** Legacy homepage anchors → dedicated pages. */
 export function homeSectionHref(sectionId: string) {
+  if (sectionId === "packages") return "/packages/";
+  if (sectionId === "enquire") return "/enquire/";
+  if (sectionId === "work-with-us") return "/#work-with-us";
   return `/#${sectionId}`;
 }
 
 export function goHomeSection(sectionId: string) {
+  if (sectionId === "packages") {
+    window.location.assign("/packages/");
+    return;
+  }
+  if (sectionId === "enquire") {
+    window.location.assign("/enquire/");
+    return;
+  }
   if (window.location.pathname !== "/") {
     window.location.assign(homeSectionHref(sectionId));
     return;

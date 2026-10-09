@@ -1,0 +1,160 @@
+import { Link } from "react-router-dom";
+import { Seo } from "../components/Seo";
+import { colourStories, hireOptions } from "../data/content";
+import { site } from "../data/site";
+import { enquireHref, useReveal } from "../hooks/useReveal";
+
+const rows = [
+  { key: "bouquets", label: "Bouquets included" },
+  { key: "flowers", label: "Flower and wrapping allowance" },
+  { key: "wrapping", label: "Wrapping" },
+  { key: "display", label: "Display and styling" },
+  { key: "personalisation", label: "Personalisation" },
+  { key: "setup", label: "Setup and collection" },
+  { key: "delivery", label: "Delivery conditions" },
+  { key: "assistance", label: "Assistance" },
+] as const;
+
+export default function PackagesPage() {
+  const { ref, visible } = useReveal<HTMLElement>();
+
+  return (
+    <>
+      <Seo
+        title="Flower Market Packages | The Little Market Co"
+        description="Compare The Little Bar, The Bloom Market and The Brand Market — inclusive bouquet packages for weddings and celebrations in London."
+        path="/packages/"
+        jsonLd={[
+          {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Packages",
+                item: `${site.url}/packages/`,
+              },
+            ],
+          },
+        ]}
+      />
+      <main className="packages-page">
+        <header className="section">
+          <div className="container narrow">
+            <nav className="breadcrumbs" aria-label="Breadcrumb">
+              <Link to="/">Home</Link>
+              <span aria-hidden="true"> / </span>
+              <span>Packages</span>
+            </nav>
+            <span className="section-eyebrow">Packages</span>
+            <h1 className="section-title">Find your little market</h1>
+            <p className="section-lead">
+              Inclusive packages cover the styled display, seasonal flowers for the bouquet
+              allowance shown, wrapping, setup and collection. Your event can have more guests than
+              bouquets — choose how many take-home bouquets you would like to provide.
+            </p>
+          </div>
+        </header>
+
+        <section className="section packages" ref={ref}>
+          <div className={`container reveal ${visible ? "is-visible" : ""}`}>
+            <div className="packages__grid packages__grid--three">
+              {hireOptions.map((pkg) => (
+                <article className="package" key={pkg.id}>
+                  <h2>{pkg.name}</h2>
+                  <div className="package__price">{pkg.price}</div>
+                  <span className="package__note">{pkg.bouquets}</span>
+                  <p>{pkg.description}</p>
+                  <ul>
+                    {pkg.includes.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <Link
+                    className="btn btn-accent"
+                    to={enquireHref({ packageChoice: pkg.enquiryValue })}
+                  >
+                    Check availability
+                  </Link>
+                </article>
+              ))}
+            </div>
+            <p className="packages__note">
+              Prices shown are inclusive package starting points for the bouquet allowances above.
+              They are not a £395 setup fee plus separate per-person charges. Further travel outside
+              our usual London service area, assisted staffing and personalised extras are quoted
+              individually. Planning more than 40 bouquets? Tell us your numbers when you enquire.
+            </p>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <h2 className="section-title">Compare packages</h2>
+            <div className="compare-table-wrap">
+              <table className="compare-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Detail</th>
+                    {hireOptions.map((pkg) => (
+                      <th scope="col" key={pkg.id}>
+                        {pkg.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Starting price</th>
+                    {hireOptions.map((pkg) => (
+                      <td key={pkg.id}>{pkg.price}</td>
+                    ))}
+                  </tr>
+                  {rows.map((row) => (
+                    <tr key={row.key}>
+                      <th scope="row">{row.label}</th>
+                      {hireOptions.map((pkg) => (
+                        <td key={pkg.id}>{pkg.comparison[row.key]}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section className="section colour-stories">
+          <div className="container">
+            <h2 className="section-title">Colour stories</h2>
+            <p className="section-lead">
+              Choose a palette or share your own colours. Seasonal availability shapes the final
+              stem list.
+            </p>
+            <div className="colour-stories__grid wedding-palettes">
+              {colourStories.map((story) => (
+                <article className="colour-card" key={story.id}>
+                  <div className="colour-card__swatches" aria-hidden="true">
+                    {story.colours.map((colour) => (
+                      <span key={colour} style={{ background: colour }} />
+                    ))}
+                  </div>
+                  <h3>{story.name}</h3>
+                  <p>{story.copy}</p>
+                </article>
+              ))}
+            </div>
+            <Link
+              className="btn btn-primary"
+              style={{ marginTop: "1.5rem" }}
+              to={enquireHref()}
+            >
+              Check availability
+            </Link>
+          </div>
+        </section>
+      </main>
+    </>
+  );
+}

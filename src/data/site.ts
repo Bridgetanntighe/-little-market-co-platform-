@@ -6,32 +6,21 @@ export const site = {
   email: "hello.littlemarketco@gmail.com",
   serviceArea: "London and surrounding areas",
   service:
-    "Flower bar hire, corporate flower experiences and branded floral activations",
+    "Flower bar hire for weddings, private celebrations and corporate events across London",
   ogImage: `${SITE_URL}/images/og-flower-bar-hire-london.jpg`,
-  defaultTitle: "Flower Bar Hire London | The Little Market Co",
+  defaultTitle: "Flower Bar Hire for Weddings & Events London | The Little Market Co",
   defaultDescription:
-    "Hire a beautifully styled flower bar in London for office events, brand activations, launches, parties and celebrations. Guests create their own bouquet to take home.",
+    "Hire a styled, self-serve flower market for weddings and celebrations in London. Guests choose seasonal stems, wrap a bouquet and take it home.",
 };
 
-export const seoRoutes = [
-  {
-    path: "/flower-bar-hire-london/",
-    slug: "flower-bar-hire-london",
-  },
-  {
-    path: "/corporate-flower-bar-london/",
-    slug: "corporate-flower-bar-london",
-  },
-  {
-    path: "/brand-activation-flower-bar/",
-    slug: "brand-activation-flower-bar",
-  },
-  {
-    path: "/christmas-flower-bar-london/",
-    slug: "christmas-flower-bar-london",
-  },
-  {
-    path: "/flower-workshop-london/",
-    slug: "flower-workshop-london",
-  },
+/** Primary indexable routes used for sitemap and SEO shells. */
+export const primaryRoutes = [
+  { path: "/", slug: "home" },
+  { path: "/wedding-flower-bar-hire-london/", slug: "weddings" },
+  { path: "/celebrations/", slug: "celebrations" },
+  { path: "/corporate-flower-bar-london/", slug: "corporate" },
+  { path: "/packages/", slug: "packages" },
+  { path: "/enquire/", slug: "enquire" },
+  { path: "/partner-with-us/", slug: "partner" },
+  { path: "/privacy/", slug: "privacy" },
 ] as const;

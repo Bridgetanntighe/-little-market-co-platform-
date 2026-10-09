@@ -75,7 +75,7 @@ export const weddingFaqs = [
   },
   {
     q: "How many bouquets should we book?",
-    a: "Packages are sized around guest allowances — The Little Bar for up to 20, The Bloom Market for up to 30, and The Brand Market for up to 40. For larger weddings, tell us how many bouquets you would like to provide and we will quote accordingly.",
+    a: "Packages include up to 20, 30 or 40 take-home bouquets — not unlimited guest participation. Your wedding can have more guests than bouquets; for example, a 100-person wedding might book 30 bouquets for a selected group. Tell us how many bouquets you would like to provide and we will quote accordingly.",
   },
   {
     q: "Can you match our wedding colours?",
