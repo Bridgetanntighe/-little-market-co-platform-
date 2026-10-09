@@ -6,13 +6,11 @@ import { WorkWithUs } from "../components/WorkWithUs";
 import {
   bloomMarket,
   experienceSteps,
-  faqs,
   hireOptions,
 } from "../data/content";
 import { pageSeo } from "../data/pageSeo";
 import { site } from "../data/site";
 import { enquireHref, scrollToId, useReveal } from "../hooks/useReveal";
-import { FaqList } from "../components/FaqList";
 import { FloralStylePreview } from "../components/FloralStyleSelector";
 
 const occasions = [
@@ -112,6 +110,9 @@ function Occasions() {
       <div className="container">
         <span className="section-eyebrow">Occasions</span>
         <h2 className="section-title">What are you celebrating?</h2>
+        <p className="snap-rail__hint" aria-hidden="true">
+          Swipe for more
+        </p>
         <div className="occasions__cards">
           {occasions.map((item) => (
             <article
@@ -177,8 +178,11 @@ function PackagePreview() {
         <span className="section-eyebrow">Packages</span>
         <h2 className="section-title">Find your little market</h2>
         <p className="section-lead">
-          Inclusive packages cover the styled display and seasonal flowers for the bouquet
-          allowance shown. Your event can have more guests than bouquets.
+          Inclusive packages for the styled display and seasonal flowers — choose how many
+          take-home bouquets you would like.
+        </p>
+        <p className="snap-rail__hint" aria-hidden="true">
+          Swipe for more
         </p>
         <div className="packages__grid packages__grid--three">
           {hireOptions.map((pkg) => (
@@ -196,11 +200,6 @@ function PackagePreview() {
             </article>
           ))}
         </div>
-        <p className="packages__note">
-          Delivery, setup and collection within London and surrounding areas are included. Further
-          travel, assisted staffing and personalised extras are quoted separately. Bouquet
-          allowances are not unlimited guest participation.
-        </p>
         <Link className="btn btn-secondary packages__cta" to="/packages/">
           Compare packages
         </Link>
@@ -225,22 +224,6 @@ function FinalCta() {
           choose the right flower market.
         </p>
         <Link className="btn btn-primary" to="/enquire/">
-          Check your date
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-function FAQ() {
-  const { ref, visible } = useReveal<HTMLElement>();
-  return (
-    <section className={`section faq reveal ${visible ? "is-visible" : ""}`} id="faq" ref={ref}>
-      <div className="container">
-        <span className="section-eyebrow">Good to know</span>
-        <h2 className="section-title">Frequently asked questions</h2>
-        <FaqList items={faqs} />
-        <Link className="btn btn-primary" style={{ marginTop: "2rem" }} to="/enquire/">
           Check your date
         </Link>
       </div>
@@ -287,15 +270,6 @@ const homeJsonLd = [
     provider: { "@id": `${site.url}/#business` },
     areaServed: "London",
     description: bloomMarket.description,
-  },
-  {
-    "@type": "FAQPage",
-    "@id": `${site.url}/#faq`,
-    mainEntity: faqs.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: { "@type": "Answer", text: item.a },
-    })),
   },
 ];
 
@@ -374,7 +348,6 @@ export default function HomePage() {
         <PackagePreview />
         <FinalCta />
         <WorkWithUs />
-        <FAQ />
       </main>
     </>
   );

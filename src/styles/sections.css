@@ -869,7 +869,8 @@
   margin-top: 2rem;
 }
 
-.style-rail__hint {
+.style-rail__hint,
+.snap-rail__hint {
   display: none;
 }
 
@@ -1888,48 +1889,77 @@
 .site-footer {
   background: var(--botanical-deep);
   color: color-mix(in srgb, var(--ivory) 88%, white);
-  padding: 3rem 0 2.25rem;
+  padding: 2.25rem 0 1.75rem;
 }
 
-.site-footer__grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 1.75rem;
+.site-footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
 }
 
 .site-footer__brand {
   font-family: var(--font-brand);
-  font-size: 2rem;
+  font-size: clamp(1.65rem, 3vw, 2rem);
   color: var(--ivory);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.25rem;
 }
 
-.site-footer p,
-.site-footer a {
-  color: color-mix(in srgb, var(--ivory) 72%, transparent);
-  font-size: 0.95rem;
+.site-footer__summary {
+  color: color-mix(in srgb, var(--ivory) 68%, transparent);
+  font-size: 0.9rem;
+}
+
+.site-footer__contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.site-footer__email {
+  color: color-mix(in srgb, var(--ivory) 82%, white);
+  font-size: 0.92rem;
 }
 
 .site-footer a:hover {
   color: #fff;
 }
 
-.site-footer__label {
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--champagne);
-  margin-bottom: 0.55rem;
+.site-footer__cta {
+  margin: 0;
+}
+
+.site-footer__nav {
+  margin-top: 1.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid color-mix(in srgb, var(--ivory) 14%, transparent);
+  display: grid;
+  gap: 0.65rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.15rem;
+}
+
+.footer-links a {
+  color: color-mix(in srgb, var(--ivory) 78%, white);
+  font-size: 0.92rem;
+}
+
+.footer-links--secondary a {
+  color: color-mix(in srgb, var(--ivory) 58%, transparent);
+  font-size: 0.86rem;
 }
 
 .site-footer__tagline {
-  margin-top: 2rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid color-mix(in srgb, var(--ivory) 14%, transparent);
+  margin-top: 1.15rem;
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   letter-spacing: -0.01em;
   color: var(--rose-soft);
 }
@@ -2108,16 +2138,11 @@
 }
 
 @media (max-width: 720px) {
-  .packages__grid,
-  .packages__grid--three,
   .colour-stories__grid,
   .palettes__grid,
   .gallery__grid,
-  .site-footer__grid,
   .occasions__grid,
-  .occasions__cards,
-  .included__list,
-  .steps--three {
+  .included__list {
     grid-template-columns: 1fr;
   }
 
@@ -2138,10 +2163,11 @@
     line-height: 1.4;
   }
 
-  /* Compact horizontal swipe rail for floral styles on phones */
-  .style-rail__hint {
+  /* Shared mobile snap rails — packages, occasions, partner cards, floral styles */
+  .style-rail__hint,
+  .snap-rail__hint {
     display: block;
-    margin: 0 0 0.55rem;
+    margin: 0.85rem 0 0.45rem;
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -2149,8 +2175,17 @@
     color: var(--ink-muted);
   }
 
+  .packages .snap-rail__hint {
+    color: color-mix(in srgb, var(--ivory) 70%, transparent);
+  }
+
   .style-preview__grid.style-rail,
-  .style-selector__grid.style-rail {
+  .style-selector__grid.style-rail,
+  .packages__grid,
+  .packages__grid--three,
+  .occasions__cards,
+  .partner-cards__grid,
+  .steps--three {
     display: flex;
     grid-template-columns: none;
     gap: 0.75rem;
@@ -2161,18 +2196,98 @@
     -webkit-overflow-scrolling: touch;
     padding: 0.15rem 1rem 0.65rem;
     margin-inline: -0.75rem;
+    margin-top: 1.35rem;
     scrollbar-width: none;
   }
 
   .style-preview__grid.style-rail::-webkit-scrollbar,
-  .style-selector__grid.style-rail::-webkit-scrollbar {
+  .style-selector__grid.style-rail::-webkit-scrollbar,
+  .packages__grid::-webkit-scrollbar,
+  .packages__grid--three::-webkit-scrollbar,
+  .occasions__cards::-webkit-scrollbar,
+  .partner-cards__grid::-webkit-scrollbar,
+  .steps--three::-webkit-scrollbar {
     display: none;
   }
 
-  .style-rail > .style-card {
+  .style-rail > .style-card,
+  .packages__grid > .package,
+  .packages__grid--three > .package,
+  .occasions__cards > .occasion-card,
+  .partner-cards__grid > .partner-card,
+  .steps--three > .step {
     flex: 0 0 min(78vw, 16.5rem);
     max-width: 16.5rem;
     scroll-snap-align: start;
+  }
+
+  .packages__grid > .package,
+  .packages__grid--three > .package {
+    padding: 1.15rem 1.1rem 1.25rem;
+  }
+
+  .package h2,
+  .package h3 {
+    font-size: 1.45rem;
+  }
+
+  .package__price {
+    font-size: 1.55rem;
+  }
+
+  .package p,
+  .package li {
+    font-size: 0.86rem;
+  }
+
+  .package ul {
+    margin-bottom: 1rem;
+    gap: 0.3rem;
+  }
+
+  .occasion-card__media img {
+    aspect-ratio: 1 / 1;
+  }
+
+  .occasion-card__body {
+    padding: 0.85rem 0.9rem 1rem;
+    gap: 0.4rem;
+  }
+
+  .occasion-card__body h3 {
+    font-size: 1.25rem;
+  }
+
+  .occasion-card__body p {
+    font-size: 0.84rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .partner-card {
+    padding: 1rem 1.05rem 1.1rem;
+  }
+
+  .partner-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .partner-card p {
+    font-size: 0.86rem;
+  }
+
+  .step {
+    padding: 1rem 0.95rem 1.1rem;
+  }
+
+  .step h3 {
+    font-size: 1.2rem;
+  }
+
+  .step p {
+    font-size: 0.86rem;
   }
 
   .style-card__media {
@@ -2257,12 +2372,64 @@
     min-width: 9rem;
   }
 
-  .style-preview .btn {
+  .style-preview .btn,
+  .packages__cta,
+  .occasions__cta {
     margin-top: 1rem;
   }
 
-  .colour-stories.section {
-    padding-block: clamp(2.5rem, 6vw, 3.5rem);
+  .packages__note {
+    margin-top: 0.9rem;
+    font-size: 0.84rem;
+  }
+
+  .work-with-us__copy,
+  .work-with-us__support {
+    font-size: 0.92rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .site-footer {
+    padding: 1.65rem 0 calc(1.35rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .site-footer__top {
+    gap: 0.85rem;
+  }
+
+  .site-footer__contact {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .site-footer__cta {
+    padding: 0.55rem 0.95rem;
+    min-height: 2.4rem;
+    font-size: 0.84rem;
+  }
+
+  .site-footer__nav {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    gap: 0.45rem;
+  }
+
+  .footer-links {
+    gap: 0.35rem 0.85rem;
+  }
+
+  .footer-links a {
+    font-size: 0.88rem;
+  }
+
+  .site-footer__tagline {
+    margin-top: 0.85rem;
+    font-size: 1.1rem;
+  }
+
+  .wedding-hero,
+  .partner-hero {
+    padding-top: clamp(1.5rem, 4vw, 2.25rem);
   }
 
   .sticky-cta {

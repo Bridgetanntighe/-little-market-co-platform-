@@ -1,4 +1,4 @@
-import { useEffect, useId, useState, type ReactNode } from "react";
+import { useEffect, useId, useState, type MouseEvent, type ReactNode } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { contact } from "../data/contact";
 import { enquireHref, goHomeSection } from "../hooks/useReveal";
@@ -8,6 +8,35 @@ const mainNav = [
   { to: "/celebrations/", label: "Celebrations" },
   { to: "/corporate-flower-bar-london/", label: "Corporate & Brands" },
   { to: "/packages/", label: "Packages" },
+];
+
+const footerPrimary = [
+  { to: "/wedding-flower-bar-hire-london/", label: "Weddings" },
+  { to: "/celebrations/", label: "Celebrations" },
+  { to: "/corporate-flower-bar-london/", label: "Corporate" },
+  { to: "/packages/", label: "Packages" },
+  { to: "/enquire/", label: "Enquire" },
+] as const;
+
+type FooterSecondaryItem =
+  | { to: string; label: string }
+  | {
+      href: string;
+      label: string;
+      onClick: (e: MouseEvent<HTMLAnchorElement>) => void;
+    };
+
+const footerSecondary: FooterSecondaryItem[] = [
+  {
+    href: "/#work-with-us",
+    label: "Work with us",
+    onClick: (e) => {
+      e.preventDefault();
+      goHomeSection("work-with-us");
+    },
+  },
+  { to: "/partner-with-us/", label: "Partner with us" },
+  { to: "/privacy/", label: "Privacy" },
 ];
 
 function Announcement() {
@@ -73,61 +102,48 @@ function Footer() {
   return (
     <footer className="site-footer">
       <div className="container">
-        <div className="site-footer__grid">
-          <div>
+        <div className="site-footer__top">
+          <div className="site-footer__brand-block">
             <div className="site-footer__brand">The Little Market Co.</div>
-            <p>{contact.serviceArea}</p>
-            <p>The Little Bloom Market — flower bar hire for weddings and celebrations</p>
+            <p className="site-footer__summary">
+              Flower bar hire · {contact.serviceArea}
+            </p>
           </div>
-          <div>
-            <div className="site-footer__label">Explore</div>
-            <ul className="footer-links">
-              <li>
-                <Link to="/wedding-flower-bar-hire-london/">Weddings</Link>
-              </li>
-              <li>
-                <Link to="/celebrations/">Celebrations</Link>
-              </li>
-              <li>
-                <Link to="/corporate-flower-bar-london/">Corporate & Brands</Link>
-              </li>
-              <li>
-                <Link to="/packages/">Packages</Link>
-              </li>
-              <li>
-                <Link to="/enquire/">Enquire</Link>
-              </li>
-              <li>
-                <a
-                  href="/#work-with-us"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    goHomeSection("work-with-us");
-                  }}
-                >
-                  Work with us
-                </a>
-              </li>
-              <li>
-                <Link to="/partner-with-us/">Partner with us</Link>
-              </li>
-              <li>
-                <Link to="/privacy/">Privacy policy</Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <div className="site-footer__label">Email</div>
+          <div className="site-footer__contact">
             {contact.email ? (
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
-            ) : (
-              <p>Use the enquiry form</p>
-            )}
-            <Link className="btn btn-accent" style={{ marginTop: "1rem" }} to="/enquire/">
+              <a className="site-footer__email" href={`mailto:${contact.email}`}>
+                {contact.email}
+              </a>
+            ) : null}
+            <Link className="btn btn-accent site-footer__cta" to="/enquire/">
               Check availability
             </Link>
           </div>
         </div>
+
+        <nav className="site-footer__nav" aria-label="Footer">
+          <ul className="footer-links footer-links--primary">
+            {footerPrimary.map((item) => (
+              <li key={item.to}>
+                <Link to={item.to}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="footer-links footer-links--secondary">
+            {footerSecondary.map((item) => (
+              <li key={item.label}>
+                {"to" in item ? (
+                  <Link to={item.to}>{item.label}</Link>
+                ) : (
+                  <a href={item.href} onClick={item.onClick}>
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         <p className="site-footer__tagline">A little flower market for your celebration.</p>
       </div>
     </footer>

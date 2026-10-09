@@ -202,6 +202,9 @@ export default function WeddingPage() {
               you can invite. A 100-person wedding might book 20 or 30 bouquets for a selected
               group; larger bouquet counts can be quoted separately.
             </p>
+            <p className="snap-rail__hint" aria-hidden="true">
+              Swipe for more
+            </p>
             <div className="packages__grid packages__grid--three">
               {hireOptions.map((pkg) => (
                 <article className="package" key={pkg.id}>

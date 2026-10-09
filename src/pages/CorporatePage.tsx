@@ -120,6 +120,9 @@ export default function CorporatePage() {
               Same inclusive bouquet packages as our celebrations hire. Standard bookings are
               self-serve after setup.
             </p>
+            <p className="snap-rail__hint" aria-hidden="true">
+              Swipe for more
+            </p>
             <div className="packages__grid packages__grid--three">
               {hireOptions.map((pkg) => (
                 <article className="package" key={pkg.id}>

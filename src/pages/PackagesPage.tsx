@@ -81,6 +81,9 @@ export default function PackagesPage() {
 
         <section className="section packages" ref={ref}>
           <div className={`container reveal ${visible ? "is-visible" : ""}`}>
+            <p className="snap-rail__hint" aria-hidden="true">
+              Swipe for more
+            </p>
             <div className="packages__grid packages__grid--three">
               {hireOptions.map((pkg) => (
                 <article className="package" key={pkg.id}>

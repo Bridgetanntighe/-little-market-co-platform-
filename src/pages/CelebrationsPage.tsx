@@ -114,6 +114,9 @@ export default function CelebrationsPage() {
               Bouquet allowances match our shared pricing — your guest list can be larger than the
               number of bouquets you book.
             </p>
+            <p className="snap-rail__hint" aria-hidden="true">
+              Swipe for more
+            </p>
             <div className="packages__grid packages__grid--three">
               {hireOptions.map((pkg) => (
                 <article className="package" key={pkg.id}>
