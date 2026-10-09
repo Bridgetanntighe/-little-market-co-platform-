@@ -54,6 +54,13 @@ const pages = [
       "Host a bouquet-making flower workshop in London with The Little Market Co. A guided or self-serve bloom market for teams, celebrations and brand events.",
   },
   {
+    path: "/wedding-flower-bar-hire-london",
+    file: "wedding-flower-bar-hire-london/index.html",
+    title: "Wedding Flower Bar Hire London | The Little Market Co",
+    description:
+      "A self-serve wedding flower bar in London, styled around your celebration. Guests choose seasonal stems, wrap a bouquet and take it home.",
+  },
+  {
     path: "/partner-with-us",
     file: "partner-with-us/index.html",
     title: "Partner With Us | The Little Market Co",

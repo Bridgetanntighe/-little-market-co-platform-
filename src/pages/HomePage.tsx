@@ -177,6 +177,42 @@ function Occasions() {
   );
 }
 
+function WeddingFeature() {
+  const { ref, visible } = useReveal<HTMLElement>();
+  return (
+    <section
+      className={`section wedding-feature reveal ${visible ? "is-visible" : ""}`}
+      id="weddings-feature"
+      ref={ref}
+    >
+      <div className="container wedding-feature__panel">
+        <div>
+          <span className="section-eyebrow">Weddings</span>
+          <h2 className="section-title">A little market for your big day</h2>
+          <p className="section-lead">
+            A beautiful wedding activity and a bouquet for guests to take home, styled around your
+            celebration.
+          </p>
+          <Link className="btn btn-primary" to="/wedding-flower-bar-hire-london/">
+            Explore wedding flower bars
+          </Link>
+        </div>
+        <figure className="wedding-feature__figure">
+          <ResponsiveImage
+            src="/images/guests-making-bouquets-flower-market.jpg"
+            webp="/images/guests-making-bouquets-flower-market.webp"
+            alt="Styling concept of guests making take-home wedding bouquets"
+            width={1200}
+            height={800}
+            sizes="(max-width: 900px) 100vw, 420px"
+          />
+          <figcaption>Styling concept — wedding bouquet atmosphere (inspiration image)</figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
 function HowItWorks() {
   const { ref, visible } = useReveal<HTMLElement>();
   return (
@@ -851,6 +887,7 @@ export default function HomePage() {
         <SeoCopy />
         <ColourStories />
         <Occasions />
+        <WeddingFeature />
         <HowItWorks />
         <Included />
         <Gallery />

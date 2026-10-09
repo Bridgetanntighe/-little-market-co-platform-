@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import PartnerPage from "./pages/PartnerPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import { SeoLandingPage } from "./pages/SeoLandingPage";
+import WeddingPage from "./pages/WeddingPage";
 import "./styles/global.css";
 import "./styles/sections.css";
 
@@ -14,6 +15,11 @@ export default function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route
+          path="/wedding-flower-bar-hire-london"
+          element={<Navigate to="/wedding-flower-bar-hire-london/" replace />}
+        />
+        <Route path="/wedding-flower-bar-hire-london/" element={<WeddingPage />} />
         <Route path="/partner-with-us" element={<Navigate to="/partner-with-us/" replace />} />
         <Route path="/partner-with-us/" element={<PartnerPage />} />
         <Route path="/privacy" element={<Navigate to="/privacy/" replace />} />

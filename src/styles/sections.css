@@ -1063,6 +1063,104 @@
   margin-left: 0.55rem;
 }
 
+.wedding-feature {
+  background: color-mix(in srgb, var(--rose-soft) 14%, var(--cream));
+}
+
+.wedding-feature__panel {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: center;
+}
+
+.wedding-feature__figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.wedding-feature__figure figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+.wedding-hero {
+  padding-top: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.wedding-hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.wedding-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.5vw, 3.9rem);
+  color: var(--botanical);
+  line-height: 1.08;
+  margin: 0.35rem 0 0.75rem;
+  max-width: 12ch;
+}
+
+.wedding-hero__kicker {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.5vw, 1.9rem);
+  color: var(--rose);
+  margin-bottom: 0.85rem;
+}
+
+.wedding-hero__copy {
+  color: var(--ink-muted);
+  max-width: 36rem;
+  margin-bottom: 1.25rem;
+}
+
+.wedding-hero__figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.wedding-hero__figure figcaption,
+.wedding-palette-note,
+.wedding-page__privacy {
+  margin-top: 0.65rem;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  max-width: 40rem;
+}
+
+.wedding-page__privacy {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.86rem;
+}
+
+.wedding-page__privacy a {
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.wedding-palettes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.wedding-palette-note {
+  margin: 1.5rem 0 1.15rem;
+}
+
+.nav > a.active {
+  color: var(--botanical);
+}
+
 .partner-hero {
   padding-top: clamp(2.5rem, 5vw, 3.75rem);
 }
@@ -1509,12 +1607,15 @@
   .enquire__layout,
   .work-with-us__layout,
   .partner-form-section__layout,
+  .wedding-feature__panel,
+  .wedding-hero__grid,
   .seo-copy__grid,
   .seo-hero__grid {
     grid-template-columns: 1fr;
   }
 
-  .partner-cards__grid {
+  .partner-cards__grid,
+  .wedding-palettes {
     grid-template-columns: 1fr;
   }
 

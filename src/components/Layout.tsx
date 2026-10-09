@@ -68,6 +68,10 @@ function HeaderNav({
     );
   });
 
+  const weddingsActive =
+    location.pathname === "/wedding-flower-bar-hire-london/" ||
+    location.pathname === "/wedding-flower-bar-hire-london";
+
   return (
     <nav id={menuId} className="nav" aria-label="Primary">
       <a
@@ -79,6 +83,14 @@ function HeaderNav({
       >
         Packages
       </a>
+
+      <NavLink
+        to="/wedding-flower-bar-hire-london/"
+        className={weddingsActive ? "active" : undefined}
+        onClick={onNavigate}
+      >
+        Weddings
+      </NavLink>
 
       <div
         className={`nav-dropdown ${experiencesOpen ? "is-open" : ""} ${experiencesActive ? "is-active" : ""}`}
@@ -192,7 +204,7 @@ function Footer() {
             <div className="site-footer__label">Explore</div>
             <ul className="footer-links">
               <li>
-                <Link to="/flower-bar-hire-london/">Weddings</Link>
+                <Link to="/wedding-flower-bar-hire-london/">Weddings</Link>
               </li>
               <li>
                 <a

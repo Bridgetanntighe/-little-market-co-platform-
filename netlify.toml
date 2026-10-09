@@ -33,6 +33,11 @@
   status = 200
 
 [[redirects]]
+  from = "/wedding-flower-bar-hire-london"
+  to = "/wedding-flower-bar-hire-london/index.html"
+  status = 200
+
+[[redirects]]
   from = "/partner-with-us"
   to = "/partner-with-us/index.html"
   status = 200

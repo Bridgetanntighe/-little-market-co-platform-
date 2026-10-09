@@ -51,6 +51,10 @@ export default function PrivacyPage() {
               Partnership enquiries such as name, business name, email, website or Instagram,
               business type and partnership ideas
             </li>
+            <li>
+              Wedding enquiries such as name, email, wedding date, venue, guest numbers, bouquet
+              preferences and styling ideas
+            </li>
           </ul>
 
           <h2>How we use your information</h2>
