@@ -1,63 +1,31 @@
 /**
  * Public contact details and enquiry delivery via Netlify Forms.
- *
- * Leave email / Instagram empty until real values are confirmed.
- * Do not use placeholder emails or generic Instagram URLs.
- *
- * Netlify Forms: React submits URL-encoded POSTs to `/__forms.html` with `form-name`.
- * A matching static HTML form in `public/__forms.html` enables form detection at deploy.
  */
 
 export const NETLIFY_FORM_NAME = "enquiry";
 
 export const contact = {
-  /** Public enquiry email shown in the footer */
   email: "hello.littlemarketco@gmail.com",
-  /** Full Instagram profile URL — omit from UI until provided */
   instagramUrl: "",
-  /** Display handle only, e.g. @thelittlemarketco */
   instagramHandle: "",
-  /** Service area shown in footer / schema */
   serviceArea: "London and surrounding areas",
-  /** Netlify Forms are always available once the site is deployed to Netlify */
   formConfigured: true,
 };
 
 export type EnquiryPayload = {
   name: string;
   email: string;
-  phone: string;
   company: string;
-  eventType: string;
-  packageChoice: string;
   eventDate: string;
   venue: string;
   guests: string;
-  christmasBooking: string;
-  brandPersonalisation: string;
-  flowerPalette: string;
+  eventType: string;
+  packageChoice: string;
+  colourStory: string;
   additional: string;
   /** Honeypot — must stay empty for real guests */
   "bot-field"?: string;
 };
-
-/** Field names must match the static Netlify form in index.html exactly. */
-export const enquiryFieldNames = [
-  "name",
-  "email",
-  "phone",
-  "company",
-  "eventType",
-  "packageChoice",
-  "eventDate",
-  "venue",
-  "guests",
-  "christmasBooking",
-  "brandPersonalisation",
-  "flowerPalette",
-  "additional",
-  "bot-field",
-] as const;
 
 export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
   const body = new URLSearchParams();
@@ -65,19 +33,15 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
   body.set("bot-field", payload["bot-field"] ?? "");
   body.set("name", payload.name);
   body.set("email", payload.email);
-  body.set("phone", payload.phone);
   body.set("company", payload.company);
-  body.set("eventType", payload.eventType);
-  body.set("packageChoice", payload.packageChoice);
   body.set("eventDate", payload.eventDate);
   body.set("venue", payload.venue);
   body.set("guests", payload.guests);
-  body.set("christmasBooking", payload.christmasBooking);
-  body.set("brandPersonalisation", payload.brandPersonalisation);
-  body.set("flowerPalette", payload.flowerPalette);
+  body.set("eventType", payload.eventType);
+  body.set("packageChoice", payload.packageChoice);
+  body.set("colourStory", payload.colourStory);
   body.set("additional", payload.additional);
 
-  // Prefer the static skeleton so SPA redirects cannot intercept form POSTs.
   const res = await fetch("/__forms.html", {
     method: "POST",
     headers: {

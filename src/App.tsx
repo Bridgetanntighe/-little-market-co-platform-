@@ -5,18 +5,16 @@ import {
   type FormEvent,
 } from "react";
 import {
-  bloomMarket,
+  colourStories,
+  colourStoryChoices,
+  everyBookingIncludes,
   eventTypes,
-  experienceBenefits,
   faqs,
-  flowerPalettes,
   galleryItems,
-  hireOccasions,
   hireOptions,
   howItWorks,
+  memorableMoments,
   packageChoices,
-  winterBloom,
-  yesNoChoices,
 } from "./data/content";
 import { contact, NETLIFY_FORM_NAME, submitEnquiry } from "./data/contact";
 import {
@@ -31,15 +29,13 @@ import "./styles/global.css";
 import "./styles/sections.css";
 
 const nav = [
-  { id: "bloom-market", label: "The Bloom Market" },
-  { id: "occasions", label: "Occasions" },
   { id: "packages", label: "Packages" },
-  { id: "palettes", label: "Palettes" },
-  { id: "christmas", label: "Christmas" },
-  { id: "brands", label: "For Brands" },
-  { id: "about", label: "About" },
+  { id: "colour-stories", label: "Colour stories" },
+  { id: "occasions", label: "Occasions" },
+  { id: "how-it-works", label: "How it works" },
+  { id: "included", label: "Included" },
   { id: "faq", label: "FAQs" },
-  { id: "enquire", label: "Enquire" },
+  { id: "enquire", label: "Check availability" },
 ];
 
 function Announcement() {
@@ -47,13 +43,13 @@ function Announcement() {
     <div className="announcement">
       <div className="container">
         <a
-          href="#christmas"
+          href="#enquire"
           onClick={(e) => {
             e.preventDefault();
-            scrollToId("christmas");
+            scrollToId("enquire");
           }}
         >
-          Christmas 2026 bookings are now open — limited December dates available
+          Flower bar hire from £395 — tell us your date and guest numbers for a clear quote
         </a>
       </div>
     </div>
@@ -111,52 +107,110 @@ function Header() {
   );
 }
 
-function Experience() {
+function Packages() {
   const { ref, visible } = useReveal<HTMLElement>();
-
   return (
     <section
-      className={`section experience reveal ${visible ? "is-visible" : ""}`}
-      id="bloom-market"
+      className={`section packages reveal ${visible ? "is-visible" : ""}`}
+      id="packages"
       ref={ref}
     >
       <div className="container">
-        <span className="section-eyebrow">The experience</span>
-        <h2 className="section-title">
-          Part flower bar. Part guest experience. Part take-home gift.
-        </h2>
+        <span className="section-eyebrow">Packages</span>
+        <h2 className="section-title">Choose your flower market</h2>
         <p className="section-lead">
-          The Little Bloom Market gives guests the chance to select seasonal stems and create their
-          own small bouquet. Every market is prepared around your event or brand palette with
-          wrapping, ribbon and simple guest instructions included. We set everything up before your
-          event and return later to collect it.
+          Our flower bar hire starts from £395. Flowers are then tailored to your guest numbers and
+          chosen bouquet style. The final price depends on guest numbers, flowers, location and
+          branding.
         </p>
-        <div className="experience__panel">
-          <div className="experience__art">
-            <StallScene market="bloom" />
-            <span className="preview-label">Concept Preview</span>
-          </div>
-          <div className="experience__content">
-            <h3>{bloomMarket.name}</h3>
-            <p>{bloomMarket.description}</p>
-            <div className="block-title">Well suited to</div>
-            <div className="chip-row">
-              {bloomMarket.occasions.map((o) => (
-                <span className="chip" key={o}>
-                  {o}
-                </span>
-              ))}
-            </div>
-            <p className="experience__secondary">
-              Also lovely for {bloomMarket.secondaryUses.join(" and ").toLowerCase()}.
-            </p>
-          </div>
+        <div className="packages__grid packages__grid--three">
+          {hireOptions.map((pkg) => (
+            <article className={`package ${pkg.popular ? "package--popular" : ""}`} key={pkg.id}>
+              {pkg.popular && <span className="package__badge">Most popular</span>}
+              <h3>{pkg.name}</h3>
+              <div className="package__price">{pkg.price}</div>
+              <span className="package__note">{pkg.note}</span>
+              <p>{pkg.description}</p>
+              <ul>
+                {pkg.includes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <button
+                className="btn btn-accent"
+                type="button"
+                onClick={() => enquireWithOption({ packageChoice: pkg.enquiryValue })}
+              >
+                {pkg.cta}
+              </button>
+            </article>
+          ))}
         </div>
-        <div className="benefits">
-          {experienceBenefits.map((b) => (
-            <article className="benefit" key={b.title}>
-              <h3>{b.title}</h3>
-              <p>{b.copy}</p>
+        <div className="pricing-notes">
+          <p>
+            Flower bar hire starts from £395. Flowers are then tailored to your guest numbers and
+            chosen bouquet style.
+          </p>
+          <p className="pricing-notes__secondary">
+            As a guide only: mini bouquet allowance from £18 per guest · fuller bouquet allowance
+            from £25 per guest · branding from £150. Your final quote is based on the event.
+          </p>
+          <p>
+            Planning a larger event? We can create a bespoke quote for larger guest numbers, florist
+            assistance or additional branding.
+          </p>
+        </div>
+        <button
+          className="btn btn-primary packages__cta"
+          type="button"
+          onClick={() => scrollToId("enquire")}
+        >
+          Check availability
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function ColourStories() {
+  const { ref, visible } = useReveal<HTMLElement>();
+  return (
+    <section
+      className={`section colour-stories reveal ${visible ? "is-visible" : ""}`}
+      id="colour-stories"
+      ref={ref}
+    >
+      <div className="container">
+        <span className="section-eyebrow">Colour stories</span>
+        <h2 className="section-title">Choose your colour story</h2>
+        <p className="section-lead">
+          Pick a palette to suit the mood of your event. Seasonal substitutions may apply so stems
+          stay fresh on the day.
+        </p>
+        <div className="colour-stories__grid">
+          {colourStories.map((story) => (
+            <article className="colour-card" key={story.id}>
+              <div className="colour-card__swatches" aria-hidden="true">
+                {story.colours.map((colour) => (
+                  <span key={colour} style={{ background: colour }} />
+                ))}
+              </div>
+              <h3>{story.name}</h3>
+              <p>{story.copy}</p>
+              <p className="colour-card__best">{story.bestFor}</p>
+              <button
+                className="btn btn-secondary"
+                type="button"
+                onClick={() =>
+                  enquireWithOption({
+                    colourStory: story.enquiryValue,
+                    packageChoice:
+                      story.id === "brand-match" ? "The Brand Market" : undefined,
+                  })
+                }
+              >
+                Check availability
+              </button>
             </article>
           ))}
         </div>
@@ -174,18 +228,16 @@ function Occasions() {
       ref={ref}
     >
       <div className="container">
-        <span className="section-eyebrow">Flower bar hire for every celebration</span>
-        <h2 className="section-title">Weddings, birthdays and events across London</h2>
+        <span className="section-eyebrow">Occasions</span>
+        <h2 className="section-title">Made for moments worth remembering</h2>
         <p className="section-lead">
-          Looking to hire a flower bar? The Little Bloom Market is a self-serve bouquet experience
-          for guests — perfect when you want something more special than a standard floral display.
+          A self-serve flower bar for offices, parties, launches and brand events across London.
         </p>
-        <div className="occasions__grid">
-          {hireOccasions.map((item) => (
-            <article className="occasion" key={item.id}>
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </article>
+        <div className="moments">
+          {memorableMoments.map((moment) => (
+            <span className="moment" key={moment}>
+              {moment}
+            </span>
           ))}
         </div>
         <button
@@ -193,7 +245,7 @@ function Occasions() {
           type="button"
           onClick={() => scrollToId("enquire")}
         >
-          Enquire about your event
+          Check availability
         </button>
       </div>
     </section>
@@ -203,14 +255,19 @@ function Occasions() {
 function HowItWorks() {
   const { ref, visible } = useReveal<HTMLElement>();
   return (
-    <section className={`section reveal ${visible ? "is-visible" : ""}`} id="how-it-works" ref={ref}>
+    <section
+      className={`section reveal ${visible ? "is-visible" : ""}`}
+      id="how-it-works"
+      ref={ref}
+    >
       <div className="container">
         <span className="section-eyebrow">Simple process</span>
-        <h2 className="section-title">How It Works</h2>
+        <h2 className="section-title">How it works</h2>
         <p className="section-lead">
-          From first enquiry to collection day, every Bloom Market is prepared with clarity and care.
+          Guests choose their favourite stems, create their own bouquet and take it home as a
+          beautiful reminder of the event.
         </p>
-        <div className="steps">
+        <div className="steps steps--three">
           {howItWorks.map((s) => (
             <article className="step" key={s.step}>
               <div className="step__num">{s.step}</div>
@@ -219,231 +276,42 @@ function HowItWorks() {
             </article>
           ))}
         </div>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => scrollToId("enquire")}
+          style={{ marginTop: "2rem" }}
+        >
+          Check availability
+        </button>
       </div>
     </section>
   );
 }
 
-function Packages() {
+function Included() {
   const { ref, visible } = useReveal<HTMLElement>();
   return (
     <section
-      className={`section packages reveal ${visible ? "is-visible" : ""}`}
-      id="packages"
+      className={`section included reveal ${visible ? "is-visible" : ""}`}
+      id="included"
       ref={ref}
     >
       <div className="container">
-        <span className="section-eyebrow">Packages</span>
-        <h2 className="section-title">Flower bar hire packages</h2>
-        <p className="section-lead">
-          Book a styled self-serve flower bar for weddings, birthdays and private events, or a fully
-          branded activation for your campaign. Standard hire includes same-day setup and collection,
-          with around 4–6 hours of guest use.
-        </p>
-        <div className="packages__grid">
-          {hireOptions.map((pkg) => (
-            <article className="package" key={pkg.id}>
-              <h3>{pkg.name}</h3>
-              <div className="package__price">{pkg.price}</div>
-              <span className="package__note">{pkg.note}</span>
-              <p>{pkg.description}</p>
-              <ul>
-                {pkg.includes.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <button
-                className="btn btn-accent"
-                type="button"
-                onClick={() =>
-                  enquireWithOption({
-                    packageChoice: pkg.enquiryValue,
-                    brandPersonalisation: pkg.id === "branded-bloom" ? "Yes" : undefined,
-                  })
-                }
-              >
-                {pkg.cta}
-              </button>
-            </article>
+        <span className="section-eyebrow">What’s included</span>
+        <h2 className="section-title">Every booking includes</h2>
+        <ul className="included__list">
+          {everyBookingIncludes.map((item) => (
+            <li key={item}>{item}</li>
           ))}
-        </div>
-        <p className="packages__note">
-          Additional guests, premium flower requests and extended hire can be quoted separately.
-          Delivery is calculated according to location and access.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function Palettes() {
-  const { ref, visible } = useReveal<HTMLElement>();
-  return (
-    <section
-      className={`section palettes reveal ${visible ? "is-visible" : ""}`}
-      id="palettes"
-      ref={ref}
-    >
-      <div className="container">
-        <span className="section-eyebrow">Flower palettes</span>
-        <h2 className="section-title">Stems for building your own bouquet</h2>
-        <p className="section-lead">
-          Every Bloom Market is set up so guests can choose stems and create a small take-home
-          bouquet. Pick a palette below — seasonal substitutions may apply to keep flowers fresh and
-          beautiful on the day.
-        </p>
-        <div className="palettes__grid">
-          {flowerPalettes.map((palette) => (
-            <article className="palette" key={palette.id}>
-              <div className="palette__swatches" aria-hidden="true">
-                {palette.colours.map((colour) => (
-                  <span key={colour} style={{ background: colour }} />
-                ))}
-              </div>
-              <h3>{palette.name}</h3>
-              <p className="palette__tagline">{palette.tagline}</p>
-              <p className="palette__best">Best for {palette.bestFor.toLowerCase()}.</p>
-              <dl className="palette__stems">
-                <div>
-                  <dt>Hero flowers</dt>
-                  <dd>{palette.heroes.join(" · ")}</dd>
-                </div>
-                <div>
-                  <dt>Fillers</dt>
-                  <dd>{palette.fillers.join(" · ")}</dd>
-                </div>
-                <div>
-                  <dt>Foliage</dt>
-                  <dd>{palette.foliage.join(" · ")}</dd>
-                </div>
-                <div>
-                  <dt>Accent</dt>
-                  <dd>{palette.accent}</dd>
-                </div>
-              </dl>
-              <p className="palette__guide">{palette.guestGuide}</p>
-              <button
-                className="btn btn-secondary"
-                type="button"
-                onClick={() =>
-                  enquireWithOption({
-                    flowerPalette: palette.enquiryValue,
-                    christmasBooking: palette.id === "winter-bloom" ? "Yes" : undefined,
-                  })
-                }
-              >
-                Enquire with {palette.name}
-              </button>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Christmas() {
-  const { ref, visible } = useReveal<HTMLElement>();
-  return (
-    <section
-      className={`section christmas reveal ${visible ? "is-visible" : ""}`}
-      id="christmas"
-      ref={ref}
-    >
-      <div className="container christmas__panel">
-        <div>
-          <span className="section-eyebrow">Christmas 2026</span>
-          <h2 className="section-title">{winterBloom.heading}</h2>
-          <p className="section-lead">{winterBloom.lead}</p>
-          <p className="christmas__copy">{winterBloom.copy}</p>
-          <ul className="christmas__list">
-            {winterBloom.includes.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={() =>
-              enquireWithOption({
-                christmasBooking: "Yes",
-                packageChoice: "Styled Bloom Market",
-              })
-            }
-          >
-            {winterBloom.cta}
-          </button>
-        </div>
-        <aside className="christmas__aside" aria-hidden="true">
-          <span>Winter stems</span>
-          <span>Office parties</span>
-          <span>Client gifts</span>
-          <span>Brand moments</span>
-        </aside>
-      </div>
-    </section>
-  );
-}
-
-function Brands() {
-  const { ref, visible } = useReveal<HTMLElement>();
-  return (
-    <section className={`section brands reveal ${visible ? "is-visible" : ""}`} id="brands" ref={ref}>
-      <div className="container brands__panel">
-        <div>
-          <span className="section-eyebrow">For brands &amp; campaigns</span>
-          <h2 className="section-title">A flower market made for your brand</h2>
-          <p className="section-lead">
-            Turn The Little Bloom Market into a branded guest experience for product launches, press
-            days, retail moments and client events. We can coordinate the flowers, signage, wrapping
-            and take-home details with your campaign.
-          </p>
-          <p className="brands__detail">
-            Logo panels, campaign colours, branded bouquet sleeves, tags and custom guest messaging
-            can all be prepared so the market works for content, photography and guest gifting.
-          </p>
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={() =>
-              enquireWithOption({
-                packageChoice: "Branded Bloom Market",
-                brandPersonalisation: "Yes",
-              })
-            }
-          >
-            Plan a Brand Activation
-          </button>
-        </div>
-        <aside className="brands__aside" aria-hidden="true">
-          <span>Logo panels</span>
-          <span>Campaign colour</span>
-          <span>Branded sleeves</span>
-          <span>Custom tags</span>
-        </aside>
-      </div>
-    </section>
-  );
-}
-
-function About() {
-  const { ref, visible } = useReveal<HTMLElement>();
-  return (
-    <section className={`section about reveal ${visible ? "is-visible" : ""}`} id="about" ref={ref}>
-      <div className="container about__grid">
-        <div className="about__mark" aria-hidden="true">
-          <span>A little market. Made for your event.</span>
-        </div>
-        <div>
-          <span className="section-eyebrow">About us</span>
-          <h2 className="section-title">Mother-and-daughter care. Flower experiences.</h2>
-          <p>
-            The Little Market Co is an independent mother-and-daughter event studio based in London.
-            We create thoughtful flower experiences that feel warm, considered and beautifully put
-            together. Every Bloom Market is prepared with the same care we would give to our own
-            celebration.
-          </p>
-        </div>
+        </ul>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => scrollToId("enquire")}
+        >
+          Check availability
+        </button>
       </div>
     </section>
   );
@@ -451,7 +319,6 @@ function About() {
 
 function Gallery() {
   const { ref, visible } = useReveal<HTMLElement>();
-
   return (
     <section
       className={`section gallery reveal ${visible ? "is-visible" : ""}`}
@@ -463,8 +330,7 @@ function Gallery() {
         <h2 className="section-title">Bloom Market atmosphere</h2>
         <p className="section-lead">
           These photos are licensed stock used as inspiration for atmosphere and styling only. They
-          are not photographs of previous client events. Real Little Market Co event photography can
-          replace each image when available.
+          are not photographs of previous client events.
         </p>
         <div className="gallery__grid">
           {galleryItems.map((item) => (
@@ -476,11 +342,18 @@ function Gallery() {
               <div className="gallery-card__body">
                 <h3>{item.title}</h3>
                 <p>{item.caption}</p>
-                <p className="gallery-card__credit">{item.credit}</p>
               </div>
             </article>
           ))}
         </div>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => scrollToId("enquire")}
+          style={{ marginTop: "2rem" }}
+        >
+          Check availability
+        </button>
       </div>
     </section>
   );
@@ -500,16 +373,13 @@ function Enquiry() {
   const empty = {
     name: "",
     email: "",
-    phone: "",
     company: "",
-    eventType: "",
-    packageChoice: "",
     eventDate: "",
     venue: "",
     guests: "",
-    christmasBooking: "",
-    brandPersonalisation: "",
-    flowerPalette: "",
+    eventType: "",
+    packageChoice: "",
+    colourStory: "",
     additional: "",
     "bot-field": "",
   };
@@ -527,11 +397,7 @@ function Enquiry() {
       setForm((f) => ({
         ...f,
         ...(detail.packageChoice ? { packageChoice: detail.packageChoice } : {}),
-        ...(detail.christmasBooking ? { christmasBooking: detail.christmasBooking } : {}),
-        ...(detail.brandPersonalisation
-          ? { brandPersonalisation: detail.brandPersonalisation }
-          : {}),
-        ...(detail.flowerPalette ? { flowerPalette: detail.flowerPalette } : {}),
+        ...(detail.colourStory ? { colourStory: detail.colourStory } : {}),
       }));
     };
 
@@ -567,18 +433,16 @@ function Enquiry() {
     if (!form.email.trim()) errs.email = "Please enter your email address.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
       errs.email = "Please enter a valid email address.";
-    if (!form.phone.trim()) errs.phone = "Please enter a phone number.";
-    if (!form.eventType) errs.eventType = "Please select an event type.";
-    if (!form.packageChoice) errs.packageChoice = "Please select a package.";
     if (!form.eventDate) errs.eventDate = "Please choose an event date.";
     else if (form.eventDate < minEventDate)
       errs.eventDate = "Please choose today or a future event date.";
-    if (!form.venue.trim()) errs.venue = "Please enter the venue and postcode.";
-    if (!form.guests.trim()) errs.guests = "Please enter the guest number.";
+    if (!form.venue.trim()) errs.venue = "Please enter the event location.";
+    if (!form.guests.trim()) errs.guests = "Please enter approximate guest numbers.";
     else if (!/^\d+$/.test(form.guests.trim()) || Number(form.guests) < 1)
       errs.guests = "Please enter a valid guest number.";
-    if (!form.christmasBooking) errs.christmasBooking = "Please select yes or no.";
-    if (!form.brandPersonalisation) errs.brandPersonalisation = "Please select yes or no.";
+    if (!form.eventType) errs.eventType = "Please select an event type.";
+    if (!form.packageChoice) errs.packageChoice = "Please select a package.";
+    if (!form.colourStory) errs.colourStory = "Please select a colour story.";
     setFieldErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -591,8 +455,6 @@ function Enquiry() {
       setErrorMessage("Please check the highlighted fields and try again.");
       return;
     }
-
-    // Honeypot filled — treat as spam without confirming success to the bot.
     if (form["bot-field"].trim()) {
       setStatus("error");
       setErrorMessage("We could not send your enquiry. Please try again shortly.");
@@ -604,16 +466,13 @@ function Enquiry() {
       await submitEnquiry({
         name: form.name.trim(),
         email: form.email.trim(),
-        phone: form.phone.trim(),
         company: form.company.trim(),
-        eventType: form.eventType,
-        packageChoice: form.packageChoice,
         eventDate: form.eventDate,
         venue: form.venue.trim(),
         guests: form.guests.trim(),
-        christmasBooking: form.christmasBooking,
-        brandPersonalisation: form.brandPersonalisation,
-        flowerPalette: form.flowerPalette,
+        eventType: form.eventType,
+        packageChoice: form.packageChoice,
+        colourStory: form.colourStory,
         additional: form.additional.trim(),
         "bot-field": form["bot-field"],
       });
@@ -635,11 +494,10 @@ function Enquiry() {
       <div className="container enquire__layout">
         <div>
           <span className="section-eyebrow">Enquiries</span>
-          <h2 className="section-title">Check your date</h2>
+          <h2 className="section-title">Let’s plan your flower market</h2>
           <p className="section-lead">
-            Tell us about your office event, Christmas celebration or brand activation and we will
-            come back with availability and a tailored quote. There is no online checkout — every
-            booking is confirmed after we check your date.
+            Tell us a little about your event and we’ll check availability, recommend the right
+            package and reply with a clear quote.
           </p>
         </div>
         <div className="enquire__form">
@@ -647,8 +505,8 @@ function Enquiry() {
             <div className="form-success" role="status">
               <h3>Thank you</h3>
               <p>
-                Your enquiry has been sent. We will reply with availability and next steps for your
-                Bloom Market.
+                Thank you. We’ll check your date and reply with package options within one working
+                day.
               </p>
               <button
                 className="btn btn-primary"
@@ -695,16 +553,11 @@ function Enquiry() {
                     value={form.name}
                     onChange={set("name")}
                     aria-invalid={Boolean(fieldErrors.name)}
-                    aria-describedby={fieldErrors.name ? "name-error" : undefined}
                   />
-                  {fieldErrors.name && (
-                    <span className="field-error" id="name-error">
-                      {fieldErrors.name}
-                    </span>
-                  )}
+                  {fieldErrors.name && <span className="field-error">{fieldErrors.name}</span>}
                 </div>
                 <div className={`field ${fieldErrors.email ? "has-error" : ""}`}>
-                  <label htmlFor="email">Work email or email address</label>
+                  <label htmlFor="email">Email</label>
                   <input
                     id="email"
                     name="email"
@@ -714,36 +567,12 @@ function Enquiry() {
                     value={form.email}
                     onChange={set("email")}
                     aria-invalid={Boolean(fieldErrors.email)}
-                    aria-describedby={fieldErrors.email ? "email-error" : undefined}
                   />
-                  {fieldErrors.email && (
-                    <span className="field-error" id="email-error">
-                      {fieldErrors.email}
-                    </span>
-                  )}
-                </div>
-                <div className={`field ${fieldErrors.phone ? "has-error" : ""}`}>
-                  <label htmlFor="phone">Phone number</label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    autoComplete="tel"
-                    required
-                    value={form.phone}
-                    onChange={set("phone")}
-                    aria-invalid={Boolean(fieldErrors.phone)}
-                    aria-describedby={fieldErrors.phone ? "phone-error" : undefined}
-                  />
-                  {fieldErrors.phone && (
-                    <span className="field-error" id="phone-error">
-                      {fieldErrors.phone}
-                    </span>
-                  )}
+                  {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
                 </div>
                 <div className="field">
                   <label htmlFor="company">
-                    Company or organisation <span className="optional">(optional)</span>
+                    Company <span className="optional">(optional)</span>
                   </label>
                   <input
                     id="company"
@@ -752,50 +581,6 @@ function Enquiry() {
                     value={form.company}
                     onChange={set("company")}
                   />
-                </div>
-                <div className={`field ${fieldErrors.eventType ? "has-error" : ""}`}>
-                  <label htmlFor="eventType">Event type</label>
-                  <select
-                    id="eventType"
-                    name="eventType"
-                    required
-                    value={form.eventType}
-                    onChange={set("eventType")}
-                    aria-invalid={Boolean(fieldErrors.eventType)}
-                    aria-describedby={fieldErrors.eventType ? "eventType-error" : undefined}
-                  >
-                    <option value="">Select…</option>
-                    {eventTypes.map((t) => (
-                      <option key={t}>{t}</option>
-                    ))}
-                  </select>
-                  {fieldErrors.eventType && (
-                    <span className="field-error" id="eventType-error">
-                      {fieldErrors.eventType}
-                    </span>
-                  )}
-                </div>
-                <div className={`field ${fieldErrors.packageChoice ? "has-error" : ""}`}>
-                  <label htmlFor="packageChoice">Styled or Branded Bloom Market</label>
-                  <select
-                    id="packageChoice"
-                    name="packageChoice"
-                    required
-                    value={form.packageChoice}
-                    onChange={set("packageChoice")}
-                    aria-invalid={Boolean(fieldErrors.packageChoice)}
-                    aria-describedby={fieldErrors.packageChoice ? "packageChoice-error" : undefined}
-                  >
-                    <option value="">Select…</option>
-                    {packageChoices.map((o) => (
-                      <option key={o}>{o}</option>
-                    ))}
-                  </select>
-                  {fieldErrors.packageChoice && (
-                    <span className="field-error" id="packageChoice-error">
-                      {fieldErrors.packageChoice}
-                    </span>
-                  )}
                 </div>
                 <div className={`field ${fieldErrors.eventDate ? "has-error" : ""}`}>
                   <label htmlFor="eventDate">Event date</label>
@@ -808,16 +593,13 @@ function Enquiry() {
                     value={form.eventDate}
                     onChange={set("eventDate")}
                     aria-invalid={Boolean(fieldErrors.eventDate)}
-                    aria-describedby={fieldErrors.eventDate ? "eventDate-error" : undefined}
                   />
                   {fieldErrors.eventDate && (
-                    <span className="field-error" id="eventDate-error">
-                      {fieldErrors.eventDate}
-                    </span>
+                    <span className="field-error">{fieldErrors.eventDate}</span>
                   )}
                 </div>
                 <div className={`field ${fieldErrors.venue ? "has-error" : ""}`}>
-                  <label htmlFor="venue">Venue and postcode</label>
+                  <label htmlFor="venue">Event location</label>
                   <input
                     id="venue"
                     name="venue"
@@ -825,16 +607,11 @@ function Enquiry() {
                     value={form.venue}
                     onChange={set("venue")}
                     aria-invalid={Boolean(fieldErrors.venue)}
-                    aria-describedby={fieldErrors.venue ? "venue-error" : undefined}
                   />
-                  {fieldErrors.venue && (
-                    <span className="field-error" id="venue-error">
-                      {fieldErrors.venue}
-                    </span>
-                  )}
+                  {fieldErrors.venue && <span className="field-error">{fieldErrors.venue}</span>}
                 </div>
                 <div className={`field ${fieldErrors.guests ? "has-error" : ""}`}>
-                  <label htmlFor="guests">Guest number</label>
+                  <label htmlFor="guests">Approximate guest numbers</label>
                   <input
                     id="guests"
                     name="guests"
@@ -843,82 +620,68 @@ function Enquiry() {
                     value={form.guests}
                     onChange={set("guests")}
                     aria-invalid={Boolean(fieldErrors.guests)}
-                    aria-describedby={fieldErrors.guests ? "guests-error" : undefined}
                   />
-                  {fieldErrors.guests && (
-                    <span className="field-error" id="guests-error">
-                      {fieldErrors.guests}
-                    </span>
-                  )}
+                  {fieldErrors.guests && <span className="field-error">{fieldErrors.guests}</span>}
                 </div>
-                <div className={`field ${fieldErrors.christmasBooking ? "has-error" : ""}`}>
-                  <label htmlFor="christmasBooking">Christmas booking</label>
+                <div className={`field ${fieldErrors.eventType ? "has-error" : ""}`}>
+                  <label htmlFor="eventType">Event type</label>
                   <select
-                    id="christmasBooking"
-                    name="christmasBooking"
+                    id="eventType"
+                    name="eventType"
                     required
-                    value={form.christmasBooking}
-                    onChange={set("christmasBooking")}
-                    aria-invalid={Boolean(fieldErrors.christmasBooking)}
-                    aria-describedby={
-                      fieldErrors.christmasBooking ? "christmasBooking-error" : undefined
-                    }
+                    value={form.eventType}
+                    onChange={set("eventType")}
+                    aria-invalid={Boolean(fieldErrors.eventType)}
                   >
                     <option value="">Select…</option>
-                    {yesNoChoices.map((c) => (
-                      <option key={c}>{c}</option>
+                    {eventTypes.map((t) => (
+                      <option key={t}>{t}</option>
                     ))}
                   </select>
-                  {fieldErrors.christmasBooking && (
-                    <span className="field-error" id="christmasBooking-error">
-                      {fieldErrors.christmasBooking}
-                    </span>
+                  {fieldErrors.eventType && (
+                    <span className="field-error">{fieldErrors.eventType}</span>
                   )}
                 </div>
-                <div className={`field ${fieldErrors.brandPersonalisation ? "has-error" : ""}`}>
-                  <label htmlFor="brandPersonalisation">Brand personalisation required</label>
+                <div className={`field ${fieldErrors.packageChoice ? "has-error" : ""}`}>
+                  <label htmlFor="packageChoice">Package of interest</label>
                   <select
-                    id="brandPersonalisation"
-                    name="brandPersonalisation"
+                    id="packageChoice"
+                    name="packageChoice"
                     required
-                    value={form.brandPersonalisation}
-                    onChange={set("brandPersonalisation")}
-                    aria-invalid={Boolean(fieldErrors.brandPersonalisation)}
-                    aria-describedby={
-                      fieldErrors.brandPersonalisation ? "brandPersonalisation-error" : undefined
-                    }
+                    value={form.packageChoice}
+                    onChange={set("packageChoice")}
+                    aria-invalid={Boolean(fieldErrors.packageChoice)}
                   >
                     <option value="">Select…</option>
-                    {yesNoChoices.map((c) => (
-                      <option key={c}>{c}</option>
+                    {packageChoices.map((o) => (
+                      <option key={o}>{o}</option>
                     ))}
                   </select>
-                  {fieldErrors.brandPersonalisation && (
-                    <span className="field-error" id="brandPersonalisation-error">
-                      {fieldErrors.brandPersonalisation}
-                    </span>
+                  {fieldErrors.packageChoice && (
+                    <span className="field-error">{fieldErrors.packageChoice}</span>
                   )}
                 </div>
-                <div className="field">
-                  <label htmlFor="flowerPalette">
-                    Flower palette <span className="optional">(optional)</span>
-                  </label>
+                <div className={`field ${fieldErrors.colourStory ? "has-error" : ""}`}>
+                  <label htmlFor="colourStory">Colour story</label>
                   <select
-                    id="flowerPalette"
-                    name="flowerPalette"
-                    value={form.flowerPalette}
-                    onChange={set("flowerPalette")}
+                    id="colourStory"
+                    name="colourStory"
+                    required
+                    value={form.colourStory}
+                    onChange={set("colourStory")}
+                    aria-invalid={Boolean(fieldErrors.colourStory)}
                   >
-                    <option value="">Not sure yet</option>
-                    {flowerPalettes.map((palette) => (
-                      <option key={palette.id} value={palette.enquiryValue}>
-                        {palette.name}
-                      </option>
+                    <option value="">Select…</option>
+                    {colourStoryChoices.map((o) => (
+                      <option key={o}>{o}</option>
                     ))}
                   </select>
+                  {fieldErrors.colourStory && (
+                    <span className="field-error">{fieldErrors.colourStory}</span>
+                  )}
                 </div>
                 <div className="field full">
-                  <label htmlFor="additional">Additional information</label>
+                  <label htmlFor="additional">Additional details</label>
                   <textarea
                     id="additional"
                     name="additional"
@@ -938,7 +701,7 @@ function Enquiry() {
                 disabled={status === "submitting"}
                 aria-busy={status === "submitting"}
               >
-                {status === "submitting" ? "Sending…" : "Submit enquiry"}
+                {status === "submitting" ? "Sending…" : "Check availability"}
               </button>
             </form>
           )}
@@ -989,6 +752,14 @@ function FAQ() {
             </details>
           ))}
         </div>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => scrollToId("enquire")}
+          style={{ marginTop: "2rem" }}
+        >
+          Check availability
+        </button>
       </div>
     </section>
   );
@@ -1002,34 +773,28 @@ function Footer() {
           <div>
             <div className="site-footer__brand">The Little Market Co.</div>
             <p>{contact.serviceArea}</p>
-            <p>Flower bar hire for weddings, birthdays and events · London</p>
+            <p>The Little Bloom Market · Flower bar hire</p>
           </div>
-          {contact.instagramUrl ? (
-            <div>
-              <div className="site-footer__label">Instagram</div>
-              <a href={contact.instagramUrl} target="_blank" rel="noreferrer">
-                {contact.instagramHandle || "Instagram"}
-              </a>
-            </div>
-          ) : (
-            <div>
-              <div className="site-footer__label">Instagram</div>
-              <p>Details coming soon</p>
-            </div>
-          )}
-          {contact.email ? (
-            <div>
-              <div className="site-footer__label">Email</div>
+          <div>
+            <div className="site-footer__label">Email</div>
+            {contact.email ? (
               <a href={`mailto:${contact.email}`}>{contact.email}</a>
-            </div>
-          ) : (
-            <div>
-              <div className="site-footer__label">Email</div>
+            ) : (
               <p>Use the enquiry form above</p>
-            </div>
-          )}
+            )}
+          </div>
+          <div>
+            <div className="site-footer__label">Book</div>
+            <button
+              className="btn btn-accent"
+              type="button"
+              onClick={() => scrollToId("enquire")}
+            >
+              Check availability
+            </button>
+          </div>
         </div>
-        <p className="site-footer__tagline">A little market. Made for your event.</p>
+        <p className="site-footer__tagline">A flower market your guests can take home.</p>
       </div>
     </footer>
   );
@@ -1046,12 +811,11 @@ export default function App() {
         <section className="hero" id="top" aria-labelledby="hero-heading">
           <div className="container hero__grid">
             <div>
-              <span className="hero__eyebrow">Flower Bar Hire London</span>
-              <h1 id="hero-heading">The Little Bloom Market</h1>
+              <span className="hero__eyebrow">Flower bar hire London</span>
+              <h1 id="hero-heading">A flower market your guests can take home</h1>
               <p className="hero__copy">
-                Hire a self-serve flower bar for weddings, birthdays, corporate events and Christmas
-                celebrations in London. We deliver it styled and ready for guests to build their own
-                bouquet.
+                A beautifully styled, self-serve flower experience for offices, parties, launches
+                and brand events across London.
               </p>
               <div className="hero__actions">
                 <button
@@ -1059,37 +823,37 @@ export default function App() {
                   type="button"
                   onClick={() => scrollToId("enquire")}
                 >
-                  Check Your Date
+                  Plan your flower bar
                 </button>
                 <button
                   className="btn btn-secondary"
                   type="button"
                   onClick={() => scrollToId("packages")}
                 >
-                  View Packages
+                  See packages
                 </button>
               </div>
               <p className="hero__support">
-                Wedding flower bars · birthday bouquet bars · office &amp; brand events
+                Flower bar hire from £395
+                <span className="hero__support-note">
+                  The final price depends on guest numbers, flowers, location and branding.
+                </span>
               </p>
             </div>
             <div className="hero__visual">
               <div className="hero__frame">
                 <div className="scallop" aria-hidden="true" />
                 <StallScene market="bloom" />
-                <div className="hero__badge">Concept Preview — The Little Bloom Market</div>
+                <div className="hero__badge">The Little Bloom Market</div>
               </div>
             </div>
           </div>
         </section>
-        <Experience />
+        <Packages />
+        <ColourStories />
         <Occasions />
         <HowItWorks />
-        <Packages />
-        <Palettes />
-        <Christmas />
-        <Brands />
-        <About />
+        <Included />
         <Gallery />
         <Enquiry />
         <FAQ />
@@ -1097,7 +861,7 @@ export default function App() {
       <Footer />
       <div className="sticky-cta">
         <button className="btn btn-accent" type="button" onClick={() => scrollToId("enquire")}>
-          Check Your Date
+          Check availability
         </button>
       </div>
     </>

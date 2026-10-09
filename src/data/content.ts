@@ -6,180 +6,152 @@ export const bloomMarket = {
   name: "The Little Bloom Market",
   shortName: "Bloom Market",
   description:
-    "A premium self-serve flower bar hire for London weddings, birthdays, corporate events and brand activations. We deliver it fully styled and ready for guests. Guests select stems, wrap a small bouquet and take it home. We return later to collect the structure.",
-  occasions: [
-    "Weddings & bridal showers",
-    "Birthday celebrations",
-    "Corporate offices",
-    "Brand activations",
-    "Christmas parties",
-    "Private celebrations",
-  ],
-  secondaryUses: ["Hen dos", "Baby showers", "PR & press days"],
+    "A beautifully styled, self-serve flower experience. Guests choose seasonal stems, wrap their own bouquet and take it home. We deliver it ready, then return later to collect the structure.",
   accent: "#d8b4b2",
   accentSoft: "#f3e7e1",
 };
 
-/** Occasion pages for SEO and clear hire intent. */
-export const hireOccasions = [
-  {
-    id: "weddings",
-    title: "Wedding flower bar hire",
-    copy: "A beautiful self-serve moment for bridal showers, welcome drinks or reception guests — each person leaves with a small bouquet.",
-  },
-  {
-    id: "birthdays",
-    title: "Birthday flower bar hire",
-    copy: "Give guests a hands-on celebration activity that feels special, photogenic and personal without running a full workshop.",
-  },
-  {
-    id: "corporate",
-    title: "Corporate & office events",
-    copy: "Ideal for workplace celebrations, People-team gatherings and client entertaining across London offices.",
-  },
-  {
-    id: "private",
-    title: "Private parties & celebrations",
-    copy: "Hen dos, baby showers and intimate gatherings where guests can build their own bouquet to take home.",
-  },
-];
-
-export const experienceBenefits = [
-  {
-    title: "A memorable guest activity",
-    copy: "Guests select seasonal stems and create their own small bouquet — a hands-on moment that feels considered, not staged.",
-  },
-  {
-    title: "A styled feature for the event",
-    copy: "The market arrives as a finished floral installation, prepared around your event or brand palette.",
-  },
-  {
-    title: "A bouquet for every guest",
-    copy: "Everyone leaves with a wrapped take-home gift, without needing a full-length workshop.",
-  },
-];
-
 export const hireOptions = [
   {
-    id: "styled-bloom",
-    name: "Styled Bloom Market",
-    price: "From £695",
-    note: "for up to 20 guests",
-    description:
-      "The Little Bloom Market delivered, styled and ready for guests — with curated flowers, wrapping and clear instructions.",
+    id: "little-bar",
+    name: "The Little Bar",
+    price: "From £495",
+    note: "For smaller offices, dinners and private events.",
+    description: "A compact self-serve flower station for more intimate gatherings.",
     includes: [
-      "The Little Bloom Market structure",
-      "Curated seasonal flowers and foliage",
-      "Wrapping paper and ribbon",
-      "Coordinated styling",
-      "Guest instruction signage",
-      "Delivery setup and later collection",
-      "A choice of curated colour palette",
+      "Up to 20 guests",
+      "Compact self-serve flower station",
+      "Seasonal flowers and foliage",
+      "Kraft wrapping paper and ribbon",
+      "Flower care cards",
+      "Delivery, setup and collection",
     ],
-    cta: "Check Availability",
-    enquiryValue: "Styled Bloom Market",
+    cta: "Enquire about The Little Bar",
+    enquiryValue: "The Little Bar",
+    popular: false,
   },
   {
-    id: "branded-bloom",
-    name: "Branded Bloom Market",
-    price: "From £895",
-    note: "for up to 20 guests",
-    description:
-      "Everything in the Styled Bloom Market, with brand-led styling suited to launches, press days and customer gifting.",
+    id: "bloom-market",
+    name: "The Bloom Market",
+    price: "From £695",
+    note: "Our most popular option for office events, celebrations and launches.",
+    description: "A fuller styled flower market with a more generous stem selection.",
     includes: [
-      "Everything in the Styled Bloom Market",
-      "Removable logo signage",
-      "Brand or campaign colour direction",
-      "Personalised bouquet tags or stickers",
-      "Branded wrapping details",
-      "Styling suitable for content and photography",
-      "Support for launches, press days and customer gifting",
+      "Up to 30 guests",
+      "Larger selection of seasonal flowers",
+      "More generous stems per guest",
+      "Styled flower market display",
+      "Choice of colour palette",
+      "Premium wrapping materials",
+      "Delivery, setup and collection",
     ],
-    cta: "Plan a Brand Activation",
-    enquiryValue: "Branded Bloom Market",
+    cta: "Enquire about The Bloom Market",
+    enquiryValue: "The Bloom Market",
+    popular: true,
+  },
+  {
+    id: "brand-market",
+    name: "The Brand Market",
+    price: "From £995",
+    note: "For brand activations, PR events and larger corporate events.",
+    description: "A bespoke branded flower market matched to your campaign.",
+    includes: [
+      "Up to 40 guests",
+      "Custom flower colour palette",
+      "Branded market sign",
+      "Branded stickers or tags",
+      "Custom wrapping",
+      "Bespoke flower selection",
+      "Delivery, styling and collection",
+    ],
+    cta: "Create a branded market",
+    enquiryValue: "The Brand Market",
+    popular: false,
   },
 ];
 
-export const winterBloom = {
-  heading: "The Winter Bloom Market",
-  lead: "A festive self-serve flower experience for office Christmas celebrations, client gifting and seasonal brand activations.",
-  copy: "Guests can drop in, select winter-inspired stems and foliage, wrap their bouquet and add a ribbon or message card. It gives them a thoughtful gift to take home without requiring a full-length workshop.",
-  includes: [
-    "Curated winter flower palette",
-    "Seasonal foliage",
-    "Bouquet wrapping and ribbon",
-    "Optional company branding",
-    "Message cards or personalised tags",
-    "Full setup and collection",
-    "Suitable for approximately 20 guests upwards",
-  ],
-  cta: "Check December Availability",
-};
+export const colourStories = [
+  {
+    id: "soft-meadow",
+    name: "Soft Meadow",
+    colours: ["#f3e7e1", "#e8c9b8", "#f0d9a8", "#c5d4b8"],
+    copy: "Cream, blush, peach, pale yellow and soft green.",
+    bestFor: "Perfect for offices, daytime events and private celebrations.",
+    enquiryValue: "Soft Meadow",
+  },
+  {
+    id: "colour-pop",
+    name: "Colour Pop",
+    colours: ["#e8a0b0", "#e07a5f", "#f2b705", "#9b5de5", "#70c1a0"],
+    copy: "Pink, coral, orange, yellow, purple and bright green.",
+    bestFor: "Perfect for launches, summer parties and energetic brand activations.",
+    enquiryValue: "Colour Pop",
+  },
+  {
+    id: "modern-neutral",
+    name: "Modern Neutral",
+    colours: ["#f6f1e8", "#efe6d6", "#d4b59e", "#c4785a", "#6b7c59"],
+    copy: "White, cream, beige, terracotta and olive.",
+    bestFor: "Perfect for premium brands, dinners and understated events.",
+    enquiryValue: "Modern Neutral",
+  },
+  {
+    id: "seasonal-market",
+    name: "Seasonal Market",
+    colours: ["#cbb892", "#a86b6f", "#2a4336", "#d8b4b2"],
+    copy: "A seasonal palette selected around the time of year.",
+    bestFor:
+      "Spring: lilac, yellow and soft pink. Summer: coral, peach and bright yellow. Autumn: rust, burgundy and mustard. Winter: cream, red, forest green and plum.",
+    enquiryValue: "Seasonal Market",
+  },
+  {
+    id: "brand-match",
+    name: "Brand Match",
+    colours: ["#2a4336", "#f6f1e8", "#a86b6f", "#cbb892"],
+    copy: "Flowers, wrapping and signage matched to your brand colours.",
+    bestFor: "Available with The Brand Market.",
+    enquiryValue: "Brand Match",
+  },
+];
 
-/** Curated stem mixes for self-serve bouquet bars — seasonal substitutions may apply. */
-export const flowerPalettes = [
-  {
-    id: "soft-blush",
-    name: "Soft Blush",
-    tagline: "Romantic, warm and easy for guests to arrange.",
-    bestFor: "Office celebrations, bridal showers, beauty events",
-    colours: ["#f3e7e1", "#d8b4b2", "#a86b6f", "#2a4336"],
-    heroes: ["Spray roses", "Lisianthus", "Ranunculus (in season)"],
-    fillers: ["Alstroemeria", "Stock"],
-    foliage: ["Eucalyptus", "Ruscus"],
-    accent: "Waxflower",
-    guestGuide: "Pick 8–12 stems, add foliage, wrap and finish with ribbon.",
-    enquiryValue: "Soft Blush",
-  },
-  {
-    id: "neutral-luxe",
-    name: "Neutral Luxe",
-    tagline: "Cream, white and soft green for a polished corporate look.",
-    bestFor: "Boardrooms, client entertaining, brand activations",
-    colours: ["#f6f1e8", "#efe6d6", "#cbb892", "#2a4336"],
-    heroes: ["White / cream roses", "Lisianthus", "Carnations"],
-    fillers: ["Chrysanthemums", "Snapdragons"],
-    foliage: ["Eucalyptus", "Pittosporum"],
-    accent: "Thistle or dried texture",
-    guestGuide: "Start with foliage, add 2–3 hero stems, then fillers.",
-    enquiryValue: "Neutral Luxe",
-  },
-  {
-    id: "winter-bloom",
-    name: "Winter Bloom",
-    tagline: "Festive stems for Christmas parties and seasonal gifting.",
-    bestFor: "December offices, client gifts, winter brand moments",
-    colours: ["#f6f1e8", "#2a4336", "#a86b6f", "#cbb892"],
-    heroes: ["Cream roses or spray roses", "Seasonal white blooms"],
-    fillers: ["Hypericum berries", "Skimmia"],
-    foliage: ["Eucalyptus", "Fir or pine touches"],
-    accent: "Deep ribbon, optional dried orange",
-    guestGuide: "Choose a few winter stems, add greenery, wrap with festive ribbon.",
-    enquiryValue: "Winter Bloom",
-  },
-] as const;
+export const memorableMoments = [
+  "Office wellbeing",
+  "Brand activation",
+  "Product launch",
+  "Christmas party",
+  "Summer party",
+  "Wedding or private celebration",
+  "Press or PR event",
+  "Client gifting",
+  "Team away day",
+];
 
 export const howItWorks = [
   {
     step: "01",
-    title: "Tell us about your event",
-    copy: "Share the date, location, guest number and the experience you are planning.",
+    title: "Choose your package",
+    copy: "Select The Little Bar, The Bloom Market or The Brand Market to suit your guest numbers and style of event.",
   },
   {
     step: "02",
-    title: "Choose your package",
-    copy: "Select the Styled Bloom Market or a fully branded activation.",
+    title: "Choose your colour story",
+    copy: "Soft Meadow, Colour Pop, Modern Neutral, Seasonal Market or a Brand Match palette for your campaign.",
   },
   {
     step: "03",
-    title: "We prepare every detail",
-    copy: "We source and condition the flowers then prepare the wrapping, signage and styling.",
+    title: "We deliver, style and collect",
+    copy: "Guests choose their favourite stems, create their own bouquet and take it home as a beautiful reminder of the event.",
   },
-  {
-    step: "04",
-    title: "We deliver and collect",
-    copy: "The market is assembled before guests arrive and collected at the agreed time.",
-  },
+];
+
+export const everyBookingIncludes = [
+  "Fresh seasonal flowers",
+  "Flower market display",
+  "Wrapping materials",
+  "Ribbons",
+  "Care cards",
+  "Delivery and setup",
+  "Collection after the event",
 ];
 
 export const faqs = [
@@ -189,39 +161,15 @@ export const faqs = [
   },
   {
     q: "What is The Little Bloom Market?",
-    a: "It is a premium self-serve flower market. Guests select seasonal stems, wrap a small bouquet and take it home. We deliver it fully styled, then return later to collect the structure.",
+    a: "It is a self-serve flower bar experience. Guests choose seasonal stems, wrap their own bouquet and take it home. We deliver it fully styled, then return later to collect the structure.",
   },
   {
-    q: "What is the difference between Styled and Branded?",
-    a: "Styled Bloom Market includes the structure, curated flowers, wrapping, styling, signage, setup and collection. Branded Bloom Market adds logo signage, campaign colour direction, personalised tags or stickers and wrapping details suited to launches and press days.",
+    q: "What does the from £395 price mean?",
+    a: "Flower bar hire starts from £395. Flowers are then tailored to your guest numbers and chosen bouquet style, so the final quote depends on guests, flowers, location and branding.",
   },
   {
-    q: "Is delivery included?",
-    a: "Delivery is calculated according to location and access. Guide package prices are shown from the base guest number; delivery is quoted separately.",
-  },
-  {
-    q: "Can the market be personalised for a brand?",
-    a: "Yes. Removable logo panels, campaign colours, branded bouquet sleeves, tags and custom guest messaging can all be coordinated with your campaign.",
-  },
-  {
-    q: "Do guest numbers affect the price?",
-    a: "Yes. Packages start from pricing for up to 20 guests. Additional guests, premium flower requests and extended hire can be quoted separately.",
-  },
-  {
-    q: "Can guests really build their own bouquets?",
-    a: "Yes. That is the heart of The Little Bloom Market. We prepare a curated stem selection with foliage, wrapping and simple guest instructions so people can create a small bouquet to take home — without needing a full workshop.",
-  },
-  {
-    q: "What flower palettes do you offer?",
-    a: "We currently prepare Soft Blush, Neutral Luxe and Winter Bloom palettes. Each includes hero flowers, fillers, foliage and an accent. Seasonal substitutions may apply so stems stay fresh on the day.",
-  },
-  {
-    q: "Will someone stay with the market during the event?",
-    a: "Our standard service is unattended following setup. We deliver, assemble and prepare the market, provide clear guest instructions and return for collection. Optional attendants may be quoted separately where required.",
-  },
-  {
-    q: "Do you offer a Christmas version?",
-    a: "Yes. The Winter Bloom Market is designed for office Christmas celebrations, client gifting and seasonal brand activations, with a winter flower palette and optional company branding.",
+    q: "How do package prices work?",
+    a: "The Little Bar starts from £495 for up to 20 guests, The Bloom Market from £695 for up to 30 guests, and The Brand Market from £995 for up to 40 guests. Larger events and extras are quoted separately.",
   },
   {
     q: "How long is the hire period?",
@@ -229,7 +177,11 @@ export const faqs = [
   },
   {
     q: "Do you hire flower bars for weddings and birthdays?",
-    a: "Yes. The Little Bloom Market works beautifully for weddings, bridal showers, birthdays, hen dos and private celebrations, as well as corporate and Christmas events across London.",
+    a: "Yes. The Little Bloom Market works beautifully for weddings, private celebrations, birthdays and corporate events across London.",
+  },
+  {
+    q: "Will someone stay with the market during the event?",
+    a: "Our standard service is unattended following setup. We deliver, assemble and prepare the market, provide clear guest instructions and return for collection. Optional florist assistance may be quoted separately.",
   },
   {
     q: "Is a damage deposit required?",
@@ -238,33 +190,40 @@ export const faqs = [
 ];
 
 export const eventTypes = [
-  "Wedding / bridal shower",
-  "Birthday celebration",
-  "Private party / hen do",
-  "Corporate office / workplace",
+  "Office wellbeing",
   "Brand activation",
-  "PR / press day",
   "Product launch",
-  "Christmas / seasonal party",
+  "Christmas party",
+  "Summer party",
+  "Wedding or private celebration",
+  "Press or PR event",
+  "Client gifting",
+  "Team away day",
   "Other",
 ];
 
 export const packageChoices = [
-  "Styled Bloom Market",
-  "Branded Bloom Market",
-  "Not sure yet",
+  "The Little Bar",
+  "The Bloom Market",
+  "The Brand Market",
+  "I’m not sure yet",
 ];
 
-export const yesNoChoices = ["Yes", "No"] as const;
+export const colourStoryChoices = [
+  "Soft Meadow",
+  "Colour Pop",
+  "Modern Neutral",
+  "Seasonal Market",
+  "Brand Match",
+  "I’m not sure yet",
+];
 
 /**
  * Gallery items use licensed stock for atmosphere only.
- * Replace `imageSrc` with real event photography when available.
  * Captions must never imply previous client bookings.
  */
 export type GalleryItem = {
   id: string;
-  /** Photo path under /public */
   imageSrc: string;
   imageAlt: string;
   title: string;
@@ -302,7 +261,7 @@ export const galleryItems: GalleryItem[] = [
     imageSrc: "/images/inspiration/office-flowers.jpg",
     imageAlt: "Inspiration image of flowers suited to a workplace gathering",
     title: "Office flower market",
-    caption: "Inspiration — workplace and People-team gatherings (not a previous client event)",
+    caption: "Inspiration — workplace and celebration gatherings (not a previous client event)",
     credit: "Photo via Pexels",
   },
   {
@@ -317,7 +276,7 @@ export const galleryItems: GalleryItem[] = [
     id: "g6",
     imageSrc: "/images/inspiration/winter-blooms.jpg",
     imageAlt: "Inspiration image of winter foliage and seasonal blooms",
-    title: "Winter Bloom atmosphere",
+    title: "Seasonal atmosphere",
     caption: "Inspiration — festive stems and seasonal foliage (stock photo)",
     credit: "Photo via Unsplash",
   },

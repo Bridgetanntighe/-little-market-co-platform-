@@ -160,8 +160,19 @@
 
 .hero__support {
   margin-top: 1.1rem;
-  font-size: 0.92rem;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--botanical);
+}
+
+.hero__support-note {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 400;
   color: var(--ink-muted);
+  max-width: 34rem;
 }
 
 .hero__frame {
@@ -374,12 +385,36 @@
   margin-top: 2.5rem;
 }
 
+.packages__grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .package {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 1.6rem 1.4rem 1.7rem;
   border: 1px solid color-mix(in srgb, var(--ivory) 22%, transparent);
   background: color-mix(in srgb, var(--market-green-deep) 35%, transparent);
+}
+
+.package--popular {
+  border-color: color-mix(in srgb, var(--butter) 70%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--butter) 35%, transparent);
+}
+
+.package__badge {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: var(--butter);
+  color: var(--botanical-deep, #1e3228);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .package h3 {
@@ -433,6 +468,123 @@
   margin-top: 1.35rem;
   font-size: 0.92rem;
   opacity: 0.8;
+}
+
+.pricing-notes {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 0.75rem;
+  max-width: 48rem;
+  font-size: 0.95rem;
+  opacity: 0.88;
+}
+
+.pricing-notes__secondary {
+  font-size: 0.88rem;
+  opacity: 0.8;
+}
+
+.packages__cta {
+  margin-top: 1.75rem;
+}
+
+.colour-stories__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.35rem;
+  margin-top: 2.5rem;
+}
+
+.colour-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.25rem 1.15rem 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--paper) 80%, white);
+}
+
+.colour-card__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.colour-card__swatches span {
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--botanical) 12%, transparent);
+}
+
+.colour-card h3 {
+  font-size: 1.7rem;
+  color: var(--botanical);
+}
+
+.colour-card p {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.colour-card__best {
+  flex: 1;
+  font-size: 0.9rem !important;
+}
+
+.colour-card .btn {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+}
+
+.moments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 2rem;
+}
+
+.moment {
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 75%, white);
+  color: var(--botanical);
+  font-size: 0.92rem;
+}
+
+.included {
+  background: color-mix(in srgb, var(--botanical) 4%, var(--cream));
+}
+
+.included__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1.5rem;
+  margin: 2rem 0;
+  max-width: 40rem;
+}
+
+.included__list li {
+  position: relative;
+  padding-left: 1.15rem;
+  color: var(--ink-muted);
+}
+
+.included__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--rose);
+}
+
+.steps--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .palettes__grid {
@@ -864,6 +1016,13 @@
   }
 }
 
+@media (max-width: 1040px) {
+  .packages__grid--three,
+  .colour-stories__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 900px) {
   .hero__grid,
   .experience__panel,
@@ -879,18 +1038,24 @@
   }
 
   .steps,
+  .steps--three,
   .benefits,
-  .occasions__grid {
+  .occasions__grid,
+  .included__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 720px) {
   .packages__grid,
+  .packages__grid--three,
+  .colour-stories__grid,
   .palettes__grid,
   .gallery__grid,
   .site-footer__grid,
-  .occasions__grid {
+  .occasions__grid,
+  .included__list,
+  .steps--three {
     grid-template-columns: 1fr;
   }
 

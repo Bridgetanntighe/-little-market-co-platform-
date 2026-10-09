@@ -31,9 +31,7 @@ export const ENQUIRY_PREFILL_KEY = "tlmc-enquiry-prefill";
 
 export type EnquiryPrefill = {
   packageChoice?: string;
-  christmasBooking?: string;
-  brandPersonalisation?: string;
-  flowerPalette?: string;
+  colourStory?: string;
 };
 
 export function enquireWithOption(prefill: string | EnquiryPrefill) {
