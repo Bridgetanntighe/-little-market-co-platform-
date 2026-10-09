@@ -2198,10 +2198,16 @@ a.occasion-card:hover {
     background:
       linear-gradient(
         180deg,
-        color-mix(in srgb, var(--cream) 78%, transparent) 0%,
-        color-mix(in srgb, var(--cream) 55%, transparent) 48%,
-        color-mix(in srgb, var(--cream) 40%, transparent) 100%
+        color-mix(in srgb, var(--cream) 90%, transparent) 0%,
+        color-mix(in srgb, var(--cream) 78%, transparent) 42%,
+        color-mix(in srgb, var(--cream) 62%, transparent) 100%
       );
+  }
+
+  .hero--bloom .hero__copy,
+  .hero--bloom .hero__support {
+    color: var(--ink);
+    text-shadow: 0 1px 0 color-mix(in srgb, var(--cream) 55%, transparent);
   }
 
   .hero--bloom .hero__grid {
