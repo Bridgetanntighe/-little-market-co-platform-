@@ -399,7 +399,7 @@ a.btn {
 @media (max-width: 720px) {
   :root {
     --space-section: clamp(2.6rem, 7vw, 3.5rem);
-    --page-gutter: 1.35rem;
+    --page-gutter: 1.55rem;
   }
 
   .container {
