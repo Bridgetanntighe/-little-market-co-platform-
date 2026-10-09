@@ -420,7 +420,7 @@ a.btn {
   }
 
   body {
-    padding-bottom: calc(7.25rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 0;
   }
 }
 

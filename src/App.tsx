@@ -12,6 +12,15 @@ import WeddingPage from "./pages/WeddingPage";
 import "./styles/global.css";
 import "./styles/sections.css";
 
+/** Keep route changes at the top so enquire CTAs never land mid-page. */
+function ScrollToTop() {
+  const { pathname, search } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname, search]);
+  return null;
+}
+
 function SlashRedirect({ to }: { to: string }) {
   return <Navigate to={to} replace />;
 }
@@ -44,6 +53,7 @@ function routePair(bare: string, element: ReactNode) {
 export default function App() {
   return (
     <Layout>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<LegacyHomeHash />} />
         {routePair("/wedding-flower-bar-hire-london", <WeddingPage />)}

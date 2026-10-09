@@ -1,7 +1,8 @@
 import { useEffect, useId, useState, type MouseEvent, type ReactNode } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { contact } from "../data/contact";
-import { enquireHref, goHomeSection } from "../hooks/useReveal";
+import { goHomeSection } from "../hooks/useReveal";
+import { StickyCta } from "./StickyCta";
 
 const mainNav = [
   { to: "/wedding-flower-bar-hire-london/", label: "Weddings" },
@@ -43,9 +44,9 @@ function Announcement() {
   return (
     <div className="announcement">
       <div className="container">
-        <Link className="announcement__btn" to="/enquire/">
-          Flower bar hire for weddings & celebrations — tell us your date for a clear quote
-        </Link>
+        <p className="announcement__text">
+          Flower bar hire for weddings & celebrations across London
+        </p>
       </div>
     </div>
   );
@@ -75,7 +76,7 @@ function Header() {
                 {item.label}
               </NavLink>
             ))}
-            <Link className="nav-cta" to={enquireHref()} onClick={() => setOpen(false)}>
+            <Link className="nav-cta" to="/enquire/" onClick={() => setOpen(false)}>
               Check availability
             </Link>
           </nav>
@@ -108,16 +109,11 @@ function Footer() {
             <p className="site-footer__summary">
               Flower bar hire · {contact.serviceArea}
             </p>
-          </div>
-          <div className="site-footer__contact">
             {contact.email ? (
               <a className="site-footer__email" href={`mailto:${contact.email}`}>
                 {contact.email}
               </a>
             ) : null}
-            <Link className="btn btn-accent site-footer__cta" to="/enquire/">
-              Check availability
-            </Link>
           </div>
         </div>
 
@@ -159,11 +155,7 @@ export function Layout({ children }: { children: ReactNode }) {
       </div>
       {children}
       <Footer />
-      <div className="sticky-cta">
-        <Link className="btn btn-accent" to="/enquire/">
-          Check availability
-        </Link>
-      </div>
+      <StickyCta />
     </>
   );
 }

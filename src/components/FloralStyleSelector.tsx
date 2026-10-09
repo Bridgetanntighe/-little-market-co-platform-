@@ -6,7 +6,7 @@ import {
   seasonalMarketNote,
   type FloralCollection,
 } from "../data/content";
-import { enquireHref } from "../hooks/useReveal";
+import { enquireLocation } from "../hooks/useReveal";
 import { ResponsiveImage } from "./ResponsiveImage";
 
 type Mode = "full" | "preview";
@@ -72,19 +72,19 @@ export function FloralStyleSelector({ eventType }: Props) {
   const groupId = useId();
 
   const selected = floralCollections.find((c) => c.id === selectedId);
-  const enquireTo = enquireHref({
+  const enquireTo = enquireLocation({
     eventType,
     colourIdeas: selected?.enquiryValue,
   });
-  const helpTo = enquireHref({
+  const helpTo = enquireLocation({
     eventType,
     colourIdeas: HELP_ME_CHOOSE_STYLE,
   });
-  const ownColoursTo = enquireHref({
+  const ownColoursTo = enquireLocation({
     eventType,
     colourIdeas: "Own colours",
   });
-  const seasonalTo = enquireHref({
+  const seasonalTo = enquireLocation({
     eventType,
     colourIdeas: seasonalMarketNote.enquiryValue,
   });

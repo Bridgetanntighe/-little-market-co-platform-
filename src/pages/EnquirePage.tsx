@@ -45,6 +45,10 @@ export default function EnquirePage() {
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof typeof empty, string>>>({});
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fromQuery: EnquiryPrefill = {
       eventType: searchParams.get("eventType") ?? undefined,
       packageChoice: searchParams.get("package") ?? undefined,

@@ -36,15 +36,23 @@ export type EnquiryPrefill = {
   bouquets?: string;
 };
 
-export function enquireHref(prefill?: EnquiryPrefill) {
-  if (!prefill) return "/enquire/";
+/** React Router location object — preferred for query-string navigations. */
+export function enquireLocation(prefill?: EnquiryPrefill) {
   const params = new URLSearchParams();
-  if (prefill.eventType) params.set("eventType", prefill.eventType);
-  if (prefill.packageChoice) params.set("package", prefill.packageChoice);
-  if (prefill.colourIdeas) params.set("colour", prefill.colourIdeas);
-  if (prefill.bouquets) params.set("bouquets", prefill.bouquets);
-  const qs = params.toString();
-  return qs ? `/enquire/?${qs}` : "/enquire/";
+  if (prefill?.eventType) params.set("eventType", prefill.eventType);
+  if (prefill?.packageChoice) params.set("package", prefill.packageChoice);
+  if (prefill?.colourIdeas) params.set("colour", prefill.colourIdeas);
+  if (prefill?.bouquets) params.set("bouquets", prefill.bouquets);
+  const search = params.toString();
+  return {
+    pathname: "/enquire/",
+    search: search ? `?${search}` : "",
+  };
+}
+
+export function enquireHref(prefill?: EnquiryPrefill) {
+  const loc = enquireLocation(prefill);
+  return `${loc.pathname}${loc.search}`;
 }
 
 export function enquireWithOption(prefill: string | EnquiryPrefill = {}) {
