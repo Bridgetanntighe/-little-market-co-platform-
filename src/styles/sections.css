@@ -869,6 +869,10 @@
   margin-top: 2rem;
 }
 
+.style-rail__hint {
+  display: none;
+}
+
 .style-preview__grid,
 .style-selector__grid {
   display: grid;
@@ -2044,15 +2048,8 @@
 @media (max-width: 1040px) {
   .packages__grid--three,
   .colour-stories__grid,
-  .occasions__cards,
-  .style-preview__grid,
-  .style-selector__grid {
+  .occasions__cards {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .style-selector__grid .style-card:last-child {
-    grid-column: 1 / -1;
-    max-width: 28rem;
   }
 
   .occasion-card--featured {
@@ -2141,31 +2138,131 @@
     line-height: 1.4;
   }
 
-  .style-preview__grid,
-  .style-selector__grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  /* Compact horizontal swipe rail for floral styles on phones */
+  .style-rail__hint {
+    display: block;
+    margin: 0 0 0.55rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
   }
 
-  .style-card__body {
-    padding: 0.9rem 1rem 1.05rem;
-    gap: 0.4rem;
+  .style-preview__grid.style-rail,
+  .style-selector__grid.style-rail {
+    display: flex;
+    grid-template-columns: none;
+    gap: 0.75rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.15rem 1rem 0.65rem;
+    margin-inline: -0.75rem;
+    scrollbar-width: none;
   }
 
-  .style-card__body p {
-    font-size: 0.9rem;
+  .style-preview__grid.style-rail::-webkit-scrollbar,
+  .style-selector__grid.style-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .style-rail > .style-card {
+    flex: 0 0 min(78vw, 16.5rem);
+    max-width: 16.5rem;
+    scroll-snap-align: start;
   }
 
   .style-card__media {
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 1 / 1;
+  }
+
+  .style-card__media--needed {
+    padding: 0.85rem 0.9rem;
+    gap: 0.2rem;
+  }
+
+  .style-card__needed-brief {
+    font-size: 1.1rem;
+  }
+
+  .style-card__needed-copy {
+    font-size: 0.78rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .style-card__body {
+    padding: 0.7rem 0.8rem 0.85rem;
+    gap: 0.3rem;
+  }
+
+  .style-card__body h3 {
+    font-size: 1.2rem;
+  }
+
+  .style-card__body p {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .style-card__body .btn {
+    margin-top: 0.2rem;
+    min-height: 2.35rem;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.84rem;
+  }
+
+  .style-card__selected-badge {
+    font-size: 0.64rem;
+  }
+
+  .style-selector__seasonal {
+    margin-top: 1.15rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .style-selector__seasonal h3 {
+    font-size: 1.2rem;
+  }
+
+  .style-selector__seasonal p {
+    font-size: 0.86rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .style-selector__own,
+  .style-selector__note {
+    margin-top: 0.75rem;
+    font-size: 0.84rem;
   }
 
   .style-selector__actions {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1rem;
   }
 
   .style-selector__actions .btn {
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 9rem;
+  }
+
+  .style-preview .btn {
+    margin-top: 1rem;
+  }
+
+  .colour-stories.section {
+    padding-block: clamp(2.5rem, 6vw, 3.5rem);
   }
 
   .sticky-cta {

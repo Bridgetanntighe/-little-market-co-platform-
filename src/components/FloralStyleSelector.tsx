@@ -27,7 +27,7 @@ function CollectionMedia({ collection }: { collection: FloralCollection }) {
           alt={collection.image.alt}
           width={collection.image.width}
           height={collection.image.height}
-          sizes="(max-width: 720px) 100vw, 360px"
+          sizes="(max-width: 720px) 78vw, 360px"
         />
         <span className="preview-label">Styling inspiration</span>
       </div>
@@ -46,7 +46,10 @@ function CollectionMedia({ collection }: { collection: FloralCollection }) {
 export function FloralStylePreview() {
   return (
     <div className="style-preview">
-      <div className="style-preview__grid">
+      <p className="style-rail__hint" aria-hidden="true">
+        Swipe for more styles
+      </p>
+      <div className="style-preview__grid style-rail" tabIndex={0} aria-label="Floral style collections. Swipe horizontally to see more.">
         {floralCollections.map((collection) => (
           <article className="style-card style-card--preview" key={collection.id}>
             <CollectionMedia collection={collection} />
@@ -92,7 +95,16 @@ export function FloralStyleSelector({ eventType }: Props) {
 
   return (
     <div className="style-selector">
-      <div className="style-selector__grid" role="radiogroup" aria-labelledby={groupId}>
+      <p className="style-rail__hint" aria-hidden="true">
+        Swipe for more styles
+      </p>
+      <div
+        className="style-selector__grid style-rail"
+        role="radiogroup"
+        aria-labelledby={groupId}
+        tabIndex={0}
+        aria-label="Floral style collections. Swipe horizontally to see more."
+      >
         <span id={groupId} className="visually-hidden">
           Floral style collections
         </span>
