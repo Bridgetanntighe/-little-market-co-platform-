@@ -4,15 +4,15 @@
  * Leave email / Instagram empty until real values are confirmed.
  * Do not use placeholder emails or generic Instagram URLs.
  *
- * Netlify Forms: React submits URL-encoded POSTs to `/` with `form-name`.
- * A matching static HTML form in `index.html` enables form detection at deploy.
+ * Netlify Forms: React submits URL-encoded POSTs to `/__forms.html` with `form-name`.
+ * A matching static HTML form in `public/__forms.html` enables form detection at deploy.
  */
 
 export const NETLIFY_FORM_NAME = "enquiry";
 
 export const contact = {
-  /** Real enquiry email — omit from UI until provided */
-  email: "",
+  /** Public enquiry email shown in the footer */
+  email: "hello.littlemarketco@gmail.com",
   /** Full Instagram profile URL — omit from UI until provided */
   instagramUrl: "",
   /** Display handle only, e.g. @thelittlemarketco */
