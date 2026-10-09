@@ -953,7 +953,7 @@ function FAQ() {
 
   useEffect(() => {
     const scriptId = "tlmc-faq-schema";
-    const existing = document.getElementById(scriptId);
+    const existing = document.getElementById(scriptId) as HTMLScriptElement | null;
     const data = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
