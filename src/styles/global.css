@@ -1,21 +1,32 @@
 :root {
-  --ivory: #f7f2e8;
-  --market-green: #30483a;
-  --market-green-deep: #24362c;
-  --tomato: #c55d48;
-  --blush: #e6c7bd;
-  --butter: #e7c96b;
-  --ink: #242520;
-  --ink-muted: #4a4b45;
-  --shadow-soft: 0 18px 48px rgba(36, 37, 32, 0.08);
-  --shadow-lift: 0 10px 28px rgba(48, 72, 58, 0.12);
-  --font-display: "Cormorant Garamond", "Times New Roman", serif;
-  --font-body: "Outfit", "Helvetica Neue", sans-serif;
+  /* Kit-inspired system: cream ground, signal red, mono headlines */
+  --ivory: #faf3e8;
+  --cream: #faf3e8;
+  --kit-red: #c20019;
+  --kit-red-deep: #9e0014;
+  --ink: #111111;
+  --ink-muted: #3a3a3a;
+  --paper: #fffdf8;
+  --line: rgba(17, 17, 17, 0.12);
+
+  /* Legacy aliases remapped so section styles pick up the new brand */
+  --market-green: #111111;
+  --market-green-deep: #000000;
+  --tomato: var(--kit-red);
+  --blush: #f1e6d8;
+  --butter: #ffffff;
+
+  --shadow-soft: 0 18px 48px rgba(0, 0, 0, 0.08);
+  --shadow-lift: 0 10px 28px rgba(194, 0, 25, 0.18);
+  --font-brand: "Instrument Serif", "Times New Roman", serif;
+  --font-display: "IBM Plex Mono", "Courier New", monospace;
+  --font-body: "DM Sans", "Helvetica Neue", sans-serif;
   --space-section: clamp(4.5rem, 8vw, 7.5rem);
   --content-width: 1120px;
   --header-h: 4.5rem;
   --announce-h: 2.4rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius-pill: 999px;
 }
 
 *,
@@ -36,9 +47,9 @@ body {
   line-height: 1.65;
   color: var(--ink);
   background:
-    radial-gradient(ellipse at 12% 8%, rgba(230, 199, 189, 0.35), transparent 42%),
-    radial-gradient(ellipse at 88% 12%, rgba(231, 201, 107, 0.18), transparent 38%),
-    var(--ivory);
+    radial-gradient(ellipse at 8% 0%, rgba(194, 0, 25, 0.06), transparent 40%),
+    radial-gradient(ellipse at 92% 12%, rgba(17, 17, 17, 0.04), transparent 36%),
+    var(--cream);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -66,7 +77,8 @@ h2,
 h3 {
   font-family: var(--font-display);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
@@ -92,16 +104,17 @@ ul {
 .section-eyebrow {
   display: inline-block;
   margin-bottom: 0.85rem;
-  font-size: 0.78rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--tomato);
+  color: var(--kit-red);
 }
 
 .section-title {
-  font-size: clamp(2.35rem, 4.5vw, 3.4rem);
-  color: var(--market-green);
+  font-size: clamp(2.1rem, 4.4vw, 3.35rem);
+  color: var(--kit-red);
   max-width: 18ch;
 }
 
@@ -117,12 +130,14 @@ ul {
   align-items: center;
   justify-content: center;
   min-height: 3rem;
-  padding: 0.75rem 1.45rem;
+  padding: 0.75rem 1.55rem;
   border: 1.5px solid transparent;
-  border-radius: 2px;
-  font-size: 0.92rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
   transition:
     background-color 0.3s var(--ease),
@@ -133,54 +148,59 @@ ul {
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--butter);
+  outline: 2px solid var(--kit-red);
   outline-offset: 3px;
 }
 
 .btn-primary {
-  background: var(--market-green);
-  color: var(--ivory);
+  background: var(--kit-red);
+  color: #fff;
 }
 
 .btn-primary:hover {
-  background: var(--market-green-deep);
+  background: var(--kit-red-deep);
   transform: translateY(-1px);
   box-shadow: var(--shadow-lift);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--market-green);
-  border-color: var(--market-green);
+  color: var(--ink);
+  border-color: var(--ink);
 }
 
 .btn-secondary:hover {
-  background: var(--market-green);
-  color: var(--ivory);
+  background: var(--ink);
+  color: var(--cream);
 }
 
 .btn-accent {
-  background: var(--tomato);
-  color: var(--ivory);
+  background: var(--kit-red);
+  color: #fff;
 }
 
 .btn-accent:hover {
-  background: #d47864;
+  background: var(--kit-red-deep);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-lift);
 }
 
 .scallop {
   height: 18px;
-  background: radial-gradient(circle at 50% 0, transparent 10px, var(--market-green) 11px) repeat-x;
+  background: radial-gradient(circle at 50% 0, transparent 10px, var(--ink) 11px) repeat-x;
   background-size: 28px 18px;
 }
 
 .chip {
   display: inline-flex;
-  padding: 0.35rem 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--market-green) 18%, transparent);
-  background: color-mix(in srgb, var(--ivory) 70%, white);
-  font-size: 0.86rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--ink-muted);
 }
 
@@ -197,11 +217,12 @@ ul {
 }
 
 .field label {
-  font-size: 0.82rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--market-green);
+  color: var(--ink);
 }
 
 .field input,
@@ -210,9 +231,9 @@ ul {
   width: 100%;
   min-height: 3rem;
   padding: 0.7rem 0.9rem;
-  border: 1px solid color-mix(in srgb, var(--market-green) 22%, transparent);
-  border-radius: 2px;
-  background: color-mix(in srgb, var(--ivory) 88%, white);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--paper);
 }
 
 .field textarea {
@@ -224,8 +245,8 @@ ul {
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--market-green);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--butter) 45%, transparent);
+  border-color: var(--kit-red);
+  box-shadow: 0 0 0 3px rgba(194, 0, 25, 0.12);
 }
 
 .form-grid {
@@ -240,13 +261,14 @@ ul {
 
 .form-success {
   padding: 2rem;
-  border: 1px solid color-mix(in srgb, var(--market-green) 20%, transparent);
-  background: color-mix(in srgb, var(--market-green) 6%, var(--ivory));
+  border: 1px solid rgba(194, 0, 25, 0.18);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--kit-red) 6%, var(--cream));
   text-align: center;
 }
 
 .form-success h3 {
-  color: var(--market-green);
+  color: var(--kit-red);
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
@@ -254,19 +276,20 @@ ul {
 .field.has-error input,
 .field.has-error select,
 .field.has-error textarea {
-  border-color: var(--tomato);
+  border-color: var(--kit-red);
 }
 
 .field-error {
   font-size: 0.82rem;
-  color: var(--tomato);
+  color: var(--kit-red);
 }
 
 .form-error {
   margin-top: 1rem;
   padding: 0.85rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--tomato) 35%, transparent);
-  background: color-mix(in srgb, var(--tomato) 10%, var(--ivory));
+  border: 1px solid rgba(194, 0, 25, 0.28);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--kit-red) 8%, var(--cream));
   color: var(--ink);
   font-size: 0.95rem;
 }
@@ -287,6 +310,7 @@ ul {
 }
 
 .optional {
+  font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;

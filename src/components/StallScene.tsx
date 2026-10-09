@@ -2,21 +2,21 @@ import type { MarketId } from "../data/content";
 
 const palettes: Record<MarketId, { awning: string; soft: string; produce: string[] }> = {
   bloom: {
-    awning: "#e6c7bd",
-    soft: "#f0d9d1",
-    produce: ["#c55d48", "#e6c7bd", "#e7c96b", "#30483a"],
+    awning: "#c20019",
+    soft: "#f1e6d8",
+    produce: ["#c20019", "#faf3e8", "#111111", "#e8d9c8"],
   },
   harvest: {
-    awning: "#c55d48",
-    soft: "#e7c96b",
-    produce: ["#c55d48", "#e7c96b", "#30483a", "#e6c7bd"],
+    awning: "#c20019",
+    soft: "#faf3e8",
+    produce: ["#c20019", "#111111", "#faf3e8", "#e8d9c8"],
   },
   celebration: {
-    awning: "#e7c96b",
-    soft: "#e6c7bd",
-    produce: ["#e7c96b", "#c55d48", "#e6c7bd", "#30483a"],
+    awning: "#111111",
+    soft: "#f1e6d8",
+    produce: ["#c20019", "#faf3e8", "#111111", "#e8d9c8"],
   },
-};
+}
 
 const marketLabels: Record<MarketId, string> = {
   bloom: "The Little Bloom Market concept preview",
@@ -31,30 +31,30 @@ export function StallScene({ market }: { market: MarketId }) {
       <defs>
         <linearGradient id={`sky-${market}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={p.soft} stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#f7f2e8" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#0a0a0a" stopOpacity="0.35" />
         </linearGradient>
       </defs>
       <rect width="640" height="480" fill={`url(#sky-${market})`} />
-      <ellipse cx="320" cy="430" rx="240" ry="28" fill="#30483a" opacity="0.08" />
+      <ellipse cx="320" cy="430" rx="240" ry="28" fill="#c20019" opacity="0.12" />
       <rect
         x="140"
         y="210"
         width="360"
         height="180"
         rx="4"
-        fill="#f7f2e8"
-        stroke="#30483a"
+        fill="#faf3e8"
+        stroke="#111111"
         strokeWidth="3"
       />
       <rect x="155" y="230" width="330" height="48" fill={p.soft} opacity="0.55" />
       <rect x="155" y="290" width="330" height="48" fill="#efe6d6" />
       <rect x="155" y="350" width="330" height="24" fill={p.soft} opacity="0.4" />
-      <rect x="150" y="120" width="14" height="100" fill="#30483a" />
-      <rect x="476" y="120" width="14" height="100" fill="#30483a" />
+      <rect x="150" y="120" width="14" height="100" fill="#111111" />
+      <rect x="476" y="120" width="14" height="100" fill="#111111" />
       <path
         d="M130 140 L510 140 L500 200 L140 200 Z"
         fill={p.awning}
-        stroke="#30483a"
+        stroke="#111111"
         strokeWidth="2.5"
       />
       {Array.from({ length: 12 }).map((_, i) => {
@@ -63,8 +63,8 @@ export function StallScene({ market }: { market: MarketId }) {
           <path
             key={i}
             d={`M${x} 200 Q${x + 14} 220 ${x + 28} 200`}
-            fill={i % 2 === 0 ? "#30483a" : p.awning}
-            stroke="#30483a"
+            fill={i % 2 === 0 ? "#111111" : p.awning}
+            stroke="#111111"
             strokeWidth="1.2"
           />
         );
@@ -75,17 +75,17 @@ export function StallScene({ market }: { market: MarketId }) {
         width="140"
         height="36"
         rx="2"
-        fill="#f7f2e8"
-        stroke="#30483a"
+        fill="#faf3e8"
+        stroke="#111111"
         strokeWidth="2"
       />
       <text
         x="320"
         y="173"
         textAnchor="middle"
-        fontFamily="Cormorant Garamond, serif"
+        fontFamily="Instrument Serif, serif"
         fontSize="16"
-        fill="#30483a"
+        fill="#111111"
       >
         Little Market
       </text>
