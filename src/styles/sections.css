@@ -296,6 +296,28 @@
   margin-bottom: 0.65rem;
 }
 
+.occasions__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  margin-top: 2.5rem;
+}
+
+.occasion h3 {
+  font-size: clamp(1.55rem, 2.6vw, 1.9rem);
+  color: var(--botanical);
+  margin-bottom: 0.55rem;
+}
+
+.occasion p {
+  color: var(--ink-muted);
+  max-width: 36ch;
+}
+
+.occasions__cta {
+  margin-top: 2rem;
+}
+
 .steps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -857,7 +879,8 @@
   }
 
   .steps,
-  .benefits {
+  .benefits,
+  .occasions__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -866,7 +889,8 @@
   .packages__grid,
   .palettes__grid,
   .gallery__grid,
-  .site-footer__grid {
+  .site-footer__grid,
+  .occasions__grid {
     grid-template-columns: 1fr;
   }
 

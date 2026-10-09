@@ -6,19 +6,43 @@ export const bloomMarket = {
   name: "The Little Bloom Market",
   shortName: "Bloom Market",
   description:
-    "A premium self-serve flower market delivered to London offices, events and brand activations. We deliver it fully styled and ready for guests. Guests select stems, wrap a small bouquet and take it home. We return later to collect the structure.",
+    "A premium self-serve flower bar hire for London weddings, birthdays, corporate events and brand activations. We deliver it fully styled and ready for guests. Guests select stems, wrap a small bouquet and take it home. We return later to collect the structure.",
   occasions: [
+    "Weddings & bridal showers",
+    "Birthday celebrations",
     "Corporate offices",
-    "Workplace & People teams",
     "Brand activations",
-    "PR & experiential",
-    "Beauty, fashion & wellness",
-    "Event planners",
+    "Christmas parties",
+    "Private celebrations",
   ],
-  secondaryUses: ["Private celebrations", "Weddings"],
+  secondaryUses: ["Hen dos", "Baby showers", "PR & press days"],
   accent: "#d8b4b2",
   accentSoft: "#f3e7e1",
 };
+
+/** Occasion pages for SEO and clear hire intent. */
+export const hireOccasions = [
+  {
+    id: "weddings",
+    title: "Wedding flower bar hire",
+    copy: "A beautiful self-serve moment for bridal showers, welcome drinks or reception guests — each person leaves with a small bouquet.",
+  },
+  {
+    id: "birthdays",
+    title: "Birthday flower bar hire",
+    copy: "Give guests a hands-on celebration activity that feels special, photogenic and personal without running a full workshop.",
+  },
+  {
+    id: "corporate",
+    title: "Corporate & office events",
+    copy: "Ideal for workplace celebrations, People-team gatherings and client entertaining across London offices.",
+  },
+  {
+    id: "private",
+    title: "Private parties & celebrations",
+    copy: "Hen dos, baby showers and intimate gatherings where guests can build their own bouquet to take home.",
+  },
+];
 
 export const experienceBenefits = [
   {
@@ -201,7 +225,11 @@ export const faqs = [
   },
   {
     q: "How long is the hire period?",
-    a: "Standard hire covers the event day, with delivery and collection arranged around your schedule. Extended periods can be discussed.",
+    a: "Standard hire includes same-day setup and collection, with guests usually enjoying the market for around 4–6 hours. Next-morning collection or extended hire can be quoted if needed.",
+  },
+  {
+    q: "Do you hire flower bars for weddings and birthdays?",
+    a: "Yes. The Little Bloom Market works beautifully for weddings, bridal showers, birthdays, hen dos and private celebrations, as well as corporate and Christmas events across London.",
   },
   {
     q: "Is a damage deposit required?",
@@ -210,12 +238,14 @@ export const faqs = [
 ];
 
 export const eventTypes = [
+  "Wedding / bridal shower",
+  "Birthday celebration",
+  "Private party / hen do",
   "Corporate office / workplace",
   "Brand activation",
   "PR / press day",
   "Product launch",
-  "Private celebration",
-  "Wedding",
+  "Christmas / seasonal party",
   "Other",
 ];
 

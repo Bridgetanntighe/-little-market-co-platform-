@@ -11,6 +11,7 @@ import {
   faqs,
   flowerPalettes,
   galleryItems,
+  hireOccasions,
   hireOptions,
   howItWorks,
   packageChoices,
@@ -31,6 +32,7 @@ import "./styles/sections.css";
 
 const nav = [
   { id: "bloom-market", label: "The Bloom Market" },
+  { id: "occasions", label: "Occasions" },
   { id: "packages", label: "Packages" },
   { id: "palettes", label: "Palettes" },
   { id: "christmas", label: "Christmas" },
@@ -163,6 +165,41 @@ function Experience() {
   );
 }
 
+function Occasions() {
+  const { ref, visible } = useReveal<HTMLElement>();
+  return (
+    <section
+      className={`section occasions reveal ${visible ? "is-visible" : ""}`}
+      id="occasions"
+      ref={ref}
+    >
+      <div className="container">
+        <span className="section-eyebrow">Flower bar hire for every celebration</span>
+        <h2 className="section-title">Weddings, birthdays and events across London</h2>
+        <p className="section-lead">
+          Looking to hire a flower bar? The Little Bloom Market is a self-serve bouquet experience
+          for guests — perfect when you want something more special than a standard floral display.
+        </p>
+        <div className="occasions__grid">
+          {hireOccasions.map((item) => (
+            <article className="occasion" key={item.id}>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+        <button
+          className="btn btn-primary occasions__cta"
+          type="button"
+          onClick={() => scrollToId("enquire")}
+        >
+          Enquire about your event
+        </button>
+      </div>
+    </section>
+  );
+}
+
 function HowItWorks() {
   const { ref, visible } = useReveal<HTMLElement>();
   return (
@@ -197,10 +234,11 @@ function Packages() {
     >
       <div className="container">
         <span className="section-eyebrow">Packages</span>
-        <h2 className="section-title">Two ways to book</h2>
+        <h2 className="section-title">Flower bar hire packages</h2>
         <p className="section-lead">
-          Choose a styled flower market for your guests, or a fully branded activation for your
-          campaign.
+          Book a styled self-serve flower bar for weddings, birthdays and private events, or a fully
+          branded activation for your campaign. Standard hire includes same-day setup and collection,
+          with around 4–6 hours of guest use.
         </p>
         <div className="packages__grid">
           {hireOptions.map((pkg) => (
@@ -912,6 +950,32 @@ function Enquiry() {
 
 function FAQ() {
   const { ref, visible } = useReveal<HTMLElement>();
+
+  useEffect(() => {
+    const scriptId = "tlmc-faq-schema";
+    const existing = document.getElementById(scriptId);
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.a,
+        },
+      })),
+    };
+    const script = existing ?? document.createElement("script");
+    script.id = scriptId;
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(data);
+    if (!existing) document.head.appendChild(script);
+    return () => {
+      document.getElementById(scriptId)?.remove();
+    };
+  }, []);
+
   return (
     <section className={`section faq reveal ${visible ? "is-visible" : ""}`} id="faq" ref={ref}>
       <div className="container">
@@ -938,7 +1002,7 @@ function Footer() {
           <div>
             <div className="site-footer__brand">The Little Market Co.</div>
             <p>{contact.serviceArea}</p>
-            <p>The Little Bloom Market · Flower bar hire</p>
+            <p>Flower bar hire for weddings, birthdays and events · London</p>
           </div>
           {contact.instagramUrl ? (
             <div>
@@ -982,12 +1046,12 @@ export default function App() {
         <section className="hero" id="top" aria-labelledby="hero-heading">
           <div className="container hero__grid">
             <div>
-              <span className="hero__eyebrow">London Flower Bar Hire</span>
+              <span className="hero__eyebrow">Flower Bar Hire London</span>
               <h1 id="hero-heading">The Little Bloom Market</h1>
               <p className="hero__copy">
-                A self-serve flower market for London events, offices and brand activations. We
-                deliver it beautifully styled and ready for your guests to choose their stems and
-                leave with a bouquet.
+                Hire a self-serve flower bar for weddings, birthdays, corporate events and Christmas
+                celebrations in London. We deliver it styled and ready for guests to build their own
+                bouquet.
               </p>
               <div className="hero__actions">
                 <button
@@ -1005,7 +1069,9 @@ export default function App() {
                   View Packages
                 </button>
               </div>
-              <p className="hero__support">Delivered, styled and collected across London.</p>
+              <p className="hero__support">
+                Wedding flower bars · birthday bouquet bars · office &amp; brand events
+              </p>
             </div>
             <div className="hero__visual">
               <div className="hero__frame">
@@ -1017,6 +1083,7 @@ export default function App() {
           </div>
         </section>
         <Experience />
+        <Occasions />
         <HowItWorks />
         <Packages />
         <Palettes />

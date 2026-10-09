@@ -4,28 +4,37 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luxury Flower Bar Hire London | The Little Market Co</title>
+    <title>Flower Bar Hire London | Weddings, Birthdays &amp; Events | The Little Market Co</title>
     <meta
       name="description"
-      content="Hire The Little Bloom Market for corporate events, Christmas celebrations and brand activations in London. A self-serve flower bar delivered, styled and collected for you."
+      content="Hire a self-serve flower bar in London for weddings, birthdays, corporate events and Christmas parties. The Little Bloom Market is delivered styled so guests can build their own bouquet."
     />
     <meta
       name="keywords"
-      content="Flower bar hire London, Bloom bar London, Bouquet bar hire London, Corporate flower bar, Corporate Christmas activity London, Flower cart for brand activations, Branded flower bar London"
+      content="Flower bar hire London, Bouquet bar hire London, Wedding flower bar London, Birthday flower bar hire, Self serve flower bar, Bloom bar London, Corporate flower bar, Christmas flower activity London, Flower cart hire London, Hire a flower bar"
     />
+    <link rel="canonical" href="https://little-market-co.netlify.app/" />
+    <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content="The Little Market Co" />
-    <meta property="og:title" content="Luxury Flower Bar Hire London | The Little Market Co" />
+    <meta property="og:url" content="https://little-market-co.netlify.app/" />
+    <meta
+      property="og:title"
+      content="Flower Bar Hire London | Weddings, Birthdays &amp; Events | The Little Market Co"
+    />
     <meta
       property="og:description"
-      content="Hire The Little Bloom Market for corporate events, Christmas celebrations and brand activations in London. A self-serve flower bar delivered, styled and collected for you."
+      content="Hire The Little Bloom Market — a self-serve flower bar for weddings, birthdays, offices and brand events across London. Delivered, styled and collected."
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Luxury Flower Bar Hire London | The Little Market Co" />
+    <meta
+      name="twitter:title"
+      content="Flower Bar Hire London | The Little Market Co"
+    />
     <meta
       name="twitter:description"
-      content="Hire The Little Bloom Market for corporate events, Christmas celebrations and brand activations in London."
+      content="Self-serve flower bar hire for weddings, birthdays, corporate events and Christmas celebrations in London."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,28 +45,60 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "The Little Market Co",
-        "description": "Premium self-serve flower market hire for London offices, events and brand activations. The Little Bloom Market is delivered, styled and collected.",
-        "areaServed": {
-          "@type": "City",
-          "name": "London"
-        },
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        },
-        "makesOffer": {
-          "@type": "Offer",
-          "itemOffered": {
+        "@graph": [
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://little-market-co.netlify.app/#business",
+            "name": "The Little Market Co",
+            "url": "https://little-market-co.netlify.app/",
+            "email": "hello.littlemarketco@gmail.com",
+            "description": "Premium self-serve flower bar hire in London for weddings, birthdays, corporate events, Christmas parties and brand activations. The Little Bloom Market is delivered, styled and collected.",
+            "image": "https://little-market-co.netlify.app/images/inspiration/flower-stems.jpg",
+            "priceRange": "££",
+            "areaServed": [
+              { "@type": "City", "name": "London" },
+              { "@type": "AdministrativeArea", "name": "Greater London" }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "London",
+              "addressCountry": "GB"
+            },
+            "knowsAbout": [
+              "Flower bar hire",
+              "Bouquet bar hire",
+              "Wedding flower bar",
+              "Birthday flower bar",
+              "Corporate flower experiences",
+              "Self-serve flower market"
+            ]
+          },
+          {
             "@type": "Service",
+            "@id": "https://little-market-co.netlify.app/#bloom-market",
             "name": "The Little Bloom Market",
-            "description": "A self-serve flower bar and bouquet experience for corporate events, Christmas celebrations and brand activations in London. Delivered styled and later collected.",
             "serviceType": "Flower bar hire",
-            "areaServed": "London"
+            "provider": { "@id": "https://little-market-co.netlify.app/#business" },
+            "areaServed": "London",
+            "description": "A self-serve flower bar and bouquet experience for weddings, birthdays, corporate events, Christmas celebrations and brand activations in London. Guests choose stems and build their own take-home bouquet.",
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "Styled Bloom Market",
+                "price": "695",
+                "priceCurrency": "GBP",
+                "description": "From £695 for up to 20 guests. Self-serve flower bar hire with curated stems, wrapping, setup and collection."
+              },
+              {
+                "@type": "Offer",
+                "name": "Branded Bloom Market",
+                "price": "895",
+                "priceCurrency": "GBP",
+                "description": "From £895 for up to 20 guests. Branded flower bar hire for launches, press days and campaign activations."
+              }
+            ]
           }
-        }
+        ]
       }
     </script>
   </head>
