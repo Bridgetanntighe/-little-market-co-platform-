@@ -18,20 +18,33 @@ export function StickyCta() {
     }
 
     const footer = document.querySelector(".site-footer");
+    let footerInView = false;
 
     const update = () => {
-      const scrolled = window.scrollY > Math.min(320, window.innerHeight * 0.45);
+      const scrolled = window.scrollY > Math.min(280, window.innerHeight * 0.4);
       const footerTop = footer?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
-      const nearFooter = footerTop < window.innerHeight - 24;
+      const nearFooter = footerInView || footerTop < window.innerHeight - 8;
       const next = scrolled && !nearFooter;
       setVisible(next);
       document.querySelector("main")?.classList.toggle("has-sticky-cta", next);
     };
 
+    const observer =
+      footer &&
+      new IntersectionObserver(
+        ([entry]) => {
+          footerInView = entry.isIntersecting;
+          update();
+        },
+        { root: null, threshold: 0, rootMargin: "0px 0px 48px 0px" },
+      );
+    if (footer && observer) observer.observe(footer);
+
     update();
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
     return () => {
+      observer?.disconnect();
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
       document.querySelector("main")?.classList.remove("has-sticky-cta");
