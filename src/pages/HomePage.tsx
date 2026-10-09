@@ -17,6 +17,7 @@ const occasions = [
   {
     id: "weddings",
     title: "Weddings",
+    shortTitle: "Weddings",
     copy: "A thoughtful guest activity and a wedding favour in one.",
     to: "/wedding-flower-bar-hire-london/",
     cta: "Explore weddings",
@@ -30,6 +31,7 @@ const occasions = [
   {
     id: "celebrations",
     title: "Private celebrations",
+    shortTitle: "Celebrations",
     copy: "For bridal showers, baby showers and birthdays with a personal touch.",
     to: "/celebrations/",
     cta: "Explore celebrations",
@@ -43,6 +45,7 @@ const occasions = [
   {
     id: "corporate",
     title: "Corporate & brands",
+    shortTitle: "Corporate",
     copy: "Flower experiences for teams, launches and client events.",
     to: "/corporate-flower-bar-london/",
     cta: "Explore corporate events",
@@ -67,7 +70,7 @@ function Experience() {
         <div>
           <span className="section-eyebrow">The experience</span>
           <h2 className="section-title">Something to enjoy. Something to take home.</h2>
-          <p className="section-lead">
+          <p className="section-lead experience__lead">
             More than a pretty display, our little market gives guests a moment to get creative and
             a bouquet to remember the celebration by.
           </p>
@@ -103,41 +106,42 @@ function Occasions() {
   const { ref, visible } = useReveal<HTMLElement>();
   return (
     <section
-      className={`section occasions reveal ${visible ? "is-visible" : ""}`}
+      className={`section occasions occasions--chooser reveal ${visible ? "is-visible" : ""}`}
       id="occasions"
       ref={ref}
     >
       <div className="container">
         <span className="section-eyebrow">Occasions</span>
         <h2 className="section-title">What are you celebrating?</h2>
-        <p className="snap-rail__hint" aria-hidden="true">
-          Swipe for more
-        </p>
         <div className="occasions__cards">
           {occasions.map((item) => (
-            <article
+            <Link
               className={`occasion-card ${item.featured ? "occasion-card--featured" : ""}`}
+              to={item.to}
               key={item.id}
             >
               <div className="occasion-card__media">
                 <ResponsiveImage
                   src={item.image.src}
                   webp={item.image.webp}
-                  alt={item.image.alt}
+                  alt=""
                   width={1200}
                   height={800}
-                  sizes="(max-width: 900px) 100vw, 360px"
+                  sizes="(max-width: 720px) 33vw, 360px"
                 />
-                <span className="preview-label">Styling concept</span>
               </div>
               <div className="occasion-card__body">
-                <h3>{item.title}</h3>
+                <h3>
+                  <span className="occasion-card__title-full">{item.title}</span>
+                  <span className="occasion-card__title-short">{item.shortTitle}</span>
+                </h3>
                 <p>{item.copy}</p>
-                <Link className="btn btn-secondary" to={item.to}>
-                  {item.cta}
-                </Link>
+                <span className="occasion-card__cta">
+                  <span className="occasion-card__cta-full">{item.cta}</span>
+                  <span className="occasion-card__cta-short">Explore</span>
+                </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
@@ -301,9 +305,20 @@ export default function HomePage() {
         jsonLd={homeJsonLd}
       />
       <main>
-        <section className="hero hero--compact" id="top" aria-labelledby="hero-heading">
+        <section className="hero hero--compact hero--bloom" id="top" aria-labelledby="hero-heading">
+          <div className="hero__atmosphere" aria-hidden="true">
+            <ResponsiveImage
+              src="/images/seasonal-flower-stems-self-serve-bar-london.jpg"
+              webp="/images/seasonal-flower-stems-self-serve-bar-london.webp"
+              alt=""
+              width={1200}
+              height={1200}
+              loading="eager"
+              sizes="100vw"
+            />
+          </div>
           <div className="container hero__grid">
-            <div>
+            <div className="hero__content">
               <span className="hero__eyebrow">Flower bar hire for weddings & celebrations</span>
               <h1 id="hero-heading">
                 A little flower market.
@@ -342,8 +357,8 @@ export default function HomePage() {
             </figure>
           </div>
         </section>
-        <Experience />
         <Occasions />
+        <Experience />
         <Styling />
         <PackagePreview />
         <FinalCta />

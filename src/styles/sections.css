@@ -259,6 +259,15 @@
   padding-block: clamp(1.75rem, 4vw, 3rem) clamp(2.5rem, 5vw, 4rem);
 }
 
+.hero--bloom {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__atmosphere {
+  display: none;
+}
+
 .hero__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -358,6 +367,10 @@
   color: var(--ink-muted);
 }
 
+.occasions--chooser {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
 .occasions__cards {
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr;
@@ -371,6 +384,14 @@
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper) 70%, white);
   overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+a.occasion-card:hover {
+  border-color: color-mix(in srgb, var(--botanical) 35%, var(--line));
+  transform: translateY(-2px);
 }
 
 .occasion-card--featured {
@@ -402,9 +423,29 @@
   color: var(--botanical);
 }
 
+.occasion-card__title-short {
+  display: none;
+}
+
 .occasion-card__body p {
   color: var(--ink-muted);
   flex: 1;
+}
+
+.occasion-card__cta {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.occasion-card__cta-short {
+  display: none;
 }
 
 .occasion-card__body .btn {
@@ -2088,13 +2129,13 @@
 
 @media (max-width: 1040px) {
   .packages__grid--three,
-  .colour-stories__grid,
-  .occasions__cards {
+  .colour-stories__grid {
     grid-template-columns: 1fr 1fr;
   }
 
-  .occasion-card--featured {
-    grid-column: 1 / -1;
+  .occasions__cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
   }
 }
 
@@ -2126,17 +2167,150 @@
     width: 100%;
   }
 
-  .hero--compact .hero__visual {
-    order: 0;
+  /* Mobile hero: flowers sit behind the intro so the first screen stays short */
+  .hero--bloom {
+    padding-block: clamp(1.35rem, 4vw, 2rem) clamp(1.5rem, 4vw, 2.25rem);
+    min-height: min(72vh, 34rem);
+    display: flex;
+    align-items: flex-end;
   }
 
-  .hero__visual:not(.hero__visual--photo) {
-    order: -1;
+  .hero--bloom .hero__atmosphere {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero--bloom .hero__atmosphere img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero--bloom .hero__atmosphere::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        185deg,
+        color-mix(in srgb, var(--cream) 88%, transparent) 0%,
+        color-mix(in srgb, var(--cream) 78%, transparent) 42%,
+        color-mix(in srgb, var(--cream) 55%, transparent) 100%
+      );
+  }
+
+  .hero--bloom .hero__grid {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .hero--bloom .hero__visual--photo {
+    display: none;
+  }
+
+  .hero--bloom .hero__copy {
+    margin-top: 0.85rem;
+    font-size: 1rem;
+    max-width: 36rem;
+  }
+
+  .hero--bloom .hero__actions {
+    margin-top: 1.15rem;
+  }
+
+  .hero--bloom .hero__actions .btn-secondary {
+    display: none;
+  }
+
+  .hero--bloom .hero__support {
+    margin-top: 0.75rem;
+    font-size: 0.84rem;
   }
 
   .hero--compact h1 {
-    font-size: clamp(2rem, 8vw, 2.6rem);
+    font-size: clamp(1.85rem, 7.2vw, 2.45rem);
+    max-width: 14ch;
+  }
+
+  .occasions--chooser {
+    padding-block: 1.35rem 1.75rem;
+  }
+
+  .occasions--chooser .section-title {
+    font-size: clamp(1.55rem, 5.5vw, 1.9rem);
     max-width: none;
+  }
+
+  .occasions__cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+
+  .occasion-card {
+    min-width: 0;
+  }
+
+  .occasion-card__media img {
+    aspect-ratio: 1 / 1;
+  }
+
+  .occasion-card__body {
+    padding: 0.55rem 0.45rem 0.7rem;
+    gap: 0.2rem;
+  }
+
+  .occasion-card__body h3 {
+    font-size: 0.92rem;
+    line-height: 1.2;
+  }
+
+  .occasion-card__title-full {
+    display: none;
+  }
+
+  .occasion-card__title-short {
+    display: inline;
+  }
+
+  .occasion-card__body p {
+    display: none;
+  }
+
+  .occasion-card__cta {
+    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    text-decoration: none;
+    color: var(--rose);
+  }
+
+  .occasion-card__cta-full {
+    display: none;
+  }
+
+  .occasion-card__cta-short {
+    display: inline;
+  }
+
+  .occasion-card__cta-short::after {
+    content: " →";
+  }
+
+  .experience {
+    padding-block: 1.75rem 2rem;
+  }
+
+  .experience__figure {
+    display: none;
+  }
+
+  .experience__lead {
+    font-size: 0.98rem;
   }
 
   .steps,
@@ -2155,10 +2329,6 @@
   .occasions__grid,
   .included__list {
     grid-template-columns: 1fr;
-  }
-
-  .occasion-card--featured {
-    grid-column: auto;
   }
 
   main {
@@ -2198,7 +2368,6 @@
   .style-selector__grid.style-rail,
   .packages__grid,
   .packages__grid--three,
-  .occasions__cards,
   .partner-cards__grid,
   .steps--three {
     display: flex;
@@ -2219,7 +2388,6 @@
   .style-selector__grid.style-rail::-webkit-scrollbar,
   .packages__grid::-webkit-scrollbar,
   .packages__grid--three::-webkit-scrollbar,
-  .occasions__cards::-webkit-scrollbar,
   .partner-cards__grid::-webkit-scrollbar,
   .steps--three::-webkit-scrollbar {
     display: none;
@@ -2228,7 +2396,6 @@
   .style-rail > .style-card,
   .packages__grid > .package,
   .packages__grid--three > .package,
-  .occasions__cards > .occasion-card,
   .partner-cards__grid > .partner-card,
   .steps--three > .step {
     flex: 0 0 min(78vw, 16.5rem);
@@ -2258,27 +2425,6 @@
   .package ul {
     margin-bottom: 1rem;
     gap: 0.3rem;
-  }
-
-  .occasion-card__media img {
-    aspect-ratio: 1 / 1;
-  }
-
-  .occasion-card__body {
-    padding: 0.85rem 0.9rem 1rem;
-    gap: 0.4rem;
-  }
-
-  .occasion-card__body h3 {
-    font-size: 1.25rem;
-  }
-
-  .occasion-card__body p {
-    font-size: 0.84rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
 
   .partner-card {
