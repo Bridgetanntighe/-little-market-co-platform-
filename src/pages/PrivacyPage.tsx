@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { contact } from "../data/contact";
+import { pageSeo } from "../data/pageSeo";
 import { site } from "../data/site";
+
+const seo = pageSeo.privacy;
 
 export default function PrivacyPage() {
   return (
     <>
       <Seo
-        title="Privacy Policy | The Little Market Co"
-        description="How The Little Market Co collects and uses enquiry and freelance application information."
-        path="/privacy/"
+        title={seo.title}
+        description={seo.description}
+        path={seo.path}
+        image={seo.ogImage}
       />
       <main className="section privacy-page">
         <div className="container narrow">
@@ -18,7 +22,7 @@ export default function PrivacyPage() {
             <span aria-hidden="true"> / </span>
             <span>Privacy policy</span>
           </nav>
-          <h1>Privacy policy</h1>
+          <h1>{seo.h1}</h1>
           <p className="privacy-page__lead">
             This notice explains how The Little Market Co (“we”) handles personal information
             submitted through {site.url}.

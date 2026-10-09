@@ -10,6 +10,7 @@ import {
   faqs,
   hireOptions,
 } from "../data/content";
+import { pageSeo } from "../data/pageSeo";
 import { site } from "../data/site";
 import { enquireHref, scrollToId, useReveal } from "../hooks/useReveal";
 import { FaqList } from "../components/FaqList";
@@ -334,9 +335,10 @@ export default function HomePage() {
   return (
     <>
       <Seo
-        title={site.defaultTitle}
-        description={site.defaultDescription}
-        path="/"
+        title={pageSeo.home.title}
+        description={pageSeo.home.description}
+        path={pageSeo.home.path}
+        image={pageSeo.home.ogImage}
         jsonLd={homeJsonLd}
       />
       <main>

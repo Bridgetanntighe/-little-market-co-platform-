@@ -1,3 +1,7 @@
+/**
+ * Deployed public origin. When a custom domain is connected, update this
+ * together with sitemap URLs, redirects and any hardcoded absolute links.
+ */
 export const SITE_URL = "https://little-market-co.netlify.app";
 
 export const site = {
@@ -8,19 +12,7 @@ export const site = {
   service:
     "Flower bar hire for weddings, private celebrations and corporate events across London",
   ogImage: `${SITE_URL}/images/og-flower-bar-hire-london.jpg`,
-  defaultTitle: "Flower Bar Hire for Weddings & Events London | The Little Market Co",
+  defaultTitle: "Flower Bar Hire London | The Little Market Co",
   defaultDescription:
-    "Hire a styled, self-serve flower market for weddings and celebrations in London. Guests choose seasonal stems, wrap a bouquet and take it home.",
+    "Hire a styled, self-serve flower bar in London for weddings and celebrations. Guests choose seasonal stems, wrap a bouquet and take it home.",
 };
-
-/** Primary indexable routes used for sitemap and SEO shells. */
-export const primaryRoutes = [
-  { path: "/", slug: "home" },
-  { path: "/wedding-flower-bar-hire-london/", slug: "weddings" },
-  { path: "/celebrations/", slug: "celebrations" },
-  { path: "/corporate-flower-bar-london/", slug: "corporate" },
-  { path: "/packages/", slug: "packages" },
-  { path: "/enquire/", slug: "enquire" },
-  { path: "/partner-with-us/", slug: "partner" },
-  { path: "/privacy/", slug: "privacy" },
-] as const;

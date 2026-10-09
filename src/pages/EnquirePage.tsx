@@ -12,11 +12,13 @@ import {
   packageChoices,
 } from "../data/content";
 import { NETLIFY_FORM_NAME, submitEnquiry } from "../data/contact";
-import { site } from "../data/site";
+import { breadcrumbList, pageSeo } from "../data/pageSeo";
 import {
   ENQUIRY_PREFILL_KEY,
   type EnquiryPrefill,
 } from "../hooks/useReveal";
+
+const seo = pageSeo.enquire;
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -143,22 +145,15 @@ export default function EnquirePage() {
   return (
     <>
       <Seo
-        title="Enquire | The Little Market Co"
-        description="Tell us about your celebration. We’ll check availability and help you choose the right Little Bloom Market."
-        path="/enquire/"
+        title={seo.title}
+        description={seo.description}
+        path={seo.path}
+        image={seo.ogImage}
         jsonLd={[
-          {
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: "Enquire",
-                item: `${site.url}/enquire/`,
-              },
-            ],
-          },
+          breadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Enquire", path: seo.path },
+          ]),
         ]}
       />
       <main className="section enquire-page">
@@ -170,10 +165,13 @@ export default function EnquirePage() {
               <span>Enquire</span>
             </nav>
             <span className="section-eyebrow">Enquiries</span>
-            <h1 className="section-title">Tell us about your celebration</h1>
+            <h1 className="section-title">{seo.h1}</h1>
+            <p className="section-lead">{seo.lead}</p>
             <p className="section-lead">
-              We’ll check availability and send you a tailored quote. Submitting an enquiry does not
-              reserve your date.
+              Not sure which package fits? Compare{" "}
+              <Link to="/packages/">packages and prices</Link>, or read about{" "}
+              <Link to="/wedding-flower-bar-hire-london/">weddings</Link> and{" "}
+              <Link to="/celebrations/">parties and showers</Link>.
             </p>
           </div>
           <div className="enquire__form">

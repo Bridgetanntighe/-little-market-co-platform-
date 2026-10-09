@@ -1,32 +1,30 @@
 import { Link } from "react-router-dom";
+import { FaqList } from "../components/FaqList";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
-import { hireOptions } from "../data/content";
-import { site } from "../data/site";
+import { corporateFaqs, hireOptions } from "../data/content";
+import { breadcrumbList, faqPageJsonLd, pageSeo } from "../data/pageSeo";
 import { enquireHref, useReveal } from "../hooks/useReveal";
+
+const seo = pageSeo.corporate;
 
 export default function CorporatePage() {
   const { ref, visible } = useReveal<HTMLElement>();
+  const { ref: faqRef, visible: faqVisible } = useReveal<HTMLElement>();
 
   return (
     <>
       <Seo
-        title="Corporate Flower Bar Hire London | The Little Market Co"
-        description="Flower experiences for teams, launches and brand activations in London. Self-serve Little Bloom Markets with optional branded finishing."
-        path="/corporate-flower-bar-london/"
+        title={seo.title}
+        description={seo.description}
+        path={seo.path}
+        image={seo.ogImage}
         jsonLd={[
-          {
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: "Corporate & Brands",
-                item: `${site.url}/corporate-flower-bar-london/`,
-              },
-            ],
-          },
+          breadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Corporate & Brands", path: seo.path },
+          ]),
+          faqPageJsonLd(corporateFaqs),
         ]}
       />
       <main className="corporate-page">
@@ -39,12 +37,8 @@ export default function CorporatePage() {
                 <span>Corporate & Brands</span>
               </nav>
               <span className="hero__eyebrow">Teams · Launches · Activations</span>
-              <h1>Flower experiences for offices, agencies and brands</h1>
-              <p className="wedding-hero__copy">
-                Bring a Little Bloom Market to employee celebrations, client events, product
-                launches and brand activations. Guests choose stems, wrap a bouquet and take
-                something tangible from the day — without a taught workshop format.
-              </p>
+              <h1>{seo.h1}</h1>
+              <p className="wedding-hero__copy">{seo.lead}</p>
               <div className="hero__actions">
                 <Link
                   className="btn btn-primary"
@@ -96,6 +90,12 @@ export default function CorporatePage() {
                 </p>
               </article>
             </div>
+            <p className="section-lead" style={{ marginTop: "1.5rem" }}>
+              Looking for a private party instead? Explore{" "}
+              <Link to="/celebrations/">celebrations</Link> or compare{" "}
+              <Link to="/packages/">packages and prices</Link>. Agencies and venues can also{" "}
+              <Link to="/partner-with-us/">partner with us</Link>.
+            </p>
           </div>
         </section>
 
@@ -128,6 +128,23 @@ export default function CorporatePage() {
             </div>
             <Link className="btn btn-secondary packages__cta" to="/packages/">
               Compare packages
+            </Link>
+          </div>
+        </section>
+
+        <section
+          className={`section faq reveal ${faqVisible ? "is-visible" : ""}`}
+          ref={faqRef}
+        >
+          <div className="container">
+            <h2 className="section-title">Corporate FAQs</h2>
+            <FaqList items={corporateFaqs} />
+            <Link
+              className="btn btn-primary"
+              style={{ marginTop: "2rem" }}
+              to={enquireHref({ eventType: "Corporate event" })}
+            >
+              Check availability
             </Link>
           </div>
         </section>

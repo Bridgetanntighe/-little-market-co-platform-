@@ -242,3 +242,48 @@ export const faqs = [
     a: "Choose Soft Meadow, Modern Neutral, Colour Pop or share your own palette. Exact flower varieties depend on season and availability.",
   },
 ];
+
+export const celebrationFaqs = [
+  {
+    q: "Is this suitable for a bridal or baby shower?",
+    a: "Yes. The Little Bloom Market works well for bridal showers, baby showers and birthday gatherings where guests want a relaxed shared activity and a bouquet to take home.",
+  },
+  {
+    q: "How much space do we need at home?",
+    a: "The setup is compact and suited to homes, gardens and hired rooms. Share a few photos or approximate floor space when you enquire and we will advise.",
+  },
+  {
+    q: "Do we need a florist on the day?",
+    a: "Not for a standard booking. We deliver, set up and collect. Guests serve themselves using the guidance left with the display.",
+  },
+];
+
+export const corporateFaqs = [
+  {
+    q: "Can you set up in an office building?",
+    a: "Yes. We deliver to London workplaces and hired venues. Share access details, lift constraints and preferred timing with your enquiry.",
+  },
+  {
+    q: "Can the market include branded signage or packaging?",
+    a: "The Brand Market can include branded signage and packaging, quoted around your artwork and timeline. Other packages remain unbranded by default.",
+  },
+  {
+    q: "Is this a taught workshop?",
+    a: "No. Standard hire is a self-serve flower market after setup — not a sit-down floristry class. Assisted options can be discussed if you need extra support.",
+  },
+];
+
+export const packageFaqs = [
+  {
+    q: "What do the package prices include?",
+    a: "Starting prices are inclusive of the styled display, seasonal flowers for the bouquet allowance shown, wrapping materials, and delivery, setup and collection within our London service area.",
+  },
+  {
+    q: "Is the price a setup fee plus per-person flower charges?",
+    a: "No. The figures shown are inclusive package starting points for the bouquet allowances listed — not a separate setup fee plus per-person charges.",
+  },
+  {
+    q: "What if we need more than 40 bouquets?",
+    a: "Tell us your numbers when you enquire and we will quote for a larger allowance, travel outside our usual area, or assisted staffing if needed.",
+  },
+];

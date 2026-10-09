@@ -5,6 +5,7 @@ import {
 } from "react";
 import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
+import { pageSeo } from "../data/pageSeo";
 import {
   PARTNER_FORM_NAME,
   partnerBusinessTypes,
@@ -317,9 +318,10 @@ export default function PartnerPage() {
   return (
     <>
       <Seo
-        title="Partner With Us | The Little Market Co"
-        description="Explore partnerships with The Little Market Co for venues, wedding planners, event agencies and creative businesses across London."
-        path="/partner-with-us/"
+        title={pageSeo.partner.title}
+        description={pageSeo.partner.description}
+        path={pageSeo.partner.path}
+        image={pageSeo.partner.ogImage}
         jsonLd={jsonLd}
       />
       <main className="partner-page">

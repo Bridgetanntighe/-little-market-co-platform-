@@ -3,6 +3,7 @@ import { FaqList } from "../components/FaqList";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
 import { hireOptions } from "../data/content";
+import { breadcrumbList, canonicalFor, faqPageJsonLd, pageSeo } from "../data/pageSeo";
 import { site } from "../data/site";
 import {
   weddingFaqs,
@@ -15,9 +16,10 @@ import {
 import { enquireHref, useReveal } from "../hooks/useReveal";
 
 const weddingEnquire = enquireHref({ eventType: "Wedding" });
+const seo = pageSeo.weddings;
 
 export default function WeddingPage() {
-  const pageUrl = `${site.url}/wedding-flower-bar-hire-london/`;
+  const pageUrl = canonicalFor(seo.path);
   const { ref: experienceRef, visible: experienceVisible } = useReveal<HTMLElement>();
   const { ref: colourRef, visible: colourVisible } = useReveal<HTMLElement>();
   const { ref: includeRef, visible: includeVisible } = useReveal<HTMLElement>();
@@ -28,44 +30,29 @@ export default function WeddingPage() {
   const { ref: ctaRef, visible: ctaVisible } = useReveal<HTMLElement>();
 
   const jsonLd = [
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Wedding flower bar hire London",
-          item: pageUrl,
-        },
-      ],
-    },
+    breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Weddings", path: seo.path },
+    ]),
     {
       "@type": "WebPage",
       "@id": `${pageUrl}#webpage`,
       url: pageUrl,
-      name: "Wedding Flower Bar Hire London | The Little Market Co",
-      description:
-        "A self-serve wedding flower bar in London, styled around your celebration. Guests choose seasonal stems, wrap a bouquet and take it home.",
+      name: seo.title,
+      description: seo.description,
       isPartOf: { "@id": `${site.url}/#organization` },
       about: { "@id": `${site.url}/#business` },
     },
-    {
-      "@type": "FAQPage",
-      mainEntity: weddingFaqs.map((item) => ({
-        "@type": "Question",
-        name: item.q,
-        acceptedAnswer: { "@type": "Answer", text: item.a },
-      })),
-    },
+    faqPageJsonLd(weddingFaqs),
   ];
 
   return (
     <>
       <Seo
-        title="Wedding Flower Bar Hire London | The Little Market Co"
-        description="A self-serve wedding flower bar in London, styled around your celebration. Guests choose seasonal stems, wrap a bouquet and take it home."
-        path="/wedding-flower-bar-hire-london/"
+        title={seo.title}
+        description={seo.description}
+        path={seo.path}
+        image={seo.ogImage}
         jsonLd={jsonLd}
       />
       <main className="wedding-page">
@@ -78,13 +65,9 @@ export default function WeddingPage() {
                 <span>Weddings</span>
               </nav>
               <span className="hero__eyebrow">The Little Bloom Market for Weddings</span>
-              <h1>Wedding flower bar hire in London</h1>
+              <h1>{seo.h1}</h1>
               <p className="wedding-hero__kicker">A little flower market for your big day</p>
-              <p className="wedding-hero__copy">
-                Give guests something beautiful to make during your drinks reception or celebration
-                — and a bouquet to take home. We prepare, deliver, set up and collect a styled,
-                self-serve flower market around your wedding colours.
-              </p>
+              <p className="wedding-hero__copy">{seo.lead}</p>
               <div className="hero__actions">
                 <Link className="btn btn-primary" to={weddingEnquire}>
                   Check your wedding date

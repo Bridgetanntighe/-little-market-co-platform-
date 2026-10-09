@@ -70,6 +70,40 @@ a {
   text-decoration: none;
 }
 
+/* Build-time HTML fallback for crawlers; removed when the SPA boots. */
+.seo-static {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+.seo-static h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--botanical);
+  line-height: 1.15;
+}
+
+.seo-static p {
+  color: var(--ink-muted);
+  max-width: 40rem;
+}
+
+.seo-static ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seo-static a {
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 button,
 input,
 select,

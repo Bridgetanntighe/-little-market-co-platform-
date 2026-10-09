@@ -1,32 +1,30 @@
 import { Link } from "react-router-dom";
+import { FaqList } from "../components/FaqList";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
-import { colourStories, hireOptions } from "../data/content";
-import { site } from "../data/site";
+import { celebrationFaqs, colourStories, hireOptions } from "../data/content";
+import { breadcrumbList, faqPageJsonLd, pageSeo } from "../data/pageSeo";
 import { enquireHref, useReveal } from "../hooks/useReveal";
+
+const seo = pageSeo.celebrations;
 
 export default function CelebrationsPage() {
   const { ref, visible } = useReveal<HTMLElement>();
+  const { ref: faqRef, visible: faqVisible } = useReveal<HTMLElement>();
 
   return (
     <>
       <Seo
-        title="Private Celebration Flower Bar Hire London | The Little Market Co"
-        description="Hire a self-serve flower market for bridal showers, baby showers and birthdays in London. Guests wrap a bouquet and take it home."
-        path="/celebrations/"
+        title={seo.title}
+        description={seo.description}
+        path={seo.path}
+        image={seo.ogImage}
         jsonLd={[
-          {
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: "Celebrations",
-                item: `${site.url}/celebrations/`,
-              },
-            ],
-          },
+          breadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Celebrations", path: seo.path },
+          ]),
+          faqPageJsonLd(celebrationFaqs),
         ]}
       />
       <main className="celebrations-page">
@@ -39,12 +37,8 @@ export default function CelebrationsPage() {
                 <span>Celebrations</span>
               </nav>
               <span className="hero__eyebrow">Bridal showers · Baby showers · Birthdays</span>
-              <h1>A little flower market for private celebrations</h1>
-              <p className="wedding-hero__copy">
-                Gather friends for a relaxed shared activity with personal colour choices and a
-                bouquet to take home. Our compact setup arrives styled — guests choose stems, wrap
-                and enjoy the moment.
-              </p>
+              <h1>{seo.h1}</h1>
+              <p className="wedding-hero__copy">{seo.lead}</p>
               <div className="hero__actions">
                 <Link
                   className="btn btn-primary"
@@ -86,6 +80,12 @@ export default function CelebrationsPage() {
               <li>A bouquet to take home — more than a party bag</li>
               <li>Compact setup suited to homes, gardens and hired rooms</li>
             </ul>
+            <p className="section-lead" style={{ marginTop: "1.25rem" }}>
+              Planning a wedding instead? See{" "}
+              <Link to="/wedding-flower-bar-hire-london/">wedding flower bar hire</Link>, or
+              compare all{" "}
+              <Link to="/packages/">packages and prices</Link>.
+            </p>
             <Link
               className="btn btn-primary"
               to={enquireHref({ eventType: "Bridal shower" })}
@@ -142,6 +142,23 @@ export default function CelebrationsPage() {
             </div>
             <Link className="btn btn-secondary packages__cta" to="/packages/">
               Compare packages
+            </Link>
+          </div>
+        </section>
+
+        <section
+          className={`section faq reveal ${faqVisible ? "is-visible" : ""}`}
+          ref={faqRef}
+        >
+          <div className="container">
+            <h2 className="section-title">Celebration FAQs</h2>
+            <FaqList items={celebrationFaqs} />
+            <Link
+              className="btn btn-primary"
+              style={{ marginTop: "2rem" }}
+              to={enquireHref({ eventType: "Birthday / private celebration" })}
+            >
+              Check your date
             </Link>
           </div>
         </section>

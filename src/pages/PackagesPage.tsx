@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { FaqList } from "../components/FaqList";
 import { Seo } from "../components/Seo";
-import { colourStories, hireOptions } from "../data/content";
-import { site } from "../data/site";
+import { colourStories, hireOptions, packageFaqs } from "../data/content";
+import { breadcrumbList, canonicalFor, faqPageJsonLd, pageSeo } from "../data/pageSeo";
 import { enquireHref, useReveal } from "../hooks/useReveal";
 
 const rows = [
@@ -15,27 +16,37 @@ const rows = [
   { key: "assistance", label: "Assistance" },
 ] as const;
 
+const seo = pageSeo.packages;
+
 export default function PackagesPage() {
   const { ref, visible } = useReveal<HTMLElement>();
+  const { ref: faqRef, visible: faqVisible } = useReveal<HTMLElement>();
 
   return (
     <>
       <Seo
-        title="Flower Market Packages | The Little Market Co"
-        description="Compare The Little Bar, The Bloom Market and The Brand Market — inclusive bouquet packages for weddings and celebrations in London."
-        path="/packages/"
+        title={seo.title}
+        description={seo.description}
+        path={seo.path}
+        image={seo.ogImage}
         jsonLd={[
+          breadcrumbList([
+            { name: "Home", path: "/" },
+            { name: "Packages", path: seo.path },
+          ]),
+          faqPageJsonLd(packageFaqs),
           {
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: "Packages",
-                item: `${site.url}/packages/`,
-              },
-            ],
+            "@type": "OfferCatalog",
+            name: "Little Bloom Market packages",
+            itemListElement: hireOptions.map((pkg, index) => ({
+              "@type": "Offer",
+              position: index + 1,
+              name: pkg.name,
+              description: `${pkg.bouquets}. ${pkg.description}`,
+              priceCurrency: "GBP",
+              price: String(pkg.price.replace(/[^\d]/g, "")),
+              url: canonicalFor(seo.path),
+            })),
           },
         ]}
       />
@@ -48,11 +59,13 @@ export default function PackagesPage() {
               <span>Packages</span>
             </nav>
             <span className="section-eyebrow">Packages</span>
-            <h1 className="section-title">Find your little market</h1>
+            <h1 className="section-title">{seo.h1}</h1>
+            <p className="section-lead">{seo.lead}</p>
             <p className="section-lead">
-              Inclusive packages cover the styled display, seasonal flowers for the bouquet
-              allowance shown, wrapping, setup and collection. Your event can have more guests than
-              bouquets — choose how many take-home bouquets you would like to provide.
+              Browse by occasion:{" "}
+              <Link to="/wedding-flower-bar-hire-london/">weddings</Link>,{" "}
+              <Link to="/celebrations/">parties and showers</Link>, or{" "}
+              <Link to="/corporate-flower-bar-london/">corporate and brands</Link>.
             </p>
           </div>
         </header>
@@ -150,6 +163,19 @@ export default function PackagesPage() {
               style={{ marginTop: "1.5rem" }}
               to={enquireHref()}
             >
+              Check availability
+            </Link>
+          </div>
+        </section>
+
+        <section
+          className={`section faq reveal ${faqVisible ? "is-visible" : ""}`}
+          ref={faqRef}
+        >
+          <div className="container">
+            <h2 className="section-title">Package FAQs</h2>
+            <FaqList items={packageFaqs} />
+            <Link className="btn btn-primary" style={{ marginTop: "2rem" }} to={enquireHref()}>
               Check availability
             </Link>
           </div>
