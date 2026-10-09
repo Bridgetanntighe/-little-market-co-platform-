@@ -16,8 +16,8 @@ export const bloomMarket = {
     "Event planners",
   ],
   secondaryUses: ["Private celebrations", "Weddings"],
-  accent: "#e6c7bd",
-  accentSoft: "#f0d9d1",
+  accent: "#d8b4b2",
+  accentSoft: "#f3e7e1",
 };
 
 export const experienceBenefits = [

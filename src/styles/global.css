@@ -1,32 +1,36 @@
 :root {
-  /* Kit-inspired system: cream ground, signal red, mono headlines */
-  --ivory: #faf3e8;
-  --cream: #faf3e8;
-  --kit-red: #c20019;
-  --kit-red-deep: #9e0014;
-  --ink: #111111;
-  --ink-muted: #3a3a3a;
-  --paper: #fffdf8;
-  --line: rgba(17, 17, 17, 0.12);
+  /* Botanical luxury — soft florist, not clinical retail */
+  --ivory: #f6f1e8;
+  --cream: #f6f1e8;
+  --petal: #f3e7e1;
+  --botanical: #2a4336;
+  --botanical-deep: #1d3127;
+  --rose: #a86b6f;
+  --rose-soft: #d8b4b2;
+  --champagne: #cbb892;
+  --ink: #1f2420;
+  --ink-muted: #5a615b;
+  --paper: #fffaf4;
+  --line: rgba(42, 67, 54, 0.14);
 
-  /* Legacy aliases remapped so section styles pick up the new brand */
-  --market-green: #111111;
-  --market-green-deep: #000000;
-  --tomato: var(--kit-red);
-  --blush: #f1e6d8;
-  --butter: #ffffff;
+  /* Aliases used across section styles */
+  --market-green: var(--botanical);
+  --market-green-deep: var(--botanical-deep);
+  --tomato: var(--rose);
+  --blush: var(--petal);
+  --butter: var(--champagne);
 
-  --shadow-soft: 0 18px 48px rgba(0, 0, 0, 0.08);
-  --shadow-lift: 0 10px 28px rgba(194, 0, 25, 0.18);
+  --shadow-soft: 0 22px 50px rgba(29, 49, 39, 0.08);
+  --shadow-lift: 0 12px 28px rgba(42, 67, 54, 0.12);
   --font-brand: "Instrument Serif", "Times New Roman", serif;
-  --font-display: "IBM Plex Mono", "Courier New", monospace;
-  --font-body: "DM Sans", "Helvetica Neue", sans-serif;
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-body: "Manrope", "Helvetica Neue", sans-serif;
   --space-section: clamp(4.5rem, 8vw, 7.5rem);
   --content-width: 1120px;
   --header-h: 4.5rem;
   --announce-h: 2.4rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --radius-pill: 999px;
+  --radius-soft: 0.65rem;
 }
 
 *,
@@ -44,11 +48,13 @@ body {
   margin: 0;
   font-family: var(--font-body);
   font-size: 1.05rem;
-  line-height: 1.65;
+  line-height: 1.7;
+  font-weight: 400;
   color: var(--ink);
   background:
-    radial-gradient(ellipse at 8% 0%, rgba(194, 0, 25, 0.06), transparent 40%),
-    radial-gradient(ellipse at 92% 12%, rgba(17, 17, 17, 0.04), transparent 36%),
+    radial-gradient(ellipse at 10% 0%, rgba(216, 180, 178, 0.28), transparent 42%),
+    radial-gradient(ellipse at 90% 8%, rgba(203, 184, 146, 0.18), transparent 38%),
+    radial-gradient(ellipse at 50% 100%, rgba(42, 67, 54, 0.05), transparent 45%),
     var(--cream);
   -webkit-font-smoothing: antialiased;
 }
@@ -76,9 +82,9 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.12;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
@@ -104,40 +110,40 @@ ul {
 .section-eyebrow {
   display: inline-block;
   margin-bottom: 0.85rem;
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--kit-red);
+  color: var(--rose);
 }
 
 .section-title {
-  font-size: clamp(2.1rem, 4.4vw, 3.35rem);
-  color: var(--kit-red);
-  max-width: 18ch;
+  font-size: clamp(2.4rem, 4.6vw, 3.55rem);
+  color: var(--botanical);
+  max-width: 16ch;
 }
 
 .section-lead {
-  margin-top: 1rem;
-  max-width: 42rem;
+  margin-top: 1.1rem;
+  max-width: 40rem;
   color: var(--ink-muted);
   font-size: 1.08rem;
+  font-weight: 400;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 3rem;
-  padding: 0.75rem 1.55rem;
+  min-height: 3.05rem;
+  padding: 0.8rem 1.5rem;
   border: 1.5px solid transparent;
-  border-radius: var(--radius-pill);
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  border-radius: var(--radius-soft);
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   cursor: pointer;
   transition:
     background-color 0.3s var(--ease),
@@ -148,59 +154,56 @@ ul {
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--kit-red);
+  outline: 2px solid var(--champagne);
   outline-offset: 3px;
 }
 
 .btn-primary {
-  background: var(--kit-red);
-  color: #fff;
+  background: var(--botanical);
+  color: var(--cream);
 }
 
 .btn-primary:hover {
-  background: var(--kit-red-deep);
+  background: var(--botanical-deep);
   transform: translateY(-1px);
   box-shadow: var(--shadow-lift);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--ink);
+  color: var(--botanical);
+  border-color: color-mix(in srgb, var(--botanical) 55%, transparent);
 }
 
 .btn-secondary:hover {
-  background: var(--ink);
+  background: var(--botanical);
   color: var(--cream);
 }
 
 .btn-accent {
-  background: var(--kit-red);
-  color: #fff;
+  background: var(--rose);
+  color: #fffaf7;
 }
 
 .btn-accent:hover {
-  background: var(--kit-red-deep);
+  background: color-mix(in srgb, var(--rose) 85%, #5c3033);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-lift);
+  box-shadow: 0 12px 28px rgba(168, 107, 111, 0.22);
 }
 
 .scallop {
   height: 18px;
-  background: radial-gradient(circle at 50% 0, transparent 10px, var(--ink) 11px) repeat-x;
+  background: radial-gradient(circle at 50% 0, transparent 10px, var(--botanical) 11px) repeat-x;
   background-size: 28px 18px;
 }
 
 .chip {
   display: inline-flex;
-  padding: 0.35rem 0.8rem;
+  padding: 0.4rem 0.85rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  background: var(--paper);
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 80%, white);
+  font-size: 0.84rem;
   color: var(--ink-muted);
 }
 
@@ -217,12 +220,11 @@ ul {
 }
 
 .field label {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--botanical);
 }
 
 .field input,
@@ -232,7 +234,7 @@ ul {
   min-height: 3rem;
   padding: 0.7rem 0.9rem;
   border: 1px solid var(--line);
-  border-radius: 0.75rem;
+  border-radius: var(--radius-soft);
   background: var(--paper);
 }
 
@@ -245,8 +247,8 @@ ul {
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--kit-red);
-  box-shadow: 0 0 0 3px rgba(194, 0, 25, 0.12);
+  border-color: color-mix(in srgb, var(--botanical) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--champagne) 35%, transparent);
 }
 
 .form-grid {
@@ -261,35 +263,35 @@ ul {
 
 .form-success {
   padding: 2rem;
-  border: 1px solid rgba(194, 0, 25, 0.18);
+  border: 1px solid color-mix(in srgb, var(--botanical) 16%, transparent);
   border-radius: 1rem;
-  background: color-mix(in srgb, var(--kit-red) 6%, var(--cream));
+  background: color-mix(in srgb, var(--botanical) 5%, var(--cream));
   text-align: center;
 }
 
 .form-success h3 {
-  color: var(--kit-red);
-  font-size: 2rem;
+  color: var(--botanical);
+  font-size: 2.1rem;
   margin-bottom: 0.5rem;
 }
 
 .field.has-error input,
 .field.has-error select,
 .field.has-error textarea {
-  border-color: var(--kit-red);
+  border-color: var(--rose);
 }
 
 .field-error {
   font-size: 0.82rem;
-  color: var(--kit-red);
+  color: var(--rose);
 }
 
 .form-error {
   margin-top: 1rem;
   padding: 0.85rem 1rem;
-  border: 1px solid rgba(194, 0, 25, 0.28);
-  border-radius: 0.75rem;
-  background: color-mix(in srgb, var(--kit-red) 8%, var(--cream));
+  border: 1px solid color-mix(in srgb, var(--rose) 30%, transparent);
+  border-radius: var(--radius-soft);
+  background: color-mix(in srgb, var(--rose) 8%, var(--cream));
   color: var(--ink);
   font-size: 0.95rem;
 }
@@ -310,7 +312,6 @@ ul {
 }
 
 .optional {
-  font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;

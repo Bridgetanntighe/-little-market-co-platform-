@@ -8,14 +8,13 @@
   height: var(--announce-h);
   display: flex;
   align-items: center;
-  background: var(--kit-red);
-  color: #fff;
+  background: var(--botanical);
+  color: var(--cream);
   text-align: center;
-  font-family: var(--font-display);
-  font-size: 0.72rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
   overflow: hidden;
 }
 
@@ -23,15 +22,17 @@
   display: block;
   width: 100%;
   padding-block: 0.55rem;
-  color: #fff;
-  text-decoration: none;
+  color: var(--cream);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, var(--champagne) 70%, transparent);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .announcement a:hover {
-  opacity: 0.88;
+  color: var(--champagne);
 }
 
 .site-header {
@@ -57,20 +58,20 @@
 
 .brand__name {
   font-family: var(--font-brand);
-  font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+  font-size: clamp(1.55rem, 2.7vw, 2rem);
   font-weight: 400;
-  color: var(--ink);
+  color: var(--botanical);
   line-height: 1;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .brand__tag {
-  font-family: var(--font-display);
-  font-size: 0.64rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--kit-red);
+  color: var(--rose);
 }
 
 .nav {
@@ -80,16 +81,15 @@
 }
 
 .nav a {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--ink-muted);
 }
 
 .nav a:hover {
-  color: var(--kit-red);
+  color: var(--botanical);
 }
 
 .menu-toggle {
@@ -127,22 +127,21 @@
 .hero__eyebrow {
   display: inline-block;
   margin-bottom: 1rem;
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--kit-red);
+  color: var(--rose);
 }
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 5.6vw, 4.2rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  color: var(--ink);
-  max-width: 14ch;
+  font-size: clamp(2.9rem, 6vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--botanical);
+  max-width: 11ch;
 }
 
 .hero__copy {
@@ -167,9 +166,12 @@
 
 .hero__frame {
   position: relative;
-  background: #0a0a0a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(216, 180, 178, 0.55), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(203, 184, 146, 0.35), transparent 40%),
+    color-mix(in srgb, var(--petal) 55%, var(--cream));
+  border: 1px solid color-mix(in srgb, var(--botanical) 12%, transparent);
+  border-radius: 1.25rem;
   box-shadow: var(--shadow-soft);
   overflow: hidden;
 }
@@ -184,17 +186,15 @@
   position: absolute;
   left: 1rem;
   bottom: 1rem;
-  max-width: 16rem;
-  padding: 0.65rem 0.95rem;
-  background: rgba(250, 243, 232, 0.94);
-  border: 1px solid rgba(194, 0, 25, 0.2);
-  border-radius: 999px;
-  font-family: var(--font-display);
-  font-size: 0.68rem;
+  max-width: 15rem;
+  padding: 0.7rem 0.95rem;
+  background: color-mix(in srgb, var(--paper) 92%, white);
+  border: 1px solid color-mix(in srgb, var(--botanical) 14%, transparent);
+  border-radius: var(--radius-soft);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink);
+  color: var(--botanical);
 }
 
 .experience {
@@ -231,15 +231,15 @@
   top: 0.85rem;
   left: 0.85rem;
   padding: 0.4rem 0.75rem;
-  background: rgba(250, 243, 232, 0.94);
-  border: 1px solid rgba(194, 0, 25, 0.22);
+  background: color-mix(in srgb, var(--paper) 94%, white);
+  border: 1px solid color-mix(in srgb, var(--botanical) 14%, transparent);
   border-radius: 999px;
-  font-family: var(--font-display);
-  font-size: 0.66rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--kit-red);
+  color: var(--botanical);
 }
 
 .experience__content {
@@ -668,7 +668,7 @@
 }
 
 .site-footer {
-  background: #0a0a0a;
+  background: var(--botanical-deep);
   color: color-mix(in srgb, var(--ivory) 88%, white);
   padding: 3rem 0 2.25rem;
 }
@@ -697,11 +697,12 @@
 }
 
 .site-footer__label {
-  font-family: var(--font-display);
-  font-size: 0.68rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--kit-red);
+  color: var(--champagne);
   margin-bottom: 0.55rem;
 }
 
@@ -710,9 +711,9 @@
   padding-top: 1.25rem;
   border-top: 1px solid color-mix(in srgb, var(--ivory) 14%, transparent);
   font-family: var(--font-display);
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
-  color: #fff;
+  font-size: 1.45rem;
+  letter-spacing: -0.01em;
+  color: var(--rose-soft);
 }
 
 .sticky-cta {
