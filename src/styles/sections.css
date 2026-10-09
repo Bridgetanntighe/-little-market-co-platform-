@@ -2223,11 +2223,7 @@ a.occasion-card:hover {
     margin-top: 0.65rem;
     font-size: 0.95rem;
     line-height: 1.55;
-    max-width: 36rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    max-width: 34rem;
   }
 
   .hero--bloom .hero__actions {

@@ -10,9 +10,9 @@ export const site = {
   email: "hello.littlemarketco@gmail.com",
   serviceArea: "London and surrounding areas",
   service:
-    "Flower bar hire for weddings, private celebrations and corporate events across London",
+    "Mobile flower market hire for weddings, celebrations and events across London",
   ogImage: `${SITE_URL}/images/og-flower-bar-hire-london.jpg`,
-  defaultTitle: "Flower Bar Hire London | The Little Market Co",
+  defaultTitle: "Mobile Flower Market Hire London | The Little Market Co",
   defaultDescription:
-    "Hire a styled, self-serve flower bar in London for weddings and celebrations. Guests choose seasonal stems, wrap a bouquet and take it home.",
+    "We bring a styled, self-serve flower market to your London wedding or event venue. Setup and collection included.",
 };

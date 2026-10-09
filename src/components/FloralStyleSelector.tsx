@@ -61,7 +61,7 @@ export function FloralStylePreview() {
         ))}
       </div>
       <Link className="btn btn-secondary" to="/packages/#floral-style">
-        Explore floral styles
+        See all styles
       </Link>
     </div>
   );

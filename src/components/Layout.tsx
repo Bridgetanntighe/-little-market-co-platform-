@@ -45,7 +45,7 @@ function Announcement() {
     <div className="announcement">
       <div className="container">
         <p className="announcement__text">
-          Flower bar hire for weddings & celebrations across London
+          Mobile flower market hire · London venues
         </p>
       </div>
     </div>
@@ -107,7 +107,7 @@ function Footer() {
           <div className="site-footer__brand-block">
             <div className="site-footer__brand">The Little Market Co.</div>
             <p className="site-footer__summary">
-              Flower bar hire · {contact.serviceArea}
+              Mobile flower market hire · {contact.serviceArea}
             </p>
             {contact.email ? (
               <a className="site-footer__email" href={`mailto:${contact.email}`}>
@@ -140,7 +140,7 @@ function Footer() {
           </ul>
         </nav>
 
-        <p className="site-footer__tagline">A little flower market for your celebration.</p>
+        <p className="site-footer__tagline">We bring the flower market to your venue.</p>
       </div>
     </footer>
   );

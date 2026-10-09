@@ -6,7 +6,7 @@ export const bloomMarket = {
   name: "The Little Bloom Market",
   shortName: "Bloom Market",
   description:
-    "A styled, self-serve flower market where guests choose seasonal stems, create a bouquet and take it home. We prepare, deliver, set up and collect the display.",
+    "A mobile flower market we bring to your venue — styled, self-serve, with setup and collection included.",
   accent: "#d8b4b2",
   accentSoft: "#f3e7e1",
 };
@@ -192,18 +192,18 @@ export const HELP_ME_CHOOSE_STYLE = "Help me choose";
 export const experienceSteps = [
   {
     step: "01",
-    title: "Choose your stems",
-    copy: "Guests browse seasonal flowers and pick the colours that catch their eye.",
+    title: "We set up",
+    copy: "A styled flower stall arrives at your venue — flowers, wrap and display ready.",
   },
   {
     step: "02",
-    title: "Wrap your bouquet",
-    copy: "With wrap and ribbon ready, each guest gathers a little bouquet at their own pace.",
+    title: "Guests create",
+    copy: "Self-serve: guests pick stems, wrap a bouquet and take it home.",
   },
   {
     step: "03",
-    title: "Take it home",
-    copy: "A beautiful reminder of the celebration — more than a favour, a moment they made.",
+    title: "We collect",
+    copy: "When you’re done, we clear the market. You host — we handle the flowers.",
   },
 ];
 

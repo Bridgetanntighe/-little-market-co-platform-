@@ -20,11 +20,11 @@ const pages = [
   {
     path: "/",
     file: "index.html",
-    title: "Flower Bar Hire London | The Little Market Co",
+    title: "Mobile Flower Market Hire London | The Little Market Co",
     description:
-      "Hire a styled, self-serve flower bar in London for weddings and celebrations. Guests choose seasonal stems, wrap a bouquet and take it home.",
-    h1: "A little flower market. A beautiful part of your celebration.",
-    lead: "Flower bar hire for weddings and celebrations across London. Guests choose stems, wrap a bouquet and take a little of your day home.",
+      "We bring a styled, self-serve flower market to your London wedding or event venue. Setup and collection included.",
+    h1: "A flower market for your wedding or event.",
+    lead: "Mobile flower market hire across London — we set up at your venue, guests make take-home bouquets, we collect.",
     changefreq: "weekly",
     priority: "1.0",
     links: [

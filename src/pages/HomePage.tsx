@@ -18,42 +18,42 @@ const occasions = [
     id: "weddings",
     title: "Weddings",
     shortTitle: "Weddings",
-    copy: "A thoughtful guest activity and a wedding favour in one.",
+    copy: "Reception moment and guest favour in one.",
     to: "/wedding-flower-bar-hire-london/",
-    cta: "Explore weddings",
+    cta: "View",
     featured: true,
     image: {
       src: "/images/guests-making-bouquets-flower-market.jpg",
       webp: "/images/guests-making-bouquets-flower-market.webp",
-      alt: "Styling concept of wedding guests creating take-home bouquets",
+      alt: "Wedding guests creating take-home bouquets at a flower market",
     },
   },
   {
     id: "celebrations",
     title: "Private celebrations",
     shortTitle: "Celebrations",
-    copy: "For bridal showers, baby showers and birthdays with a personal touch.",
+    copy: "Showers, birthdays and private parties.",
     to: "/celebrations/",
-    cta: "Explore celebrations",
+    cta: "View",
     featured: false,
     image: {
       src: "/images/bouquet-wrapping-ribbon-flower-bar-london.jpg",
       webp: "/images/bouquet-wrapping-ribbon-flower-bar-london.webp",
-      alt: "Styling concept of bouquet wrapping for a private celebration",
+      alt: "Bouquet wrapping at a private celebration flower stall",
     },
   },
   {
     id: "corporate",
     title: "Corporate & brands",
     shortTitle: "Corporate",
-    copy: "Flower experiences for teams, launches and client events.",
+    copy: "Launches, team days and client events.",
     to: "/corporate-flower-bar-london/",
-    cta: "Explore corporate events",
+    cta: "View",
     featured: false,
     image: {
       src: "/images/london-corporate-flower-bar-office-event.jpg",
       webp: "/images/london-corporate-flower-bar-office-event.webp",
-      alt: "Styling concept of a corporate flower market for a London office event",
+      alt: "Corporate flower market at a London office event",
     },
   },
 ];
@@ -68,12 +68,8 @@ function Experience() {
     >
       <div className="container experience__layout">
         <div>
-          <span className="section-eyebrow">The experience</span>
-          <h2 className="section-title">Something to enjoy. Something to take home.</h2>
-          <p className="section-lead experience__lead">
-            More than a pretty display, our little market gives guests a moment to get creative and
-            a bouquet to remember the celebration by.
-          </p>
+          <span className="section-eyebrow">How it works</span>
+          <h2 className="section-title">We bring the market. You host the day.</h2>
           <div className="steps steps--three">
             {experienceSteps.map((s) => (
               <article className="step" key={s.step}>
@@ -88,14 +84,11 @@ function Experience() {
           <ResponsiveImage
             src="/images/guests-making-bouquets-flower-market.jpg"
             webp="/images/guests-making-bouquets-flower-market.webp"
-            alt="Styling concept close-up showing indicative takeaway bouquet size"
+            alt="Guests making bouquets at a self-serve flower market"
             width={1200}
             height={800}
             sizes="(max-width: 900px) 100vw, 420px"
           />
-          <figcaption>
-            Styling concept — indicative takeaway bouquet size (inspiration image)
-          </figcaption>
         </figure>
       </div>
     </section>
@@ -112,7 +105,7 @@ function Occasions() {
     >
       <div className="container">
         <span className="section-eyebrow">Occasions</span>
-        <h2 className="section-title">What are you celebrating?</h2>
+        <h2 className="section-title">Where we set up</h2>
         <div className="occasions__cards">
           {occasions.map((item) => (
             <Link
@@ -159,10 +152,9 @@ function Styling() {
     >
       <div className="container">
         <span className="section-eyebrow">Styling</span>
-        <h2 className="section-title">Find your floral style</h2>
+        <h2 className="section-title">Choose a palette</h2>
         <p className="section-lead">
-          Soft and romantic, fresh and understated, or full of colour. Choose a starting point and
-          we’ll shape the flowers around your celebration.
+          Three starting points. We dress the market to match your day.
         </p>
         <FloralStylePreview />
       </div>
@@ -180,10 +172,9 @@ function PackagePreview() {
     >
       <div className="container">
         <span className="section-eyebrow">Packages</span>
-        <h2 className="section-title">Find your little market</h2>
+        <h2 className="section-title">Clear packages. From £495.</h2>
         <p className="section-lead">
-          Inclusive packages for the styled display and seasonal flowers — choose how many
-          take-home bouquets you would like.
+          Display, seasonal flowers and take-home bouquets — setup and collection included.
         </p>
         <p className="snap-rail__hint" aria-hidden="true">
           Swipe for more
@@ -194,12 +185,12 @@ function PackagePreview() {
               <h3>{pkg.name}</h3>
               <div className="package__price">{pkg.price}</div>
               <span className="package__note">{pkg.bouquets}</span>
-              <p>{pkg.description}</p>
+              <p>{pkg.note}</p>
               <Link
                 className="btn btn-accent"
                 to={enquireHref({ packageChoice: pkg.enquiryValue })}
               >
-                Check availability
+                Check date
               </Link>
             </article>
           ))}
@@ -221,11 +212,10 @@ function FinalCta() {
       ref={ref}
     >
       <div className="container narrow">
-        <span className="section-eyebrow">Enquiries</span>
-        <h2 className="section-title">Let’s make your celebration bloom</h2>
+        <span className="section-eyebrow">Book</span>
+        <h2 className="section-title">Tell us your date and venue</h2>
         <p className="section-lead">
-          Share your date, venue and approximate numbers. We’ll check availability and help you
-          choose the right flower market.
+          We’ll confirm availability and send a clear quote.
         </p>
         <Link className="btn btn-primary" to="/enquire/">
           Check your date
@@ -270,7 +260,7 @@ const homeJsonLd = [
     "@type": "Service",
     "@id": `${site.url}/#bloom-market`,
     name: bloomMarket.name,
-    serviceType: "Flower bar hire",
+    serviceType: "Mobile flower market hire",
     provider: { "@id": `${site.url}/#business` },
     areaServed: "London",
     description: bloomMarket.description,
@@ -319,41 +309,36 @@ export default function HomePage() {
           </div>
           <div className="container hero__grid">
             <div className="hero__content">
-              <span className="hero__eyebrow">Flower bar hire for weddings & celebrations</span>
+              <span className="hero__eyebrow">Mobile flower market hire · London</span>
               <h1 id="hero-heading">
-                A little flower market.
-                <br />
-                A beautiful part of your celebration.
+                A flower market for your wedding or event.
               </h1>
               <p className="hero__copy">
-                Guests choose their favourite stems, wrap a bouquet and take a little of your day
-                home. A beautifully styled, self-serve flower experience across London.
+                We bring a styled, self-serve flower stall to your venue. Guests make a bouquet to
+                take home — we set up and collect.
               </p>
               <div className="hero__actions">
                 <Link className="btn btn-primary" to="/enquire/">
                   Check your date
                 </Link>
-                <Link className="btn btn-secondary" to="/wedding-flower-bar-hire-london/">
-                  Explore weddings
+                <Link className="btn btn-secondary" to="/packages/">
+                  View packages
                 </Link>
               </div>
               <p className="hero__support">
-                Seasonal flowers · Thoughtful styling · Setup & collection
+                Setup & collection included · London & surrounding areas
               </p>
             </div>
             <figure className="hero__visual hero__visual--photo">
               <ResponsiveImage
                 src="/images/seasonal-flower-stems-self-serve-bar-london.jpg"
                 webp="/images/seasonal-flower-stems-self-serve-bar-london.webp"
-                alt="Styling concept of a compact flower market with wrapping area and takeaway bouquets"
+                alt="Styled mobile flower market with seasonal stems and wrapping area"
                 width={1200}
                 height={1200}
                 loading="eager"
                 sizes="(max-width: 900px) 100vw, 480px"
               />
-              <figcaption>
-                Styling concept — compact flower market with wrapping area (inspiration image)
-              </figcaption>
             </figure>
           </div>
         </section>
