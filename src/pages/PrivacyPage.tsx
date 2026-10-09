@@ -47,6 +47,10 @@ export default function PrivacyPage() {
               Freelance interest applications such as name, email, travel areas, skills of interest,
               experience notes, portfolio links and availability
             </li>
+            <li>
+              Partnership enquiries such as name, business name, email, website or Instagram,
+              business type and partnership ideas
+            </li>
           </ul>
 
           <h2>How we use your information</h2>
@@ -57,7 +61,8 @@ export default function PrivacyPage() {
               Assess suitability for occasional freelance opportunities and contact applicants if a
               suitable opportunity comes up
             </li>
-            <li>Keep basic records of conversations related to bookings or applications</li>
+            <li>Respond to partnership enquiries and discuss possible collaborations</li>
+            <li>Keep basic records of conversations related to bookings, applications or partnerships</li>
           </ul>
           <p>
             Submitting a freelance interest form does not mean there is a confirmed vacancy,

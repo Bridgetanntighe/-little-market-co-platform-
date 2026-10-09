@@ -54,6 +54,13 @@ const pages = [
       "Host a bouquet-making flower workshop in London with The Little Market Co. A guided or self-serve bloom market for teams, celebrations and brand events.",
   },
   {
+    path: "/partner-with-us",
+    file: "partner-with-us/index.html",
+    title: "Partner With Us | The Little Market Co",
+    description:
+      "Explore partnerships with The Little Market Co for venues, wedding planners, event agencies and creative businesses across London.",
+  },
+  {
     path: "/privacy",
     file: "privacy/index.html",
     title: "Privacy Policy | The Little Market Co",

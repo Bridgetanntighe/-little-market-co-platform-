@@ -1063,6 +1063,122 @@
   margin-left: 0.55rem;
 }
 
+.partner-hero {
+  padding-top: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.partner-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+  color: var(--botanical);
+  line-height: 1.1;
+  margin-bottom: 1.1rem;
+  max-width: 14ch;
+}
+
+.partner-hero__copy {
+  color: var(--ink-muted);
+  max-width: 38rem;
+  margin-bottom: 0.9rem;
+}
+
+.partner-hero .btn {
+  margin-top: 0.75rem;
+}
+
+.partner-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+  margin-top: 2.25rem;
+}
+
+.partner-card {
+  padding: 1.35rem 1.25rem 1.45rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--paper) 85%, white);
+}
+
+.partner-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  color: var(--botanical);
+  margin-bottom: 0.55rem;
+}
+
+.partner-card p {
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.partner-ways {
+  background: color-mix(in srgb, var(--botanical) 4%, var(--cream));
+}
+
+.partner-ways__list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0 1.15rem;
+  padding: 0;
+  list-style: none;
+}
+
+.partner-ways__list li {
+  position: relative;
+  padding-left: 1.15rem;
+  color: var(--ink-muted);
+}
+
+.partner-ways__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--rose);
+}
+
+.partner-ways__note {
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+  margin-bottom: 1.25rem;
+  max-width: 40rem;
+}
+
+.partner-form-section {
+  background: color-mix(in srgb, var(--market-green) 5%, var(--ivory));
+}
+
+.partner-form-section__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: start;
+}
+
+.partner-form-section__panel {
+  padding: 1.4rem 1.3rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--market-green) 14%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--ivory) 82%, white);
+}
+
+.partner-page__privacy {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.86rem;
+  color: var(--ink-muted);
+  max-width: 36rem;
+}
+
+.partner-page__privacy a {
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 .privacy-page h1 {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 3.4rem);
@@ -1392,8 +1508,13 @@
   .about__grid,
   .enquire__layout,
   .work-with-us__layout,
+  .partner-form-section__layout,
   .seo-copy__grid,
   .seo-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-cards__grid {
     grid-template-columns: 1fr;
   }
 

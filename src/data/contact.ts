@@ -4,6 +4,7 @@
 
 export const NETLIFY_FORM_NAME = "enquiry";
 export const WORK_WITH_US_FORM_NAME = "work-with-us";
+export const PARTNER_FORM_NAME = "partner-with-us";
 
 export const contact = {
   email: "hello.littlemarketco@gmail.com",
@@ -19,6 +20,14 @@ export const workInterestOptions = [
   "Guest assistance",
   "Styling",
   "Other",
+] as const;
+
+export const partnerBusinessTypes = [
+  "Venue",
+  "Wedding or event planner",
+  "Event or creative agency",
+  "Florist",
+  "Other business",
 ] as const;
 
 export type EnquiryPayload = {
@@ -44,6 +53,16 @@ export type WorkWithUsPayload = {
   experience: string;
   portfolio: string;
   availability: string;
+  "bot-field"?: string;
+};
+
+export type PartnerPayload = {
+  name: string;
+  businessName: string;
+  email: string;
+  website: string;
+  businessType: string;
+  partnershipIdea: string;
   "bot-field"?: string;
 };
 
@@ -101,5 +120,21 @@ export async function submitWorkWithUs(payload: WorkWithUsPayload): Promise<void
     });
   } catch {
     throw new Error("We could not send your application. Please try again shortly.");
+  }
+}
+
+export async function submitPartnerEnquiry(payload: PartnerPayload): Promise<void> {
+  try {
+    await postNetlifyForm(PARTNER_FORM_NAME, {
+      "bot-field": payload["bot-field"] ?? "",
+      name: payload.name,
+      businessName: payload.businessName,
+      email: payload.email,
+      website: payload.website,
+      businessType: payload.businessType,
+      partnershipIdea: payload.partnershipIdea,
+    });
+  } catch {
+    throw new Error("We could not send your partnership enquiry. Please try again shortly.");
   }
 }

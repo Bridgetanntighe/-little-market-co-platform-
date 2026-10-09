@@ -192,41 +192,7 @@ function Footer() {
             <div className="site-footer__label">Explore</div>
             <ul className="footer-links">
               <li>
-                <Link to="/flower-bar-hire-london/">Flower bar hire in London</Link>
-              </li>
-              <li>
-                <Link to="/corporate-flower-bar-london/">Corporate flower experiences</Link>
-              </li>
-              <li>
-                <Link to="/brand-activation-flower-bar/">Branded flower bar hire</Link>
-              </li>
-              <li>
-                <Link to="/christmas-flower-bar-london/">Christmas flower bar</Link>
-              </li>
-              <li>
-                <Link to="/flower-workshop-london/">Bouquet-making workshops</Link>
-              </li>
-              <li>
-                <a
-                  href="/#packages"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    goHomeSection("packages");
-                  }}
-                >
-                  Packages
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#enquire"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    goHomeSection("enquire");
-                  }}
-                >
-                  Contact / enquiry
-                </a>
+                <Link to="/flower-bar-hire-london/">Weddings</Link>
               </li>
               <li>
                 <a
@@ -237,6 +203,20 @@ function Footer() {
                   }}
                 >
                   Work with us
+                </a>
+              </li>
+              <li>
+                <Link to="/partner-with-us/">Partner with us</Link>
+              </li>
+              <li>
+                <a
+                  href="/#enquire"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goHomeSection("enquire");
+                  }}
+                >
+                  Contact
                 </a>
               </li>
               <li>
