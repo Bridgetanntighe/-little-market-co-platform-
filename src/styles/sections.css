@@ -547,12 +547,6 @@
   background: linear-gradient(160deg, #efe6d6, #e6c7bd);
 }
 
-.gallery-card__visual .preview-label {
-  position: relative;
-  top: auto;
-  left: auto;
-}
-
 .gallery-card__body {
   padding: 1rem 1.05rem 1.2rem;
 }
@@ -566,6 +560,13 @@
 .gallery-card__body p {
   font-size: 0.92rem;
   color: var(--ink-muted);
+}
+
+.gallery-card__credit {
+  margin-top: 0.45rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--ink-muted) 80%, transparent);
 }
 
 .enquire {

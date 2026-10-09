@@ -1,17 +1,14 @@
 /**
- * Public contact details and enquiry delivery.
+ * Public contact details and enquiry delivery via Netlify Forms.
  *
- * Leave fields empty until real values are confirmed.
- * Do not use .example emails or generic Instagram URLs.
+ * Leave email / Instagram empty until real values are confirmed.
+ * Do not use placeholder emails or generic Instagram URLs.
  *
- * Form delivery (static GitHub Pages):
- * Set VITE_FORM_ENDPOINT to a form service URL that accepts JSON POSTs
- * (e.g. Formspree `https://formspree.io/f/xxxxx` or Web3Forms).
- * Optionally set VITE_FORM_ACCESS_KEY for services that require a key in the body.
+ * Netlify Forms: React submits URL-encoded POSTs to `/` with `form-name`.
+ * A matching static HTML form in `index.html` enables form detection at deploy.
  */
 
-const endpoint = (import.meta.env.VITE_FORM_ENDPOINT as string | undefined)?.trim() ?? "";
-const accessKey = (import.meta.env.VITE_FORM_ACCESS_KEY as string | undefined)?.trim() ?? "";
+export const NETLIFY_FORM_NAME = "enquiry";
 
 export const contact = {
   /** Real enquiry email — omit from UI until provided */
@@ -22,9 +19,8 @@ export const contact = {
   instagramHandle: "",
   /** Service area shown in footer / schema */
   serviceArea: "London and surrounding areas",
-  formEndpoint: endpoint,
-  formAccessKey: accessKey,
-  formConfigured: Boolean(endpoint),
+  /** Netlify Forms are always available once the site is deployed to Netlify */
+  formConfigured: true,
 };
 
 export type EnquiryPayload = {
@@ -40,41 +36,53 @@ export type EnquiryPayload = {
   christmasBooking: string;
   brandPersonalisation: string;
   additional: string;
+  /** Honeypot — must stay empty for real guests */
+  "bot-field"?: string;
 };
 
+/** Field names must match the static Netlify form in index.html exactly. */
+export const enquiryFieldNames = [
+  "name",
+  "email",
+  "phone",
+  "company",
+  "eventType",
+  "packageChoice",
+  "eventDate",
+  "venue",
+  "guests",
+  "christmasBooking",
+  "brandPersonalisation",
+  "additional",
+  "bot-field",
+] as const;
+
 export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
-  if (!contact.formEndpoint) {
-    throw new Error(
-      "Enquiry form is not connected yet. Please provide a form endpoint or enquiry email so submissions can be delivered.",
-    );
-  }
+  const body = new URLSearchParams();
+  body.set("form-name", NETLIFY_FORM_NAME);
+  body.set("bot-field", payload["bot-field"] ?? "");
+  body.set("name", payload.name);
+  body.set("email", payload.email);
+  body.set("phone", payload.phone);
+  body.set("company", payload.company);
+  body.set("eventType", payload.eventType);
+  body.set("packageChoice", payload.packageChoice);
+  body.set("eventDate", payload.eventDate);
+  body.set("venue", payload.venue);
+  body.set("guests", payload.guests);
+  body.set("christmasBooking", payload.christmasBooking);
+  body.set("brandPersonalisation", payload.brandPersonalisation);
+  body.set("additional", payload.additional);
 
-  const body: Record<string, string> = {
-    ...payload,
-    _subject: `Bloom Market enquiry — ${payload.name}`,
-  };
-
-  if (contact.formAccessKey) {
-    body.access_key = contact.formAccessKey;
-  }
-
-  const res = await fetch(contact.formEndpoint, {
+  const res = await fetch("/", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: JSON.stringify(body),
+    body: body.toString(),
   });
 
   if (!res.ok) {
-    let detail = "";
-    try {
-      const data = (await res.json()) as { error?: string; message?: string };
-      detail = data.error || data.message || "";
-    } catch {
-      /* ignore */
-    }
-    throw new Error(detail || "We could not send your enquiry. Please try again shortly.");
+    throw new Error("We could not send your enquiry. Please try again shortly.");
   }
 }

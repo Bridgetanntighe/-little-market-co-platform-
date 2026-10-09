@@ -16,7 +16,7 @@ import {
   winterBloom,
   yesNoChoices,
 } from "./data/content";
-import { contact, submitEnquiry } from "./data/contact";
+import { contact, NETLIFY_FORM_NAME, submitEnquiry } from "./data/contact";
 import {
   enquireWithOption,
   ENQUIRY_PREFILL_KEY,
@@ -353,28 +353,24 @@ function Gallery() {
       ref={ref}
     >
       <div className="container">
-        <span className="section-eyebrow">Concept Preview</span>
+        <span className="section-eyebrow">Inspiration</span>
         <h2 className="section-title">Bloom Market atmosphere</h2>
         <p className="section-lead">
-          These visuals are concept previews showing intended atmosphere only. They are not previous
-          client bookings. Real event photography can replace each preview when available.
+          These photos are licensed stock used as inspiration for atmosphere and styling only. They
+          are not photographs of previous client events. Real Little Market Co event photography can
+          replace each image when available.
         </p>
         <div className="gallery__grid">
           {galleryItems.map((item) => (
             <article className="gallery-card gallery-card--bloom" key={item.id}>
               <div className="gallery-card__visual">
-                {item.imageSrc ? (
-                  <img src={item.imageSrc} alt={item.imageAlt} loading="lazy" />
-                ) : (
-                  <>
-                    <span className="preview-label">Concept Preview</span>
-                    <span className="visually-hidden">{item.imageAlt}</span>
-                  </>
-                )}
+                <img src={item.imageSrc} alt={item.imageAlt} loading="lazy" />
+                <span className="preview-label">Inspiration</span>
               </div>
               <div className="gallery-card__body">
                 <h3>{item.title}</h3>
                 <p>{item.caption}</p>
+                <p className="gallery-card__credit">{item.credit}</p>
               </div>
             </article>
           ))}
@@ -385,6 +381,14 @@ function Gallery() {
 }
 
 type FormState = "idle" | "submitting" | "success" | "error";
+
+function todayIsoDate() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
 
 function Enquiry() {
   const empty = {
@@ -400,12 +404,14 @@ function Enquiry() {
     christmasBooking: "",
     brandPersonalisation: "",
     additional: "",
+    "bot-field": "",
   };
   const [form, setForm] = useState(empty);
   const [status, setStatus] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof typeof empty, string>>>({});
   const { ref, visible } = useReveal<HTMLElement>();
+  const minEventDate = todayIsoDate();
 
   useEffect(() => {
     const apply = (detail: EnquiryPrefill) => {
@@ -454,10 +460,11 @@ function Enquiry() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
       errs.email = "Please enter a valid email address.";
     if (!form.phone.trim()) errs.phone = "Please enter a phone number.";
-    if (!form.company.trim()) errs.company = "Please enter your company or organisation.";
     if (!form.eventType) errs.eventType = "Please select an event type.";
     if (!form.packageChoice) errs.packageChoice = "Please select a package.";
     if (!form.eventDate) errs.eventDate = "Please choose an event date.";
+    else if (form.eventDate < minEventDate)
+      errs.eventDate = "Please choose today or a future event date.";
     if (!form.venue.trim()) errs.venue = "Please enter the venue and postcode.";
     if (!form.guests.trim()) errs.guests = "Please enter the guest number.";
     else if (!/^\d+$/.test(form.guests.trim()) || Number(form.guests) < 1)
@@ -477,11 +484,10 @@ function Enquiry() {
       return;
     }
 
-    if (!contact.formConfigured) {
+    // Honeypot filled — treat as spam without confirming success to the bot.
+    if (form["bot-field"].trim()) {
       setStatus("error");
-      setErrorMessage(
-        "Enquiries cannot be sent yet — a form delivery service has not been connected. Please share your preferred enquiry email or form endpoint so this can be completed.",
-      );
+      setErrorMessage("We could not send your enquiry. Please try again shortly.");
       return;
     }
 
@@ -500,6 +506,7 @@ function Enquiry() {
         christmasBooking: form.christmasBooking,
         brandPersonalisation: form.brandPersonalisation,
         additional: form.additional.trim(),
+        "bot-field": form["bot-field"],
       });
       sessionStorage.removeItem(ENQUIRY_PREFILL_KEY);
       setStatus("success");
@@ -522,18 +529,13 @@ function Enquiry() {
           <h2 className="section-title">Check your date</h2>
           <p className="section-lead">
             Tell us about your office event, Christmas celebration or brand activation and we will
-            come back with availability and a tailored quote.
+            come back with availability and a tailored quote. There is no online checkout — every
+            booking is confirmed after we check your date.
           </p>
-          {!contact.formConfigured && (
-            <p className="enquire__notice" role="status">
-              Form delivery is not connected in this build yet. Submissions will show an error until
-              a real form endpoint or enquiry email is provided.
-            </p>
-          )}
         </div>
         <div className="enquire__form">
           {status === "success" ? (
-            <div className="form-success">
+            <div className="form-success" role="status">
               <h3>Thank you</h3>
               <p>
                 Your enquiry has been sent. We will reply with availability and next steps for your
@@ -551,7 +553,28 @@ function Enquiry() {
               </button>
             </div>
           ) : (
-            <form onSubmit={submit} noValidate>
+            <form
+              name={NETLIFY_FORM_NAME}
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={submit}
+              noValidate
+            >
+              <input type="hidden" name="form-name" value={NETLIFY_FORM_NAME} />
+              <p className="honeypot" aria-hidden="true">
+                <label htmlFor="bot-field">
+                  Do not fill this out
+                  <input
+                    id="bot-field"
+                    name="bot-field"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form["bot-field"]}
+                    onChange={set("bot-field")}
+                  />
+                </label>
+              </p>
               <div className="form-grid">
                 <div className={`field ${fieldErrors.name ? "has-error" : ""}`}>
                   <label htmlFor="name">Name</label>
@@ -609,23 +632,17 @@ function Enquiry() {
                     </span>
                   )}
                 </div>
-                <div className={`field ${fieldErrors.company ? "has-error" : ""}`}>
-                  <label htmlFor="company">Company or organisation</label>
+                <div className="field">
+                  <label htmlFor="company">
+                    Company or organisation <span className="optional">(optional)</span>
+                  </label>
                   <input
                     id="company"
                     name="company"
                     autoComplete="organization"
-                    required
                     value={form.company}
                     onChange={set("company")}
-                    aria-invalid={Boolean(fieldErrors.company)}
-                    aria-describedby={fieldErrors.company ? "company-error" : undefined}
                   />
-                  {fieldErrors.company && (
-                    <span className="field-error" id="company-error">
-                      {fieldErrors.company}
-                    </span>
-                  )}
                 </div>
                 <div className={`field ${fieldErrors.eventType ? "has-error" : ""}`}>
                   <label htmlFor="eventType">Event type</label>
@@ -678,6 +695,7 @@ function Enquiry() {
                     name="eventDate"
                     type="date"
                     required
+                    min={minEventDate}
                     value={form.eventDate}
                     onChange={set("eventDate")}
                     aria-invalid={Boolean(fieldErrors.eventDate)}

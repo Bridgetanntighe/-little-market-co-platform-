@@ -63,6 +63,34 @@
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Static Netlify Forms definition for SPA detection at deploy time.
+      Field names must match the React enquiry form exactly.
+    -->
+    <form
+      name="enquiry"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      netlify-honeypot="bot-field"
+      hidden
+      aria-hidden="true"
+    >
+      <input type="hidden" name="form-name" value="enquiry" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" type="email" />
+      <input name="phone" />
+      <input name="company" />
+      <input name="eventType" />
+      <input name="packageChoice" />
+      <input name="eventDate" type="date" />
+      <input name="venue" />
+      <input name="guests" />
+      <input name="christmasBooking" />
+      <input name="brandPersonalisation" />
+      <textarea name="additional"></textarea>
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -277,6 +277,23 @@ ul {
   transform: none;
 }
 
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.optional {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-muted);
+  font-size: 0.85em;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

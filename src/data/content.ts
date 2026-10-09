@@ -177,54 +177,67 @@ export const packageChoices = [
 export const yesNoChoices = ["Yes", "No"] as const;
 
 /**
- * Gallery items are concept previews only.
- * Replace `imageSrc` with real event photography when available;
- * leave undefined to keep the atmospheric placeholder treatment.
+ * Gallery items use licensed stock for atmosphere only.
+ * Replace `imageSrc` with real event photography when available.
+ * Captions must never imply previous client bookings.
  */
 export type GalleryItem = {
   id: string;
-  /** Optional real photo path under /public — swap in when ready */
-  imageSrc?: string;
+  /** Photo path under /public */
+  imageSrc: string;
   imageAlt: string;
   title: string;
   caption: string;
+  credit: string;
 };
 
 export const galleryItems: GalleryItem[] = [
   {
     id: "g1",
-    imageAlt: "Concept preview of a self-serve flower bar with seasonal stems",
+    imageSrc: "/images/inspiration/flower-stems.jpg",
+    imageAlt: "Inspiration image of seasonal flower stems arranged for guests to choose",
     title: "Self-serve stem station",
-    caption: "Concept preview — guests choosing seasonal stems",
+    caption: "Inspiration — seasonal stems ready for guests to select (not a previous client event)",
+    credit: "Photo via Unsplash",
   },
   {
     id: "g2",
-    imageAlt: "Concept preview of bouquet wrapping paper and ribbon details",
+    imageSrc: "/images/inspiration/bouquet-wrap.jpg",
+    imageAlt: "Inspiration image of bouquet wrapping paper and ribbon details",
     title: "Ribbon and wrap detail",
-    caption: "Concept preview — finishing touches for take-home bouquets",
+    caption: "Inspiration — finishing touches for take-home bouquets (stock photo)",
+    credit: "Photo via Pexels",
   },
   {
     id: "g3",
-    imageAlt: "Concept preview of guests composing small take-home bouquets",
+    imageSrc: "/images/inspiration/bouquet-moment.jpg",
+    imageAlt: "Inspiration image of pink blooms suggesting a bouquet-making moment",
     title: "Bouquet-making moment",
-    caption: "Concept preview — wrapping a small bouquet to take home",
+    caption: "Inspiration — the feel of wrapping a small bouquet to take home (stock photo)",
+    credit: "Photo via Unsplash",
   },
   {
     id: "g4",
-    imageAlt: "Concept preview of The Little Bloom Market styled for a London office event",
+    imageSrc: "/images/inspiration/office-flowers.jpg",
+    imageAlt: "Inspiration image of flowers suited to a workplace gathering",
     title: "Office flower market",
-    caption: "Concept preview — workplace and People-team gatherings",
+    caption: "Inspiration — workplace and People-team gatherings (not a previous client event)",
+    credit: "Photo via Pexels",
   },
   {
     id: "g5",
-    imageAlt: "Concept preview of a branded flower bar for a campaign activation",
+    imageSrc: "/images/inspiration/brand-styling.jpg",
+    imageAlt: "Inspiration image of a styled bouquet for a brand or campaign moment",
     title: "Brand activation styling",
-    caption: "Concept preview — campaign colours and photography-ready detail",
+    caption: "Inspiration — photography-ready floral detail for campaigns (stock photo)",
+    credit: "Photo via Unsplash",
   },
   {
     id: "g6",
-    imageAlt: "Concept preview of a winter flower market with seasonal foliage",
+    imageSrc: "/images/inspiration/winter-blooms.jpg",
+    imageAlt: "Inspiration image of winter foliage and seasonal blooms",
     title: "Winter Bloom atmosphere",
-    caption: "Concept preview — festive stems and seasonal foliage",
+    caption: "Inspiration — festive stems and seasonal foliage (stock photo)",
+    credit: "Photo via Unsplash",
   },
 ];
