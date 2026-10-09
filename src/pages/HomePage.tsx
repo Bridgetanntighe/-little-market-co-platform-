@@ -30,6 +30,7 @@ import { FaqList } from "../components/FaqList";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
 import { StallScene } from "../components/StallScene";
+import { WorkWithUs } from "../components/WorkWithUs";
 
 function Packages() {
   const { ref, visible } = useReveal<HTMLElement>();
@@ -854,6 +855,7 @@ export default function HomePage() {
         <Included />
         <Gallery />
         <Enquiry />
+        <WorkWithUs />
         <FAQ />
       </main>
     </>

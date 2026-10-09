@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { seoPages } from "./data/seoPages";
 import HomePage from "./pages/HomePage";
+import PrivacyPage from "./pages/PrivacyPage";
 import { SeoLandingPage } from "./pages/SeoLandingPage";
 import "./styles/global.css";
 import "./styles/sections.css";
@@ -12,6 +13,8 @@ export default function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/privacy" element={<Navigate to="/privacy/" replace />} />
+        <Route path="/privacy/" element={<PrivacyPage />} />
         {seoPages.map((page) => {
           const bare = page.path.replace(/\/$/, "");
           return (

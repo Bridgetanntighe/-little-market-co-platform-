@@ -228,6 +228,20 @@ function Footer() {
                   Contact / enquiry
                 </a>
               </li>
+              <li>
+                <a
+                  href="/#work-with-us"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goHomeSection("work-with-us");
+                  }}
+                >
+                  Work with us
+                </a>
+              </li>
+              <li>
+                <Link to="/privacy/">Privacy policy</Link>
+              </li>
             </ul>
           </div>
           <div>

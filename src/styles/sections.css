@@ -1010,6 +1010,90 @@
   font-size: 0.95rem;
 }
 
+.work-with-us {
+  background: color-mix(in srgb, var(--rose-soft) 12%, var(--cream));
+}
+
+.work-with-us__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: start;
+}
+
+.work-with-us__copy,
+.work-with-us__support {
+  color: var(--ink-muted);
+  max-width: 36rem;
+  margin-bottom: 0.85rem;
+}
+
+.work-with-us__support {
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.work-with-us__panel:empty {
+  display: none;
+}
+
+.work-with-us__panel form,
+.work-with-us__panel .form-success {
+  padding: 1.35rem 1.25rem 1.45rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--paper) 88%, white);
+}
+
+.work-with-us__privacy {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.86rem;
+  color: var(--ink-muted);
+  max-width: 36rem;
+}
+
+.work-with-us__privacy a {
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.work-with-us__close {
+  margin-top: 0.65rem;
+  margin-left: 0.55rem;
+}
+
+.privacy-page h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  color: var(--botanical);
+  margin-bottom: 1rem;
+}
+
+.privacy-page h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--botanical);
+  margin: 1.75rem 0 0.65rem;
+}
+
+.privacy-page__lead,
+.privacy-page p,
+.privacy-page li {
+  color: var(--ink-muted);
+  max-width: 42rem;
+}
+
+.privacy-page ul {
+  margin: 0.5rem 0 1rem 1.1rem;
+}
+
+.privacy-page a {
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 .faq__list {
   margin-top: 2.25rem;
   display: grid;
@@ -1307,9 +1391,15 @@
   .brands__panel,
   .about__grid,
   .enquire__layout,
+  .work-with-us__layout,
   .seo-copy__grid,
   .seo-hero__grid {
     grid-template-columns: 1fr;
+  }
+
+  .work-with-us__close {
+    margin-left: 0;
+    width: 100%;
   }
 
   .hero__visual {

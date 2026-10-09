@@ -53,6 +53,13 @@ const pages = [
     description:
       "Host a bouquet-making flower workshop in London with The Little Market Co. A guided or self-serve bloom market for teams, celebrations and brand events.",
   },
+  {
+    path: "/privacy",
+    file: "privacy/index.html",
+    title: "Privacy Policy | The Little Market Co",
+    description:
+      "How The Little Market Co collects and uses enquiry and freelance application information.",
+  },
 ];
 
 const site = "https://little-market-co.netlify.app";
