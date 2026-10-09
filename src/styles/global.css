@@ -27,6 +27,7 @@
   --font-body: "Manrope", "Helvetica Neue", sans-serif;
   --space-section: clamp(3.25rem, 6vw, 6.25rem);
   --content-width: 1120px;
+  --page-gutter: 1.25rem;
   --header-h: 4.5rem;
   --announce-h: 2.4rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -133,7 +134,7 @@ ul {
 }
 
 .container {
-  width: min(100% - 2.5rem, var(--content-width));
+  width: min(100% - (var(--page-gutter) * 2), var(--content-width));
   margin-inline: auto;
 }
 
@@ -395,10 +396,11 @@ a.btn {
 @media (max-width: 720px) {
   :root {
     --space-section: clamp(2.6rem, 7vw, 3.5rem);
+    --page-gutter: 1.35rem;
   }
 
   .container {
-    width: min(100% - 1.5rem, var(--content-width));
+    width: min(100% - (var(--page-gutter) * 2), var(--content-width));
   }
 
   .section-title {

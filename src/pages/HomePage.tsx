@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
-import { WorkWithUs } from "../components/WorkWithUs";
 import {
   bloomMarket,
   experienceSteps,
@@ -347,7 +346,6 @@ export default function HomePage() {
         <Styling />
         <PackagePreview />
         <FinalCta />
-        <WorkWithUs />
       </main>
     </>
   );
