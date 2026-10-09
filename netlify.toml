@@ -1,0 +1,38 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Pretty URLs for SEO landing pages (directory index.html files from build).
+# SPA fallback last — existing static files take precedence on Netlify.
+[[redirects]]
+  from = "/flower-bar-hire-london"
+  to = "/flower-bar-hire-london/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/corporate-flower-bar-london"
+  to = "/corporate-flower-bar-london/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/brand-activation-flower-bar"
+  to = "/brand-activation-flower-bar/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/christmas-flower-bar-london"
+  to = "/christmas-flower-bar-london/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/flower-workshop-london"
+  to = "/flower-workshop-london/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

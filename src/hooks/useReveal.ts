@@ -31,8 +31,7 @@ export const ENQUIRY_PREFILL_KEY = "tlmc-enquiry-prefill";
 
 export type EnquiryPrefill = {
   packageChoice?: string;
-  christmasBooking?: string;
-  brandPersonalisation?: string;
+  colourStory?: string;
 };
 
 export function enquireWithOption(prefill: string | EnquiryPrefill) {
@@ -40,5 +39,23 @@ export function enquireWithOption(prefill: string | EnquiryPrefill) {
     typeof prefill === "string" ? { packageChoice: prefill } : prefill;
   sessionStorage.setItem(ENQUIRY_PREFILL_KEY, JSON.stringify(detail));
   window.dispatchEvent(new CustomEvent("tlmc-enquiry-prefill", { detail }));
+
+  if (window.location.pathname !== "/") {
+    window.location.assign("/#enquire");
+    return;
+  }
   scrollToId("enquire");
+}
+
+/** Homepage section anchors — use as <a href> for reliable cross-page navigation. */
+export function homeSectionHref(sectionId: string) {
+  return `/#${sectionId}`;
+}
+
+export function goHomeSection(sectionId: string) {
+  if (window.location.pathname !== "/") {
+    window.location.assign(homeSectionHref(sectionId));
+    return;
+  }
+  scrollToId(sectionId);
 }

@@ -4,65 +4,147 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luxury Flower Bar Hire London | The Little Market Co</title>
+    <title>Flower Bar Hire London | The Little Market Co</title>
     <meta
       name="description"
-      content="Hire The Little Bloom Market for corporate events, Christmas celebrations and brand activations in London. A self-serve flower bar delivered, styled and collected for you."
+      content="Hire a beautifully styled flower bar in London for office events, brand activations, launches, parties and celebrations. Guests create their own bouquet to take home."
     />
-    <meta
-      name="keywords"
-      content="Flower bar hire London, Bloom bar London, Bouquet bar hire London, Corporate flower bar, Corporate Christmas activity London, Flower cart for brand activations, Branded flower bar London"
-    />
+    <link rel="canonical" href="https://little-market-co.netlify.app/" />
+    <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content="The Little Market Co" />
-    <meta property="og:title" content="Luxury Flower Bar Hire London | The Little Market Co" />
+    <meta property="og:url" content="https://little-market-co.netlify.app/" />
+    <meta
+      property="og:title"
+      content="Flower Bar Hire London | The Little Market Co"
+    />
     <meta
       property="og:description"
-      content="Hire The Little Bloom Market for corporate events, Christmas celebrations and brand activations in London. A self-serve flower bar delivered, styled and collected for you."
+      content="Hire a beautifully styled flower bar in London for office events, brand activations, launches, parties and celebrations. Guests create their own bouquet to take home."
+    />
+    <meta
+      property="og:image"
+      content="https://little-market-co.netlify.app/images/og-flower-bar-hire-london.jpg"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Luxury Flower Bar Hire London | The Little Market Co" />
+    <meta
+      name="twitter:title"
+      content="Flower Bar Hire London | The Little Market Co"
+    />
     <meta
       name="twitter:description"
-      content="Hire The Little Bloom Market for corporate events, Christmas celebrations and brand activations in London."
+      content="Hire a beautifully styled flower bar in London for office events, brand activations, launches, parties and celebrations. Guests create their own bouquet to take home."
+    />
+    <meta
+      name="twitter:image"
+      content="https://little-market-co.netlify.app/images/og-flower-bar-hire-london.jpg"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "The Little Market Co",
-        "description": "Premium self-serve flower market hire for London offices, events and brand activations. The Little Bloom Market is delivered, styled and collected.",
-        "areaServed": {
-          "@type": "City",
-          "name": "London"
-        },
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "London",
-          "addressCountry": "GB"
-        },
-        "makesOffer": {
-          "@type": "Offer",
-          "itemOffered": {
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://little-market-co.netlify.app/#organization",
+            "name": "The Little Market Co",
+            "url": "https://little-market-co.netlify.app/",
+            "email": "hello.littlemarketco@gmail.com",
+            "description": "Flower bar hire, corporate flower experiences and branded floral activations",
+            "logo": "https://little-market-co.netlify.app/favicon.svg"
+          },
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://little-market-co.netlify.app/#business",
+            "name": "The Little Market Co",
+            "url": "https://little-market-co.netlify.app/",
+            "email": "hello.littlemarketco@gmail.com",
+            "description": "Flower bar hire, corporate flower experiences and branded floral activations",
+            "image": "https://little-market-co.netlify.app/images/og-flower-bar-hire-london.jpg",
+            "priceRange": "££",
+            "areaServed": [
+              { "@type": "City", "name": "London" },
+              { "@type": "AdministrativeArea", "name": "Greater London" }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "London",
+              "addressCountry": "GB"
+            },
+            "parentOrganization": {
+              "@id": "https://little-market-co.netlify.app/#organization"
+            }
+          },
+          {
             "@type": "Service",
+            "@id": "https://little-market-co.netlify.app/#bloom-market",
             "name": "The Little Bloom Market",
-            "description": "A self-serve flower bar and bouquet experience for corporate events, Christmas celebrations and brand activations in London. Delivered styled and later collected.",
             "serviceType": "Flower bar hire",
-            "areaServed": "London"
+            "provider": { "@id": "https://little-market-co.netlify.app/#business" },
+            "areaServed": "London",
+            "description": "Self-serve flower bar hire in London for offices, brand activations, launches, parties and celebrations. Guests create a take-home bouquet.",
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "The Little Bar",
+                "price": "495",
+                "priceCurrency": "GBP",
+                "description": "From £495 for up to 20 guests. Compact self-serve flower station with seasonal flowers, wrapping and care cards."
+              },
+              {
+                "@type": "Offer",
+                "name": "The Bloom Market",
+                "price": "695",
+                "priceCurrency": "GBP",
+                "description": "From £695 for up to 30 guests. Larger seasonal selection, styled display and choice of colour palette."
+              },
+              {
+                "@type": "Offer",
+                "name": "The Brand Market",
+                "price": "995",
+                "priceCurrency": "GBP",
+                "description": "From £995 for up to 40 guests. Custom palette, branded signage and wrapping for activations and PR events."
+              }
+            ]
           }
-        }
+        ]
       }
     </script>
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Static Netlify Forms definition for SPA detection at deploy time.
+      Field names must match the React enquiry form exactly.
+    -->
+    <form
+      name="enquiry"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      netlify-honeypot="bot-field"
+      hidden
+      aria-hidden="true"
+    >
+      <input type="hidden" name="form-name" value="enquiry" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" type="email" />
+      <input name="company" />
+      <input name="eventDate" type="date" />
+      <input name="venue" />
+      <input name="guests" />
+      <input name="eventType" />
+      <input name="packageChoice" />
+      <input name="colourStory" />
+      <textarea name="additional"></textarea>
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

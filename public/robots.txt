@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://little-market-co.netlify.app/sitemap.xml
