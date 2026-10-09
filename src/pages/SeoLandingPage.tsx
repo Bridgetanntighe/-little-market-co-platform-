@@ -4,7 +4,7 @@ import { ResponsiveImage } from "../components/ResponsiveImage";
 import { Seo } from "../components/Seo";
 import { packagesFor, type SeoPageContent } from "../data/seoPages";
 import { site } from "../data/site";
-import { enquireWithOption, goHomeSection } from "../hooks/useReveal";
+import { goHomeSection, homeSectionHref } from "../hooks/useReveal";
 
 export function SeoLandingPage({ page }: { page: SeoPageContent }) {
   const packages = packagesFor(page.packageIds);
@@ -70,20 +70,12 @@ export function SeoLandingPage({ page }: { page: SeoPageContent }) {
                 <h1>{page.h1}</h1>
                 <p className="seo-hero__intro">{page.intro}</p>
                 <div className="hero__actions">
-                  <button
-                    className="btn btn-primary"
-                    type="button"
-                    onClick={() => goHomeSection("enquire")}
-                  >
+                  <a className="btn btn-primary" href={homeSectionHref("enquire")}>
                     Check availability
-                  </button>
-                  <button
-                    className="btn btn-secondary"
-                    type="button"
-                    onClick={() => goHomeSection("packages")}
-                  >
+                  </a>
+                  <a className="btn btn-secondary" href={homeSectionHref("packages")}>
                     See packages
-                  </button>
+                  </a>
                 </div>
               </div>
               <figure className="seo-hero__figure">
@@ -136,13 +128,18 @@ export function SeoLandingPage({ page }: { page: SeoPageContent }) {
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
-                    <button
+                    <a
                       className="btn btn-accent"
-                      type="button"
-                      onClick={() => enquireWithOption({ packageChoice: pkg.enquiryValue })}
+                      href={homeSectionHref("enquire")}
+                      onClick={() => {
+                        sessionStorage.setItem(
+                          "tlmc-enquiry-prefill",
+                          JSON.stringify({ packageChoice: pkg.enquiryValue }),
+                        );
+                      }}
                     >
                       Check availability
-                    </button>
+                    </a>
                   </article>
                 ))}
               </div>
@@ -177,14 +174,13 @@ export function SeoLandingPage({ page }: { page: SeoPageContent }) {
               <span className="section-eyebrow">FAQs</span>
               <h2 className="section-title">Questions about this experience</h2>
               <FaqList items={page.faqs} />
-              <button
+              <a
                 className="btn btn-primary"
-                type="button"
                 style={{ marginTop: "2rem" }}
-                onClick={() => goHomeSection("enquire")}
+                href={homeSectionHref("enquire")}
               >
                 Check availability
-              </button>
+              </a>
             </div>
           </section>
 
@@ -223,14 +219,13 @@ export function SeoLandingPage({ page }: { page: SeoPageContent }) {
                   </a>
                 </li>
               </ul>
-              <button
+              <a
                 className="btn btn-accent"
-                type="button"
                 style={{ marginTop: "1.5rem" }}
-                onClick={() => goHomeSection("enquire")}
+                href={homeSectionHref("enquire")}
               >
                 Plan your flower bar
-              </button>
+              </a>
             </div>
           </section>
         </article>

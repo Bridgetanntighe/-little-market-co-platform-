@@ -47,9 +47,14 @@ export function enquireWithOption(prefill: string | EnquiryPrefill) {
   scrollToId("enquire");
 }
 
+/** Homepage section anchors — use as <a href> for reliable cross-page navigation. */
+export function homeSectionHref(sectionId: string) {
+  return `/#${sectionId}`;
+}
+
 export function goHomeSection(sectionId: string) {
   if (window.location.pathname !== "/") {
-    window.location.assign(`/#${sectionId}`);
+    window.location.assign(homeSectionHref(sectionId));
     return;
   }
   scrollToId(sectionId);

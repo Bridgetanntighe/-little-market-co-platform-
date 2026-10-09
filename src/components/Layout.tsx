@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { contact } from "../data/contact";
-import { goHomeSection } from "../hooks/useReveal";
+import { goHomeSection, homeSectionHref } from "../hooks/useReveal";
 
 const homeNav = [
   { id: "packages", label: "Packages" },
@@ -24,9 +24,9 @@ function Announcement() {
   return (
     <div className="announcement">
       <div className="container">
-        <button type="button" className="announcement__btn" onClick={() => goHomeSection("enquire")}>
+        <a className="announcement__btn" href={homeSectionHref("enquire")}>
           Flower bar hire from £395 — tell us your date and guest numbers for a clear quote
-        </button>
+        </a>
       </div>
     </div>
   );
@@ -140,14 +140,13 @@ function Footer() {
             ) : (
               <p>Use the enquiry form</p>
             )}
-            <button
+            <a
               className="btn btn-accent"
-              type="button"
               style={{ marginTop: "1rem" }}
-              onClick={() => goHomeSection("enquire")}
+              href={homeSectionHref("enquire")}
             >
               Check availability
-            </button>
+            </a>
           </div>
         </div>
         <p className="site-footer__tagline">A flower market your guests can take home.</p>
@@ -166,9 +165,9 @@ export function Layout({ children }: { children: ReactNode }) {
       {children}
       <Footer />
       <div className="sticky-cta">
-        <button className="btn btn-accent" type="button" onClick={() => goHomeSection("enquire")}>
+        <a className="btn btn-accent" href={homeSectionHref("enquire")}>
           Check availability
-        </button>
+        </a>
       </div>
     </>
   );
