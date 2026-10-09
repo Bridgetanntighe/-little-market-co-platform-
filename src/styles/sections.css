@@ -413,6 +413,81 @@
   opacity: 0.8;
 }
 
+.palettes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+  margin-top: 2.5rem;
+}
+
+.palette {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.palette__swatches {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.palette__swatches span {
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--botanical) 12%, transparent);
+}
+
+.palette h3 {
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  color: var(--botanical);
+}
+
+.palette__tagline {
+  color: var(--ink-muted);
+  max-width: 28ch;
+}
+
+.palette__best {
+  font-size: 0.92rem;
+  color: var(--rose);
+}
+
+.palette__stems {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.35rem 0 0.15rem;
+}
+
+.palette__stems dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--botanical);
+  margin-bottom: 0.15rem;
+}
+
+.palette__stems dd {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.palette__guide {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--botanical);
+  margin: 0.25rem 0 0.5rem;
+}
+
+.palette .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
 .christmas {
   background: color-mix(in srgb, var(--market-green) 8%, var(--ivory));
 }
@@ -789,6 +864,7 @@
 
 @media (max-width: 720px) {
   .packages__grid,
+  .palettes__grid,
   .gallery__grid,
   .site-footer__grid {
     grid-template-columns: 1fr;

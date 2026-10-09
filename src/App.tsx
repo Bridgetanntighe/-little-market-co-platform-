@@ -9,6 +9,7 @@ import {
   eventTypes,
   experienceBenefits,
   faqs,
+  flowerPalettes,
   galleryItems,
   hireOptions,
   howItWorks,
@@ -31,6 +32,7 @@ import "./styles/sections.css";
 const nav = [
   { id: "bloom-market", label: "The Bloom Market" },
   { id: "packages", label: "Packages" },
+  { id: "palettes", label: "Palettes" },
   { id: "christmas", label: "Christmas" },
   { id: "brands", label: "For Brands" },
   { id: "about", label: "About" },
@@ -236,6 +238,72 @@ function Packages() {
   );
 }
 
+function Palettes() {
+  const { ref, visible } = useReveal<HTMLElement>();
+  return (
+    <section
+      className={`section palettes reveal ${visible ? "is-visible" : ""}`}
+      id="palettes"
+      ref={ref}
+    >
+      <div className="container">
+        <span className="section-eyebrow">Flower palettes</span>
+        <h2 className="section-title">Stems for building your own bouquet</h2>
+        <p className="section-lead">
+          Every Bloom Market is set up so guests can choose stems and create a small take-home
+          bouquet. Pick a palette below — seasonal substitutions may apply to keep flowers fresh and
+          beautiful on the day.
+        </p>
+        <div className="palettes__grid">
+          {flowerPalettes.map((palette) => (
+            <article className="palette" key={palette.id}>
+              <div className="palette__swatches" aria-hidden="true">
+                {palette.colours.map((colour) => (
+                  <span key={colour} style={{ background: colour }} />
+                ))}
+              </div>
+              <h3>{palette.name}</h3>
+              <p className="palette__tagline">{palette.tagline}</p>
+              <p className="palette__best">Best for {palette.bestFor.toLowerCase()}.</p>
+              <dl className="palette__stems">
+                <div>
+                  <dt>Hero flowers</dt>
+                  <dd>{palette.heroes.join(" · ")}</dd>
+                </div>
+                <div>
+                  <dt>Fillers</dt>
+                  <dd>{palette.fillers.join(" · ")}</dd>
+                </div>
+                <div>
+                  <dt>Foliage</dt>
+                  <dd>{palette.foliage.join(" · ")}</dd>
+                </div>
+                <div>
+                  <dt>Accent</dt>
+                  <dd>{palette.accent}</dd>
+                </div>
+              </dl>
+              <p className="palette__guide">{palette.guestGuide}</p>
+              <button
+                className="btn btn-secondary"
+                type="button"
+                onClick={() =>
+                  enquireWithOption({
+                    flowerPalette: palette.enquiryValue,
+                    christmasBooking: palette.id === "winter-bloom" ? "Yes" : undefined,
+                  })
+                }
+              >
+                Enquire with {palette.name}
+              </button>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Christmas() {
   const { ref, visible } = useReveal<HTMLElement>();
   return (
@@ -403,6 +471,7 @@ function Enquiry() {
     guests: "",
     christmasBooking: "",
     brandPersonalisation: "",
+    flowerPalette: "",
     additional: "",
     "bot-field": "",
   };
@@ -424,6 +493,7 @@ function Enquiry() {
         ...(detail.brandPersonalisation
           ? { brandPersonalisation: detail.brandPersonalisation }
           : {}),
+        ...(detail.flowerPalette ? { flowerPalette: detail.flowerPalette } : {}),
       }));
     };
 
@@ -505,6 +575,7 @@ function Enquiry() {
         guests: form.guests.trim(),
         christmasBooking: form.christmasBooking,
         brandPersonalisation: form.brandPersonalisation,
+        flowerPalette: form.flowerPalette,
         additional: form.additional.trim(),
         "bot-field": form["bot-field"],
       });
@@ -790,6 +861,24 @@ function Enquiry() {
                     </span>
                   )}
                 </div>
+                <div className="field">
+                  <label htmlFor="flowerPalette">
+                    Flower palette <span className="optional">(optional)</span>
+                  </label>
+                  <select
+                    id="flowerPalette"
+                    name="flowerPalette"
+                    value={form.flowerPalette}
+                    onChange={set("flowerPalette")}
+                  >
+                    <option value="">Not sure yet</option>
+                    {flowerPalettes.map((palette) => (
+                      <option key={palette.id} value={palette.enquiryValue}>
+                        {palette.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <div className="field full">
                   <label htmlFor="additional">Additional information</label>
                   <textarea
@@ -930,6 +1019,7 @@ export default function App() {
         <Experience />
         <HowItWorks />
         <Packages />
+        <Palettes />
         <Christmas />
         <Brands />
         <About />

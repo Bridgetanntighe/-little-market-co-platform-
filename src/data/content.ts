@@ -92,6 +92,49 @@ export const winterBloom = {
   cta: "Check December Availability",
 };
 
+/** Curated stem mixes for self-serve bouquet bars — seasonal substitutions may apply. */
+export const flowerPalettes = [
+  {
+    id: "soft-blush",
+    name: "Soft Blush",
+    tagline: "Romantic, warm and easy for guests to arrange.",
+    bestFor: "Office celebrations, bridal showers, beauty events",
+    colours: ["#f3e7e1", "#d8b4b2", "#a86b6f", "#2a4336"],
+    heroes: ["Spray roses", "Lisianthus", "Ranunculus (in season)"],
+    fillers: ["Alstroemeria", "Stock"],
+    foliage: ["Eucalyptus", "Ruscus"],
+    accent: "Waxflower",
+    guestGuide: "Pick 8–12 stems, add foliage, wrap and finish with ribbon.",
+    enquiryValue: "Soft Blush",
+  },
+  {
+    id: "neutral-luxe",
+    name: "Neutral Luxe",
+    tagline: "Cream, white and soft green for a polished corporate look.",
+    bestFor: "Boardrooms, client entertaining, brand activations",
+    colours: ["#f6f1e8", "#efe6d6", "#cbb892", "#2a4336"],
+    heroes: ["White / cream roses", "Lisianthus", "Carnations"],
+    fillers: ["Chrysanthemums", "Snapdragons"],
+    foliage: ["Eucalyptus", "Pittosporum"],
+    accent: "Thistle or dried texture",
+    guestGuide: "Start with foliage, add 2–3 hero stems, then fillers.",
+    enquiryValue: "Neutral Luxe",
+  },
+  {
+    id: "winter-bloom",
+    name: "Winter Bloom",
+    tagline: "Festive stems for Christmas parties and seasonal gifting.",
+    bestFor: "December offices, client gifts, winter brand moments",
+    colours: ["#f6f1e8", "#2a4336", "#a86b6f", "#cbb892"],
+    heroes: ["Cream roses or spray roses", "Seasonal white blooms"],
+    fillers: ["Hypericum berries", "Skimmia"],
+    foliage: ["Eucalyptus", "Fir or pine touches"],
+    accent: "Deep ribbon, optional dried orange",
+    guestGuide: "Choose a few winter stems, add greenery, wrap with festive ribbon.",
+    enquiryValue: "Winter Bloom",
+  },
+] as const;
+
 export const howItWorks = [
   {
     step: "01",
@@ -139,6 +182,14 @@ export const faqs = [
   {
     q: "Do guest numbers affect the price?",
     a: "Yes. Packages start from pricing for up to 20 guests. Additional guests, premium flower requests and extended hire can be quoted separately.",
+  },
+  {
+    q: "Can guests really build their own bouquets?",
+    a: "Yes. That is the heart of The Little Bloom Market. We prepare a curated stem selection with foliage, wrapping and simple guest instructions so people can create a small bouquet to take home — without needing a full workshop.",
+  },
+  {
+    q: "What flower palettes do you offer?",
+    a: "We currently prepare Soft Blush, Neutral Luxe and Winter Bloom palettes. Each includes hero flowers, fillers, foliage and an accent. Seasonal substitutions may apply so stems stay fresh on the day.",
   },
   {
     q: "Will someone stay with the market during the event?",

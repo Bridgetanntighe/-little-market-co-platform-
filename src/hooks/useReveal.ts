@@ -33,6 +33,7 @@ export type EnquiryPrefill = {
   packageChoice?: string;
   christmasBooking?: string;
   brandPersonalisation?: string;
+  flowerPalette?: string;
 };
 
 export function enquireWithOption(prefill: string | EnquiryPrefill) {

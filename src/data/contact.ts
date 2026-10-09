@@ -35,6 +35,7 @@ export type EnquiryPayload = {
   guests: string;
   christmasBooking: string;
   brandPersonalisation: string;
+  flowerPalette: string;
   additional: string;
   /** Honeypot — must stay empty for real guests */
   "bot-field"?: string;
@@ -53,6 +54,7 @@ export const enquiryFieldNames = [
   "guests",
   "christmasBooking",
   "brandPersonalisation",
+  "flowerPalette",
   "additional",
   "bot-field",
 ] as const;
@@ -72,6 +74,7 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
   body.set("guests", payload.guests);
   body.set("christmasBooking", payload.christmasBooking);
   body.set("brandPersonalisation", payload.brandPersonalisation);
+  body.set("flowerPalette", payload.flowerPalette);
   body.set("additional", payload.additional);
 
   // Prefer the static skeleton so SPA redirects cannot intercept form POSTs.
