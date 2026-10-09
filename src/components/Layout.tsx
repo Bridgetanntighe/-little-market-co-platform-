@@ -1,22 +1,13 @@
-import { useState, type ReactNode } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { contact } from "../data/contact";
 import { goHomeSection, homeSectionHref } from "../hooks/useReveal";
 
-const homeNav = [
-  { id: "packages", label: "Packages" },
-  { id: "colour-stories", label: "Colour stories" },
-  { id: "occasions", label: "Occasions" },
-  { id: "how-it-works", label: "How it works" },
-  { id: "faq", label: "FAQs" },
-  { id: "enquire", label: "Check availability" },
-];
-
-const pageNav = [
+const experienceLinks = [
   { to: "/flower-bar-hire-london/", label: "Flower bar hire" },
-  { to: "/corporate-flower-bar-london/", label: "Corporate" },
+  { to: "/corporate-flower-bar-london/", label: "Corporate events" },
   { to: "/brand-activation-flower-bar/", label: "Brand activations" },
-  { to: "/christmas-flower-bar-london/", label: "Christmas" },
+  { to: "/christmas-flower-bar-london/", label: "Christmas parties" },
   { to: "/flower-workshop-london/", label: "Workshops" },
 ];
 
@@ -32,12 +23,127 @@ function Announcement() {
   );
 }
 
-function Header() {
-  const [open, setOpen] = useState(false);
+function HeaderNav({
+  menuId,
+  onNavigate,
+}: {
+  menuId: string;
+  onNavigate: () => void;
+}) {
+  const [experiencesOpen, setExperiencesOpen] = useState(false);
+  const location = useLocation();
+  const dropdownId = useId();
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
   const go = (id: string) => {
-    setOpen(false);
+    onNavigate();
+    setExperiencesOpen(false);
     goHomeSection(id);
   };
+
+  useEffect(() => {
+    if (!experiencesOpen) return;
+    const onPointer = (e: MouseEvent) => {
+      if (!dropdownRef.current?.contains(e.target as Node)) {
+        setExperiencesOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setExperiencesOpen(false);
+    };
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [experiencesOpen]);
+
+  const experiencesActive = experienceLinks.some((l) => {
+    const bare = l.to.replace(/\/$/, "");
+    return (
+      location.pathname === l.to ||
+      location.pathname === bare ||
+      location.pathname.startsWith(`${bare}/`)
+    );
+  });
+
+  return (
+    <nav id={menuId} className="nav" aria-label="Primary">
+      <a
+        href="/#packages"
+        onClick={(e) => {
+          e.preventDefault();
+          go("packages");
+        }}
+      >
+        Packages
+      </a>
+
+      <div
+        className={`nav-dropdown ${experiencesOpen ? "is-open" : ""} ${experiencesActive ? "is-active" : ""}`}
+        ref={dropdownRef}
+      >
+        <button
+          type="button"
+          className="nav-dropdown__trigger"
+          aria-expanded={experiencesOpen}
+          aria-controls={dropdownId}
+          onClick={() => setExperiencesOpen((v) => !v)}
+        >
+          Experiences
+          <span className="nav-dropdown__chevron" aria-hidden="true" />
+        </button>
+        <div className="nav-dropdown__panel" id={dropdownId} role="region" aria-label="Experiences">
+          {experienceLinks.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              onClick={() => {
+                setExperiencesOpen(false);
+                onNavigate();
+              }}
+            >
+              {l.label}
+            </NavLink>
+          ))}
+        </div>
+      </div>
+
+      <a
+        href="/#how-it-works"
+        onClick={(e) => {
+          e.preventDefault();
+          go("how-it-works");
+        }}
+      >
+        How it works
+      </a>
+      <a
+        href="/#faq"
+        onClick={(e) => {
+          e.preventDefault();
+          go("faq");
+        }}
+      >
+        FAQs
+      </a>
+
+      <a
+        className="nav-cta"
+        href={homeSectionHref("enquire")}
+        onClick={onNavigate}
+      >
+        Check availability
+      </a>
+    </nav>
+  );
+}
+
+function Header() {
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const menuId = useId();
 
   return (
     <header className="site-header">
@@ -46,30 +152,21 @@ function Header() {
           <span className="brand__name">The Little Market Co.</span>
           <span className="brand__tag">Flower Bar Hire · London</span>
         </Link>
-        <nav className={`nav ${open ? "is-open" : ""}`} aria-label="Primary">
-          {homeNav.map((l) => (
-            <a
-              key={l.id}
-              href={`/#${l.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                go(l.id);
-              }}
-            >
-              {l.label}
-            </a>
-          ))}
-          {pageNav.map((l) => (
-            <NavLink key={l.to} to={l.to} onClick={() => setOpen(false)}>
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
+
+        <div className={open ? "nav-shell is-open" : "nav-shell"}>
+          <HeaderNav
+            key={location.pathname}
+            menuId={menuId}
+            onNavigate={() => setOpen(false)}
+          />
+        </div>
+
         <button
           className={`menu-toggle ${open ? "is-open" : ""}`}
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls={menuId}
           onClick={() => setOpen((v) => !v)}
         >
           <span />
