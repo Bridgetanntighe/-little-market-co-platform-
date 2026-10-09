@@ -134,7 +134,7 @@ ul {
 }
 
 .container {
-  width: min(100% - (var(--page-gutter) * 2), var(--content-width));
+  width: min(calc(100% - 2 * var(--page-gutter)), var(--content-width));
   margin-inline: auto;
 }
 
@@ -400,7 +400,7 @@ a.btn {
   }
 
   .container {
-    width: min(100% - (var(--page-gutter) * 2), var(--content-width));
+    width: min(calc(100% - 2 * var(--page-gutter)), var(--content-width));
   }
 
   .section-title {
