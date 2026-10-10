@@ -22,7 +22,7 @@ export const hireOptions = [
     price: "From £495",
     bouquets: "Up to 20 bouquets included",
     bouquetCount: 20,
-    note: "For intimate gatherings and smaller celebrations.",
+    note: "The simple option — perfect when only some guests make a bouquet.",
     description: "A compact self-serve flower station with seasonal stems and simple wrapping.",
     includes: [
       "Up to 20 bouquets included",
@@ -50,7 +50,7 @@ export const hireOptions = [
     price: "From £695",
     bouquets: "Up to 30 bouquets included",
     bouquetCount: 30,
-    note: "A fuller market for celebrations and larger guest lists.",
+    note: "A fuller market when you want more guests to take flowers home.",
     description: "A larger styled flower market with a more generous stem selection and palette choice.",
     includes: [
       "Up to 30 bouquets included",
@@ -78,7 +78,7 @@ export const hireOptions = [
     price: "From £995",
     bouquets: "Up to 40 bouquets included",
     bouquetCount: 40,
-    note: "For larger celebrations, launches and branded moments.",
+    note: "For bigger bouquet numbers, launches and branded moments.",
     description: "A bespoke flower market with custom palette options and branded finishing touches.",
     includes: [
       "Up to 40 bouquets included",
@@ -283,7 +283,7 @@ export const galleryItems: GalleryItem[] = [
 export const faqs = [
   {
     q: "How many bouquets should we book?",
-    a: "Packages include up to 20, 30 or 40 bouquets. Your event can have more guests than bouquets — choose how many take-home bouquets you would like to provide.",
+    a: "Packages are priced by take-home bouquets, not total guests. A room of 60–80 can still book The Little Bar (up to 20 bouquets) if only some guests make one — for example the bridal party, a selected group, or whoever wants to join. Want most guests to take flowers home? Choose a larger allowance or ask us to quote.",
   },
   {
     q: "Is the flower market self-serve?",
@@ -341,6 +341,10 @@ export const packageFaqs = [
   {
     q: "Is the price a setup fee plus per-person flower charges?",
     a: "No. The figures shown are inclusive package starting points for the bouquet allowances listed — not a separate setup fee plus per-person charges.",
+  },
+  {
+    q: "We have 60–80 guests — can we still book the simple package?",
+    a: "Yes. Guest count and bouquet count are different. Book the bouquet number you want to offer — The Little Bar (up to 20) is the simple, lower-cost option even for a larger room if not everyone takes a bouquet. Prefer flowers for more of the room? Choose 30 or 40, or ask us to quote above that.",
   },
   {
     q: "What if we need more than 40 bouquets?",

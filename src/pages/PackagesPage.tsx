@@ -106,10 +106,10 @@ export default function PackagesPage() {
               ))}
             </div>
             <p className="packages__note">
-              Prices shown are inclusive package starting points for the bouquet allowances above.
-              They are not a £395 setup fee plus separate per-person charges. Further travel outside
-              our usual London service area, assisted staffing and personalised extras are quoted
-              individually. Planning more than 40 bouquets? Tell us your numbers when you enquire.
+              Prices are for bouquet allowances, not headcount — so 60–80 guests can still choose
+              The Little Bar if you only want around 20 take-home bouquets. Inclusive starting
+              points (not a setup fee plus per-person charges). Further travel, assisted staffing
+              and more than 40 bouquets are quoted individually.
             </p>
           </div>
         </section>

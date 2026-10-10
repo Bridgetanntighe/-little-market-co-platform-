@@ -319,6 +319,9 @@ export default function EnquirePage() {
                         <option key={t}>{t}</option>
                       ))}
                     </select>
+                    <span className="field-hint">
+                      Not the same as guest count — a larger party can still choose fewer bouquets.
+                    </span>
                     {fieldErrors.bouquets && (
                       <span className="field-error">{fieldErrors.bouquets}</span>
                     )}

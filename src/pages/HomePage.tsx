@@ -173,7 +173,8 @@ function PackagePreview() {
         <span className="section-eyebrow">Step 2 · Packages</span>
         <h2 className="section-title">Pick your market. From £495.</h2>
         <p className="section-lead">
-          Display, flowers and take-home bouquets — setup and collection included.
+          Priced by how many take-home bouquets you want — not your total guest list. A bigger
+          room can still book the simple option.
         </p>
         <p className="snap-rail__hint" aria-hidden="true">
           Swipe for more
