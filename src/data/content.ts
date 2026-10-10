@@ -28,14 +28,14 @@ export const hireOptions = [
       "Up to 20 bouquets included",
       "Styled compact flower market display",
       "Seasonal flowers and foliage",
-      "Kraft wrapping paper and ribbon",
+      "Easy kraft wrap and ribbon — simple for guests to use",
       "Flower care cards",
       "Delivery, setup and collection within our London service area",
     ],
     comparison: {
       bouquets: "Up to 20",
       flowers: "Seasonal stems and foliage for each bouquet",
-      wrapping: "Kraft wrap and ribbon",
+      wrapping: "Easy kraft wrap and ribbon",
       display: "Compact styled market",
       personalisation: "By quotation",
       setup: "Included — setup and collection",
@@ -51,19 +51,20 @@ export const hireOptions = [
     bouquets: "Up to 30 bouquets included",
     bouquetCount: 30,
     note: "A fuller market when you want more guests to take flowers home.",
-    description: "A larger styled flower market with a more generous stem selection and palette choice.",
+    description:
+      "A larger styled flower market with a more generous stem selection — wrap stays easy for guests to take home.",
     includes: [
       "Up to 30 bouquets included",
       "Larger selection of seasonal flowers",
       "Styled flower market display",
       "Choice of colour palette",
-      "Premium wrapping materials",
+      "Elevated wrap and ribbon — still easy for guests to fold and take home",
       "Delivery, setup and collection within our London service area",
     ],
     comparison: {
       bouquets: "Up to 30",
       flowers: "Larger seasonal selection per bouquet",
-      wrapping: "Premium wrapping materials",
+      wrapping: "Elevated wrap — guest-easy to use",
       display: "Fuller styled market",
       personalisation: "By quotation",
       setup: "Included — setup and collection",
@@ -85,13 +86,13 @@ export const hireOptions = [
       "Custom flower colour palette",
       "Branded market sign",
       "Branded stickers or tags",
-      "Custom wrapping",
+      "Custom wrap finishes — kept simple enough for self-serve take-home",
       "Delivery, styling and collection within our London service area",
     ],
     comparison: {
       bouquets: "Up to 40",
       flowers: "Bespoke seasonal selection",
-      wrapping: "Custom wrapping",
+      wrapping: "Custom wrap — still guest-easy",
       display: "Fully styled market",
       personalisation: "Branded sign, stickers or tags included",
       setup: "Included — styling and collection",
@@ -291,7 +292,11 @@ export const faqs = [
   },
   {
     q: "Do guests take the flowers home?",
-    a: "Yes. Guests choose stems, wrap a bouquet and take it home as a beautiful reminder of the celebration.",
+    a: "Yes. Guests choose stems, wrap a bouquet and take it home. Wrapping is chosen to look lovely and stay easy — no fiddly materials at a busy event.",
+  },
+  {
+    q: "Is the wrapping easy for guests?",
+    a: "Yes. Even on fuller packages, we use wrap and ribbon that guests can manage themselves in a minute or two — premium look, simple self-serve take-home.",
   },
   {
     q: "Where do you cover?",
@@ -340,7 +345,7 @@ export const corporateFaqs = [
 export const packageFaqs = [
   {
     q: "What do the package prices include?",
-    a: "Starting prices are inclusive of the styled display, seasonal flowers for the bouquet allowance shown, wrapping materials, and delivery, setup and collection within our London service area.",
+    a: "Starting prices are inclusive of the styled display, seasonal flowers for the bouquet allowance shown, guest-easy wrapping materials, and delivery, setup and collection within our London service area.",
   },
   {
     q: "Is the price a setup fee plus per-person flower charges?",

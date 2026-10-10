@@ -10,7 +10,7 @@ import { enquireHref, scrollToId, useReveal } from "../hooks/useReveal";
 const rows = [
   { key: "bouquets", label: "Bouquets included" },
   { key: "flowers", label: "Flower and wrapping allowance" },
-  { key: "wrapping", label: "Wrapping" },
+  { key: "wrapping", label: "Wrapping (guest-easy)" },
   { key: "display", label: "Display and styling" },
   { key: "personalisation", label: "Personalisation" },
   { key: "setup", label: "Setup and collection" },

@@ -19,7 +19,7 @@ export const weddingSteps = [
   {
     step: "02",
     title: "Wrap your bouquet",
-    copy: "With wrapping and ribbon ready, each guest gathers a little bouquet at their own pace.",
+    copy: "Wrap and ribbon are ready and easy to use — each guest gathers a little bouquet at their own pace.",
   },
   {
     step: "03",
@@ -31,7 +31,7 @@ export const weddingSteps = [
 export const weddingIncludes = [
   "A styled flower market display",
   "Prepared seasonal flowers and foliage",
-  "Wrapping materials and ribbon",
+  "Easy wrap and ribbon for self-serve take-home",
   "Simple instructions for guests",
   "Flower care cards",
   "Setup and collection",
@@ -48,7 +48,7 @@ export const weddingTouches = [
   },
   {
     title: "Ribbon and wrapping to complement your colours",
-    copy: "Finishing materials chosen to sit gently with your palette.",
+    copy: "Finishing materials chosen to sit with your palette — still simple for guests to wrap and carry home.",
   },
   {
     title: "A custom flower palette",
