@@ -6,12 +6,7 @@ import {
 } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Seo } from "../components/Seo";
-import {
-  bouquetChoices,
-  eventTypes,
-  hireOptions,
-  packageChoices,
-} from "../data/content";
+import { eventTypes, hireOptions, packageChoices } from "../data/content";
 import { NETLIFY_FORM_NAME, submitEnquiry } from "../data/contact";
 import { breadcrumbList, pageSeo } from "../data/pageSeo";
 import {
@@ -22,6 +17,9 @@ import {
 const seo = pageSeo.enquire;
 
 type FormState = "idle" | "submitting" | "success" | "error";
+
+const BOUQUET_UNSURE = "Help me decide";
+const bouquetQuickPicks = ["20", "30", "40"] as const;
 
 const empty = {
   name: "",
@@ -41,10 +39,24 @@ const empty = {
 function bouquetsForPackage(packageChoice: string) {
   const pkg = hireOptions.find((p) => p.enquiryValue === packageChoice);
   if (!pkg) return undefined;
-  if (pkg.bouquetCount === 20) return "Up to 20";
-  if (pkg.bouquetCount === 30) return "Up to 30";
-  if (pkg.bouquetCount === 40) return "Up to 40";
-  return undefined;
+  return String(pkg.bouquetCount);
+}
+
+/** Accept "20", "Up to 20", or similar prefills as a simple estimate. */
+function normalizeBouquetEstimate(value?: string) {
+  if (!value) return undefined;
+  if (value === BOUQUET_UNSURE || value === "Help me decide") return BOUQUET_UNSURE;
+  const match = value.match(/\d+/);
+  return match ? match[0] : value;
+}
+
+function bouquetHintFromGuests(guests: string) {
+  const n = Number.parseInt(guests, 10);
+  if (!Number.isFinite(n) || n < 12) return null;
+  if (n <= 40) return `For about ${n} guests, many book around 15–25 take-home bouquets.`;
+  if (n <= 80)
+    return `For about ${n} guests, many book around 20–30 — or fewer for a simple option.`;
+  return `For about ${n} guests, many book around 30–40 — or fewer if only some guests take one.`;
 }
 
 export default function EnquirePage() {
@@ -76,9 +88,10 @@ export default function EnquirePage() {
       /* ignore */
     }
     const merged = { ...stored, ...fromQuery };
-    const mappedBouquets =
+    const mappedBouquets = normalizeBouquetEstimate(
       merged.bouquets ||
-      (merged.packageChoice ? bouquetsForPackage(merged.packageChoice) : undefined);
+        (merged.packageChoice ? bouquetsForPackage(merged.packageChoice) : undefined),
+    );
     setForm((f) => ({
       ...f,
       ...(merged.eventType ? { eventType: merged.eventType } : {}),
@@ -104,7 +117,7 @@ export default function EnquirePage() {
         };
         if (key === "packageChoice" && typeof value === "string") {
           const mapped = bouquetsForPackage(value);
-          if (mapped && !f.bouquets) next.bouquets = mapped;
+          if (mapped && (!f.bouquets || f.bouquets === BOUQUET_UNSURE)) next.bouquets = mapped;
         }
         return next;
       });
@@ -116,6 +129,16 @@ export default function EnquirePage() {
       });
     };
 
+  const setBouquetEstimate = (value: string) => {
+    setForm((f) => ({ ...f, bouquets: value }));
+    setFieldErrors((errs) => {
+      if (!errs.bouquets) return errs;
+      const next = { ...errs };
+      delete next.bouquets;
+      return next;
+    });
+  };
+
   const validate = () => {
     const errs: Partial<Record<keyof typeof empty, string>> = {};
     if (!form.name.trim()) errs.name = "Please enter your name.";
@@ -124,10 +147,17 @@ export default function EnquirePage() {
       errs.email = "Please enter a valid email address.";
     if (!form.eventType) errs.eventType = "Please select an event type.";
     if (!form.venue.trim()) errs.venue = "Please enter your venue or area.";
-    if (!form.bouquets) errs.bouquets = "Please tell us how many bouquets you need.";
+    if (!form.bouquets.trim()) errs.bouquets = "Add a rough bouquet estimate — or tap Not sure.";
+    else if (form.bouquets !== BOUQUET_UNSURE) {
+      const n = Number.parseInt(form.bouquets, 10);
+      if (!Number.isFinite(n) || n < 1) errs.bouquets = "Enter a number, or tap Not sure.";
+    }
     setFieldErrors(errs);
     return Object.keys(errs).length === 0;
   };
+
+  const guestHint = bouquetHintFromGuests(form.guests);
+  const bouquetInputValue = form.bouquets === BOUQUET_UNSURE ? "" : form.bouquets;
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -305,22 +335,54 @@ export default function EnquirePage() {
                       Not decided yet
                     </label>
                   </div>
+                  <div className="field">
+                    <label htmlFor="enquiry-guests">
+                      Guest count <span className="optional">(optional)</span>
+                    </label>
+                    <input
+                      id="enquiry-guests"
+                      name="guests"
+                      inputMode="numeric"
+                      placeholder="e.g. 80"
+                      value={form.guests}
+                      onChange={set("guests")}
+                    />
+                  </div>
                   <div className={`field ${fieldErrors.bouquets ? "has-error" : ""}`}>
-                    <label htmlFor="enquiry-bouquets">Bouquets wanted</label>
-                    <select
+                    <label htmlFor="enquiry-bouquets">Rough bouquet estimate</label>
+                    <input type="hidden" name="bouquets" value={form.bouquets} />
+                    <input
                       id="enquiry-bouquets"
-                      name="bouquets"
-                      required
-                      value={form.bouquets}
-                      onChange={set("bouquets")}
-                    >
-                      <option value="">Select…</option>
-                      {bouquetChoices.map((t) => (
-                        <option key={t}>{t}</option>
+                      inputMode="numeric"
+                      placeholder="e.g. 25"
+                      value={bouquetInputValue}
+                      onChange={(e) => setBouquetEstimate(e.target.value.replace(/[^\d]/g, ""))}
+                      aria-describedby="enquiry-bouquets-hint"
+                    />
+                    <div className="chip-row bouquet-picks" role="group" aria-label="Quick bouquet estimates">
+                      {bouquetQuickPicks.map((n) => (
+                        <button
+                          key={n}
+                          type="button"
+                          className={`chip bouquet-picks__chip ${form.bouquets === n ? "is-active" : ""}`}
+                          onClick={() => setBouquetEstimate(n)}
+                        >
+                          ~{n}
+                        </button>
                       ))}
-                    </select>
-                    <span className="field-hint">
-                      Not the same as guest count — a larger party can still choose fewer bouquets.
+                      <button
+                        type="button"
+                        className={`chip bouquet-picks__chip ${form.bouquets === BOUQUET_UNSURE ? "is-active" : ""}`}
+                        onClick={() => setBouquetEstimate(BOUQUET_UNSURE)}
+                      >
+                        Not sure
+                      </button>
+                    </div>
+                    <span className="field-hint" id="enquiry-bouquets-hint">
+                      {form.bouquets === BOUQUET_UNSURE
+                        ? "No problem — we’ll help you choose when we reply."
+                        : guestHint ||
+                          "Guess is fine — not the same as guest count. A bigger room can still book fewer bouquets."}
                     </span>
                     {fieldErrors.bouquets && (
                       <span className="field-error">{fieldErrors.bouquets}</span>
@@ -383,16 +445,6 @@ export default function EnquirePage() {
                         </select>
                       </div>
                       <div className="field">
-                        <label htmlFor="enquiry-guests">Guest count</label>
-                        <input
-                          id="enquiry-guests"
-                          name="guests"
-                          inputMode="numeric"
-                          value={form.guests}
-                          onChange={set("guests")}
-                        />
-                      </div>
-                      <div className="field">
                         <label htmlFor="enquiry-colourIdeas">Colour ideas</label>
                         <input
                           id="enquiry-colourIdeas"
@@ -415,7 +467,6 @@ export default function EnquirePage() {
                   ) : (
                     <>
                       <input type="hidden" name="packageChoice" value={form.packageChoice} />
-                      <input type="hidden" name="guests" value={form.guests} />
                       <input type="hidden" name="colourIdeas" value={form.colourIdeas} />
                       <input type="hidden" name="additional" value={form.additional} />
                     </>
