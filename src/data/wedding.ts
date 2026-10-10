@@ -47,8 +47,8 @@ export const weddingTouches = [
     copy: "Bouquet tags with your names and date — available by quotation.",
   },
   {
-    title: "Ribbon and wrapping to complement your colours",
-    copy: "Finishing materials chosen to sit with your palette — still simple for guests to wrap and carry home.",
+    title: "Ribbon to complement your colours",
+    copy: "Ribbon chosen to sit with your palette — wrap stays simple so guests can take bouquets home easily.",
   },
   {
     title: "A custom flower palette",

@@ -79,20 +79,21 @@ export const hireOptions = [
     price: "From £995",
     bouquets: "Up to 40 bouquets included",
     bouquetCount: 40,
-    note: "Branded finishing for launches and activations — bouquet numbers can be sized to your brief.",
-    description: "A bespoke flower market with custom palette options and branded finishing touches.",
+    note: "Branded sign and tags for launches — bouquet numbers sized to your brief.",
+    description:
+      "A styled flower market with a brand-led palette, branded signage and tags — wrap stays simple for guests.",
     includes: [
       "Up to 40 bouquets included",
-      "Custom flower colour palette",
+      "Flower palette shaped around your brand colours",
       "Branded market sign",
       "Branded stickers or tags",
-      "Custom wrap finishes — kept simple enough for self-serve take-home",
+      "Guest-easy wrap and ribbon (colour-matched where we can)",
       "Delivery, styling and collection within our London service area",
     ],
     comparison: {
       bouquets: "Up to 40",
-      flowers: "Bespoke seasonal selection",
-      wrapping: "Custom wrap — still guest-easy",
+      flowers: "Palette shaped around your brand colours",
+      wrapping: "Guest-easy wrap · colour-matched ribbon where possible",
       display: "Fully styled market",
       personalisation: "Branded sign, stickers or tags included",
       setup: "Included — styling and collection",
@@ -184,7 +185,7 @@ export const seasonalMarketNote = {
 export const brandMatchCollection = {
   id: "brand-match",
   name: "Brand Match",
-  copy: "A custom palette shaped around your brand colours, with optional branded signage and packaging.",
+  copy: "A palette shaped around your brand colours, with a branded sign and tags — wrap stays simple for guests.",
   enquiryValue: "Brand Match",
 };
 
@@ -330,11 +331,11 @@ export const corporateFaqs = [
   },
   {
     q: "We only need a small amount of flowers — can a brand still book?",
-    a: "Yes. Flower volume is set by your bouquet estimate, not by being a brand. For a compact activation, book The Little Bar or The Bloom Market (around 20–30 take-home bouquets). Want branded signage or packaging on a smaller setup? Tell us in your enquiry — we can quote branding as an add-on, or shape The Brand Market around a smaller bouquet number.",
+    a: "Yes. Flower volume is set by your bouquet estimate, not by being a brand. For a compact activation, book The Little Bar or The Bloom Market (around 20–30 take-home bouquets). Want a branded sign or tags on a smaller setup? Tell us in your enquiry — we can quote those as an add-on, or shape The Brand Market around a smaller bouquet number.",
   },
   {
-    q: "Can the market include branded signage or packaging?",
-    a: "The Brand Market includes branded finishing as standard, quoted around your artwork and timeline. Smaller unbranded packages (Little Bar / Bloom Market) stay simple by default; light branding can be added by quotation.",
+    q: "Can the market include branding?",
+    a: "Yes — typically a branded market sign plus stickers or tags on bouquets, quoted around your artwork and timeline. We don’t offer fully custom printed wrapping paper; guests still use simple wrap and ribbon so take-home stays easy. Smaller packages stay unbranded by default; light branding can be added by quotation.",
   },
   {
     q: "Is this a taught workshop?",

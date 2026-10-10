@@ -85,8 +85,8 @@ export default function CorporatePage() {
               <article className="partner-card">
                 <h3>Branded finishing</h3>
                 <p>
-                  The Brand Market can include branded signage and packaging — quoted around your
-                  artwork and timeline.
+                  The Brand Market includes a branded sign and tags or stickers — quoted around your
+                  artwork. Wrap stays simple so guests can take flowers home easily.
                 </p>
               </article>
             </div>
