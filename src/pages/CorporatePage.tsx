@@ -98,10 +98,9 @@ export default function CorporatePage() {
                 to={enquireHref({
                   eventType: "Brand activation",
                   colourIdeas: brandMatchCollection.enquiryValue,
-                  packageChoice: "The Brand Market",
                 })}
               >
-                Enquire about Brand Match
+                Check your date · Brand Match
               </Link>
             </div>
             <p className="section-lead" style={{ marginTop: "1.5rem" }}>
@@ -117,8 +116,9 @@ export default function CorporatePage() {
           <div className="container">
             <h2 className="section-title">Packages for corporate hire</h2>
             <p className="section-lead">
-              Same inclusive bouquet packages as our celebrations hire. Standard bookings are
-              self-serve after setup.
+              Pick the bouquet volume that fits the brief — a brand can book the simple Little Bar
+              for a compact moment, or The Brand Market when you want branded finishing. Self-serve
+              after setup.
             </p>
             <p className="snap-rail__hint" aria-hidden="true">
               Swipe for more

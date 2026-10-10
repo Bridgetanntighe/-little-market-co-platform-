@@ -78,7 +78,7 @@ export const hireOptions = [
     price: "From £995",
     bouquets: "Up to 40 bouquets included",
     bouquetCount: 40,
-    note: "For bigger bouquet numbers, launches and branded moments.",
+    note: "Branded finishing for launches and activations — bouquet numbers can be sized to your brief.",
     description: "A bespoke flower market with custom palette options and branded finishing touches.",
     includes: [
       "Up to 40 bouquets included",
@@ -324,8 +324,12 @@ export const corporateFaqs = [
     a: "Yes. We deliver to London workplaces and hired venues. Share access details, lift constraints and preferred timing with your enquiry.",
   },
   {
+    q: "We only need a small amount of flowers — can a brand still book?",
+    a: "Yes. Flower volume is set by your bouquet estimate, not by being a brand. For a compact activation, book The Little Bar or The Bloom Market (around 20–30 take-home bouquets). Want branded signage or packaging on a smaller setup? Tell us in your enquiry — we can quote branding as an add-on, or shape The Brand Market around a smaller bouquet number.",
+  },
+  {
     q: "Can the market include branded signage or packaging?",
-    a: "The Brand Market can include branded signage and packaging, quoted around your artwork and timeline. Other packages remain unbranded by default.",
+    a: "The Brand Market includes branded finishing as standard, quoted around your artwork and timeline. Smaller unbranded packages (Little Bar / Bloom Market) stay simple by default; light branding can be added by quotation.",
   },
   {
     q: "Is this a taught workshop?",
