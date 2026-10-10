@@ -44,7 +44,7 @@ export default function CorporatePage() {
                   className="btn btn-primary"
                   to={enquireHref({ eventType: "Corporate event" })}
                 >
-                  Check availability
+                  Check your date
                 </Link>
                 <Link className="btn btn-secondary" to="/packages/">
                   See packages
@@ -138,7 +138,7 @@ export default function CorporatePage() {
                       packageChoice: pkg.enquiryValue,
                     })}
                   >
-                    Check availability
+                    Check your date
                   </Link>
                 </article>
               ))}
@@ -161,7 +161,7 @@ export default function CorporatePage() {
               style={{ marginTop: "2rem" }}
               to={enquireHref({ eventType: "Corporate event" })}
             >
-              Check availability
+              Check your date
             </Link>
           </div>
         </section>

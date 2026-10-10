@@ -106,9 +106,9 @@ export default function PrivacyPage() {
           <p>We may update this policy from time to time. The latest version will always appear on this page.</p>
 
           <p>
-            <Link to="/#work-with-us">Back to Work with us</Link>
+            <Link to="/enquire/">Check your date</Link>
             {" · "}
-            <Link to="/#enquire">Customer enquiries</Link>
+            <Link to="/">Home</Link>
           </p>
         </div>
       </main>

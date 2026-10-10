@@ -19,7 +19,7 @@ const occasions = [
     shortTitle: "Weddings",
     copy: "Reception moment and guest favour in one.",
     to: "/wedding-flower-bar-hire-london/",
-    cta: "View",
+    cta: "Plan yours",
     featured: true,
     image: {
       src: "/images/guests-making-bouquets-flower-market.jpg",
@@ -33,7 +33,7 @@ const occasions = [
     shortTitle: "Celebrations",
     copy: "Showers, birthdays and private parties.",
     to: "/celebrations/",
-    cta: "View",
+    cta: "Plan yours",
     featured: false,
     image: {
       src: "/images/bouquet-wrapping-ribbon-flower-bar-london.jpg",
@@ -47,7 +47,7 @@ const occasions = [
     shortTitle: "Corporate",
     copy: "Launches, team days and client events.",
     to: "/corporate-flower-bar-london/",
-    cta: "View",
+    cta: "Plan yours",
     featured: false,
     image: {
       src: "/images/london-corporate-flower-bar-office-event.jpg",
@@ -103,8 +103,8 @@ function Occasions() {
       ref={ref}
     >
       <div className="container">
-        <span className="section-eyebrow">Occasions</span>
-        <h2 className="section-title">Where we set up</h2>
+        <span className="section-eyebrow">Step 1 · Occasion</span>
+        <h2 className="section-title">Where are you celebrating?</h2>
         <div className="occasions__cards">
           {occasions.map((item) => (
             <Link
@@ -130,7 +130,7 @@ function Occasions() {
                 <p>{item.copy}</p>
                 <span className="occasion-card__cta">
                   <span className="occasion-card__cta-full">{item.cta}</span>
-                  <span className="occasion-card__cta-short">Explore</span>
+                  <span className="occasion-card__cta-short">Plan</span>
                 </span>
               </div>
             </Link>
@@ -170,10 +170,10 @@ function PackagePreview() {
       ref={ref}
     >
       <div className="container">
-        <span className="section-eyebrow">Packages</span>
-        <h2 className="section-title">Clear packages. From £495.</h2>
+        <span className="section-eyebrow">Step 2 · Packages</span>
+        <h2 className="section-title">Pick your market. From £495.</h2>
         <p className="section-lead">
-          Display, seasonal flowers and take-home bouquets — setup and collection included.
+          Display, flowers and take-home bouquets — setup and collection included.
         </p>
         <p className="snap-rail__hint" aria-hidden="true">
           Swipe for more
@@ -189,7 +189,7 @@ function PackagePreview() {
                 className="btn btn-accent"
                 to={enquireHref({ packageChoice: pkg.enquiryValue })}
               >
-                Check date
+                Check your date
               </Link>
             </article>
           ))}
@@ -211,10 +211,10 @@ function FinalCta() {
       ref={ref}
     >
       <div className="container narrow">
-        <span className="section-eyebrow">Book</span>
-        <h2 className="section-title">Tell us your date and venue</h2>
+        <span className="section-eyebrow">Step 3 · Book</span>
+        <h2 className="section-title">Check your date</h2>
         <p className="section-lead">
-          We’ll confirm availability and send a clear quote.
+          Share a few details — we’ll reply with availability and a clear quote.
         </p>
         <Link className="btn btn-primary" to="/enquire/">
           Check your date
@@ -342,9 +342,9 @@ export default function HomePage() {
           </div>
         </section>
         <Occasions />
+        <PackagePreview />
         <Experience />
         <Styling />
-        <PackagePreview />
         <FinalCta />
       </main>
     </>

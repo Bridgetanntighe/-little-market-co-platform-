@@ -6,7 +6,7 @@ import {
   seasonalMarketNote,
   type FloralCollection,
 } from "../data/content";
-import { enquireLocation } from "../hooks/useReveal";
+import { enquireHref, enquireLocation } from "../hooks/useReveal";
 import { ResponsiveImage } from "./ResponsiveImage";
 
 type Mode = "full" | "preview";
@@ -51,17 +51,22 @@ export function FloralStylePreview() {
       </p>
       <div className="style-preview__grid style-rail" tabIndex={0} aria-label="Floral style collections. Swipe horizontally to see more.">
         {floralCollections.map((collection) => (
-          <article className="style-card style-card--preview" key={collection.id}>
+          <Link
+            className="style-card style-card--preview"
+            to={enquireHref({ colourIdeas: collection.enquiryValue })}
+            key={collection.id}
+          >
             <CollectionMedia collection={collection} />
             <div className="style-card__body">
               <h3>{collection.name}</h3>
               <p>{collection.copy}</p>
+              <span className="style-card__cta">Check your date →</span>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
       <Link className="btn btn-secondary" to="/packages/#floral-style">
-        See all styles
+        Compare styles
       </Link>
     </div>
   );
@@ -163,7 +168,7 @@ export function FloralStyleSelector({ eventType }: Props) {
 
       <div className="style-selector__actions">
         <Link className="btn btn-primary" to={enquireTo}>
-          Enquire with this style
+          Check your date
         </Link>
         <Link className="btn btn-secondary" to={helpTo}>
           Help me choose

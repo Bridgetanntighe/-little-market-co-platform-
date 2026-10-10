@@ -89,7 +89,7 @@ export default function CelebrationsPage() {
             </p>
             <Link
               className="btn btn-primary"
-              to={enquireHref({ eventType: "Bridal shower" })}
+              to={enquireHref({ eventType: "Birthday / private celebration" })}
             >
               Check your date
             </Link>

@@ -543,6 +543,84 @@ a.occasion-card:hover {
   text-underline-offset: 0.12em;
 }
 
+.enquire-page__help {
+  margin-top: 0.85rem;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+.enquire-page__help a {
+  color: var(--botanical);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.enquire-steps {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.enquire-steps li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--botanical);
+}
+
+.enquire-steps__num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  background: var(--botanical);
+  color: var(--cream);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.enquire-form__group-label {
+  margin: 1.15rem 0 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.enquire-form__group-label:first-of-type {
+  margin-top: 0;
+}
+
+.enquire-extras {
+  margin-top: 1rem;
+}
+
+.enquire-extras__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--botanical);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.enquire-extras__grid {
+  margin-top: 0.85rem;
+}
+
 .wedding-split {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -995,6 +1073,22 @@ a.occasion-card:hover {
   padding: 1.1rem 1.15rem 1.25rem;
   flex: 1;
   background: var(--paper);
+}
+
+a.style-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.style-card:hover {
+  border-color: color-mix(in srgb, var(--botanical) 35%, var(--line));
+}
+
+.style-card__cta {
+  margin-top: 0.35rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--rose);
 }
 
 .style-card--preview .style-card__body {

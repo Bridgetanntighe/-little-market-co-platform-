@@ -79,7 +79,7 @@ const pages = [
     priority: "0.85",
     links: [
       { href: "/packages/", label: "Packages & prices" },
-      { href: "/enquire/?eventType=Corporate+event", label: "Check availability" },
+      { href: "/enquire/?eventType=Corporate+event", label: "Check your date" },
       { href: "/partner-with-us/", label: "Partner with us" },
     ],
   },
@@ -94,7 +94,7 @@ const pages = [
     changefreq: "weekly",
     priority: "0.9",
     links: [
-      { href: "/enquire/", label: "Check availability" },
+      { href: "/enquire/", label: "Check your date" },
       { href: "/wedding-flower-bar-hire-london/", label: "Weddings" },
       { href: "/celebrations/", label: "Celebrations" },
       { href: "/corporate-flower-bar-london/", label: "Corporate & Brands" },
@@ -103,11 +103,11 @@ const pages = [
   {
     path: "/enquire",
     file: "enquire/index.html",
-    title: "Enquire | The Little Market Co",
+    title: "Check Your Date | The Little Market Co",
     description:
-      "Enquire about flower bar hire in London. Share your date, venue and bouquet numbers for a tailored Little Bloom Market quote.",
-    h1: "Tell us about your celebration",
-    lead: "We’ll check availability and send a tailored quote. Submitting an enquiry does not reserve your date.",
+      "Check your date for a mobile flower market in London. Share your venue and bouquet numbers — we’ll reply with a clear quote.",
+    h1: "Check your date",
+    lead: "Three quick details. We’ll confirm availability and send package options.",
     changefreq: "monthly",
     priority: "0.8",
     links: [

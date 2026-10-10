@@ -1,7 +1,6 @@
-import { useEffect, useId, useState, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { contact } from "../data/contact";
-import { goHomeSection } from "../hooks/useReveal";
 import { StickyCta } from "./StickyCta";
 
 const mainNav = [
@@ -16,29 +15,13 @@ const footerPrimary = [
   { to: "/celebrations/", label: "Celebrations" },
   { to: "/corporate-flower-bar-london/", label: "Corporate" },
   { to: "/packages/", label: "Packages" },
-  { to: "/enquire/", label: "Enquire" },
+  { to: "/enquire/", label: "Check your date" },
 ] as const;
 
-type FooterSecondaryItem =
-  | { to: string; label: string }
-  | {
-      href: string;
-      label: string;
-      onClick: (e: MouseEvent<HTMLAnchorElement>) => void;
-    };
-
-const footerSecondary: FooterSecondaryItem[] = [
-  {
-    href: "/#work-with-us",
-    label: "Work with us",
-    onClick: (e) => {
-      e.preventDefault();
-      goHomeSection("work-with-us");
-    },
-  },
+const footerSecondary = [
   { to: "/partner-with-us/", label: "Partner with us" },
   { to: "/privacy/", label: "Privacy" },
-];
+] as const;
 
 function Announcement() {
   return (
@@ -77,7 +60,7 @@ function Header() {
               </NavLink>
             ))}
             <Link className="nav-cta" to="/enquire/" onClick={() => setOpen(false)}>
-              Check availability
+              Check your date
             </Link>
           </nav>
         </div>
@@ -128,13 +111,7 @@ function Footer() {
           <ul className="footer-links footer-links--secondary">
             {footerSecondary.map((item) => (
               <li key={item.label}>
-                {"to" in item ? (
-                  <Link to={item.to}>{item.label}</Link>
-                ) : (
-                  <a href={item.href} onClick={item.onClick}>
-                    {item.label}
-                  </a>
-                )}
+                <Link to={item.to}>{item.label}</Link>
               </li>
             ))}
           </ul>

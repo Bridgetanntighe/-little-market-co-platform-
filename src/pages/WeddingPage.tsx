@@ -70,7 +70,7 @@ export default function WeddingPage() {
               <p className="wedding-hero__copy">{seo.lead}</p>
               <div className="hero__actions">
                 <Link className="btn btn-primary" to={weddingEnquire}>
-                  Check your wedding date
+                  Check your date
                 </Link>
                 <a className="btn btn-secondary" href="#wedding-experience">
                   Explore the experience
@@ -140,7 +140,7 @@ export default function WeddingPage() {
               </figure>
             </div>
             <Link className="btn btn-primary" style={{ marginTop: "2rem" }} to={weddingEnquire}>
-              Check your wedding date
+              Check your date
             </Link>
           </div>
         </section>
@@ -162,7 +162,7 @@ export default function WeddingPage() {
               choose Soft Meadow, Modern Neutral or Colour Pop before you enquire.
             </p>
             <Link className="btn btn-secondary" to={weddingEnquire}>
-              Check your wedding date
+              Check your date
             </Link>
           </div>
         </section>
@@ -184,7 +184,7 @@ export default function WeddingPage() {
               enquire.
             </p>
             <Link className="btn btn-primary" to={weddingEnquire}>
-              Check your wedding date
+              Check your date
             </Link>
           </div>
         </section>
@@ -219,7 +219,7 @@ export default function WeddingPage() {
                       packageChoice: pkg.enquiryValue,
                     })}
                   >
-                    Check your wedding date
+                    Check your date
                   </Link>
                 </article>
               ))}
@@ -259,7 +259,7 @@ export default function WeddingPage() {
               style={{ marginTop: "1.75rem" }}
               to={weddingEnquire}
             >
-              Check your wedding date
+              Check your date
             </Link>
           </div>
         </section>
@@ -307,7 +307,7 @@ export default function WeddingPage() {
             <h2 className="section-title">Wedding flower bar FAQs</h2>
             <FaqList items={weddingFaqs} />
             <Link className="btn btn-primary" style={{ marginTop: "2rem" }} to={weddingEnquire}>
-              Check your wedding date
+              Check your date
             </Link>
           </div>
         </section>
@@ -325,7 +325,7 @@ export default function WeddingPage() {
               help you choose the right market — submitting an enquiry does not reserve your date.
             </p>
             <Link className="btn btn-primary" to={weddingEnquire}>
-              Check your wedding date
+              Check your date
             </Link>
           </div>
         </section>

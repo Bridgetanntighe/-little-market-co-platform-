@@ -9,6 +9,7 @@ import { Seo } from "../components/Seo";
 import {
   bouquetChoices,
   eventTypes,
+  hireOptions,
   packageChoices,
 } from "../data/content";
 import { NETLIFY_FORM_NAME, submitEnquiry } from "../data/contact";
@@ -37,12 +38,22 @@ const empty = {
   "bot-field": "",
 };
 
+function bouquetsForPackage(packageChoice: string) {
+  const pkg = hireOptions.find((p) => p.enquiryValue === packageChoice);
+  if (!pkg) return undefined;
+  if (pkg.bouquetCount === 20) return "Up to 20";
+  if (pkg.bouquetCount === 30) return "Up to 30";
+  if (pkg.bouquetCount === 40) return "Up to 40";
+  return undefined;
+}
+
 export default function EnquirePage() {
   const [searchParams] = useSearchParams();
   const [form, setForm] = useState(empty);
   const [status, setStatus] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof typeof empty, string>>>({});
+  const [showExtras, setShowExtras] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -65,13 +76,17 @@ export default function EnquirePage() {
       /* ignore */
     }
     const merged = { ...stored, ...fromQuery };
+    const mappedBouquets =
+      merged.bouquets ||
+      (merged.packageChoice ? bouquetsForPackage(merged.packageChoice) : undefined);
     setForm((f) => ({
       ...f,
       ...(merged.eventType ? { eventType: merged.eventType } : {}),
       ...(merged.packageChoice ? { packageChoice: merged.packageChoice } : {}),
       ...(merged.colourIdeas ? { colourIdeas: merged.colourIdeas } : {}),
-      ...(merged.bouquets ? { bouquets: merged.bouquets } : {}),
+      ...(mappedBouquets ? { bouquets: mappedBouquets } : {}),
     }));
+    if (merged.colourIdeas || merged.packageChoice) setShowExtras(true);
   }, [searchParams]);
 
   const set =
@@ -81,11 +96,18 @@ export default function EnquirePage() {
         e.target instanceof HTMLInputElement && e.target.type === "checkbox"
           ? e.target.checked
           : e.target.value;
-      setForm((f) => ({
-        ...f,
-        [key]: value,
-        ...(key === "dateUndecided" && value === true ? { eventDate: "" } : {}),
-      }));
+      setForm((f) => {
+        const next = {
+          ...f,
+          [key]: value,
+          ...(key === "dateUndecided" && value === true ? { eventDate: "" } : {}),
+        };
+        if (key === "packageChoice" && typeof value === "string") {
+          const mapped = bouquetsForPackage(value);
+          if (mapped && !f.bouquets) next.bouquets = mapped;
+        }
+        return next;
+      });
       setFieldErrors((errs) => {
         if (!errs[key]) return errs;
         const next = { ...errs };
@@ -170,23 +192,31 @@ export default function EnquirePage() {
               <span aria-hidden="true"> / </span>
               <span>Enquire</span>
             </nav>
-            <span className="section-eyebrow">Enquiries</span>
+            <span className="section-eyebrow">Book</span>
             <h1 className="section-title">{seo.h1}</h1>
             <p className="section-lead">{seo.lead}</p>
-            <p className="section-lead">
-              Not sure which package fits? Compare{" "}
-              <Link to="/packages/">packages and prices</Link>, or read about{" "}
-              <Link to="/wedding-flower-bar-hire-london/">weddings</Link> and{" "}
-              <Link to="/celebrations/">parties and showers</Link>.
-            </p>
+            <ol className="enquire-steps" aria-label="How booking works">
+              <li>
+                <span className="enquire-steps__num">1</span>
+                <span>Your day</span>
+              </li>
+              <li>
+                <span className="enquire-steps__num">2</span>
+                <span>Your details</span>
+              </li>
+              <li>
+                <span className="enquire-steps__num">3</span>
+                <span>We reply with a quote</span>
+              </li>
+            </ol>
           </div>
           <div className="enquire__form">
             {status === "success" ? (
               <div className="form-success" role="status">
-                <h2>Thank you</h2>
+                <h2>You’re on the list</h2>
                 <p>
-                  Thank you for getting in touch. We’ll review your details and reply with package
-                  options.
+                  Thank you — we’ll check your date and send package options shortly. Exciting days
+                  ahead.
                 </p>
                 <button
                   className="btn btn-primary"
@@ -222,32 +252,9 @@ export default function EnquirePage() {
                     />
                   </label>
                 </p>
+
+                <p className="enquire-form__group-label">Your day</p>
                 <div className="form-grid">
-                  <div className={`field ${fieldErrors.name ? "has-error" : ""}`}>
-                    <label htmlFor="enquiry-name">Name</label>
-                    <input
-                      id="enquiry-name"
-                      name="name"
-                      autoComplete="name"
-                      required
-                      value={form.name}
-                      onChange={set("name")}
-                    />
-                    {fieldErrors.name && <span className="field-error">{fieldErrors.name}</span>}
-                  </div>
-                  <div className={`field ${fieldErrors.email ? "has-error" : ""}`}>
-                    <label htmlFor="enquiry-email">Email</label>
-                    <input
-                      id="enquiry-email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      value={form.email}
-                      onChange={set("email")}
-                    />
-                    {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
-                  </div>
                   <div className={`field ${fieldErrors.eventType ? "has-error" : ""}`}>
                     <label htmlFor="enquiry-eventType">Event type</label>
                     <select
@@ -277,28 +284,8 @@ export default function EnquirePage() {
                     />
                     {fieldErrors.venue && <span className="field-error">{fieldErrors.venue}</span>}
                   </div>
-                  <div className={`field full ${fieldErrors.bouquets ? "has-error" : ""}`}>
-                    <label htmlFor="enquiry-bouquets">Approximate number of bouquets wanted</label>
-                    <select
-                      id="enquiry-bouquets"
-                      name="bouquets"
-                      required
-                      value={form.bouquets}
-                      onChange={set("bouquets")}
-                    >
-                      <option value="">Select…</option>
-                      {bouquetChoices.map((t) => (
-                        <option key={t}>{t}</option>
-                      ))}
-                    </select>
-                    {fieldErrors.bouquets && (
-                      <span className="field-error">{fieldErrors.bouquets}</span>
-                    )}
-                  </div>
                   <div className="field">
-                    <label htmlFor="enquiry-eventDate">
-                      Date <span className="optional">(optional)</span>
-                    </label>
+                    <label htmlFor="enquiry-eventDate">Date</label>
                     <input
                       id="enquiry-eventDate"
                       name="eventDate"
@@ -318,61 +305,123 @@ export default function EnquirePage() {
                       Not decided yet
                     </label>
                   </div>
-                  <div className="field">
-                    <label htmlFor="enquiry-guests">
-                      Total guest count <span className="optional">(optional)</span>
-                    </label>
-                    <input
-                      id="enquiry-guests"
-                      name="guests"
-                      inputMode="numeric"
-                      value={form.guests}
-                      onChange={set("guests")}
-                    />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="enquiry-package">
-                      Package <span className="optional">(optional)</span>
-                    </label>
+                  <div className={`field ${fieldErrors.bouquets ? "has-error" : ""}`}>
+                    <label htmlFor="enquiry-bouquets">Bouquets wanted</label>
                     <select
-                      id="enquiry-package"
-                      name="packageChoice"
-                      value={form.packageChoice}
-                      onChange={set("packageChoice")}
+                      id="enquiry-bouquets"
+                      name="bouquets"
+                      required
+                      value={form.bouquets}
+                      onChange={set("bouquets")}
                     >
                       <option value="">Select…</option>
-                      {packageChoices.map((t) => (
+                      {bouquetChoices.map((t) => (
                         <option key={t}>{t}</option>
                       ))}
                     </select>
-                  </div>
-                  <div className="field">
-                    <label htmlFor="enquiry-colourIdeas">
-                      Colour ideas <span className="optional">(optional)</span>
-                    </label>
-                    <input
-                      id="enquiry-colourIdeas"
-                      name="colourIdeas"
-                      value={form.colourIdeas}
-                      onChange={set("colourIdeas")}
-                    />
-                  </div>
-                  <div className="field full">
-                    <label htmlFor="enquiry-additional">
-                      Additional details <span className="optional">(optional)</span>
-                    </label>
-                    <textarea
-                      id="enquiry-additional"
-                      name="additional"
-                      rows={4}
-                      value={form.additional}
-                      onChange={set("additional")}
-                    />
+                    {fieldErrors.bouquets && (
+                      <span className="field-error">{fieldErrors.bouquets}</span>
+                    )}
                   </div>
                 </div>
+
+                <p className="enquire-form__group-label">Your details</p>
+                <div className="form-grid">
+                  <div className={`field ${fieldErrors.name ? "has-error" : ""}`}>
+                    <label htmlFor="enquiry-name">Name</label>
+                    <input
+                      id="enquiry-name"
+                      name="name"
+                      autoComplete="name"
+                      required
+                      value={form.name}
+                      onChange={set("name")}
+                    />
+                    {fieldErrors.name && <span className="field-error">{fieldErrors.name}</span>}
+                  </div>
+                  <div className={`field ${fieldErrors.email ? "has-error" : ""}`}>
+                    <label htmlFor="enquiry-email">Email</label>
+                    <input
+                      id="enquiry-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      value={form.email}
+                      onChange={set("email")}
+                    />
+                    {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
+                  </div>
+                </div>
+
+                <div className="enquire-extras">
+                  <button
+                    className="enquire-extras__toggle"
+                    type="button"
+                    aria-expanded={showExtras}
+                    onClick={() => setShowExtras((v) => !v)}
+                  >
+                    {showExtras ? "Hide optional details" : "Add package or colour ideas (optional)"}
+                  </button>
+                  {showExtras ? (
+                    <div className="form-grid enquire-extras__grid">
+                      <div className="field">
+                        <label htmlFor="enquiry-package">Package</label>
+                        <select
+                          id="enquiry-package"
+                          name="packageChoice"
+                          value={form.packageChoice}
+                          onChange={set("packageChoice")}
+                        >
+                          <option value="">Select…</option>
+                          {packageChoices.map((t) => (
+                            <option key={t}>{t}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="field">
+                        <label htmlFor="enquiry-guests">Guest count</label>
+                        <input
+                          id="enquiry-guests"
+                          name="guests"
+                          inputMode="numeric"
+                          value={form.guests}
+                          onChange={set("guests")}
+                        />
+                      </div>
+                      <div className="field">
+                        <label htmlFor="enquiry-colourIdeas">Colour ideas</label>
+                        <input
+                          id="enquiry-colourIdeas"
+                          name="colourIdeas"
+                          value={form.colourIdeas}
+                          onChange={set("colourIdeas")}
+                        />
+                      </div>
+                      <div className="field full">
+                        <label htmlFor="enquiry-additional">Anything else</label>
+                        <textarea
+                          id="enquiry-additional"
+                          name="additional"
+                          rows={3}
+                          value={form.additional}
+                          onChange={set("additional")}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <input type="hidden" name="packageChoice" value={form.packageChoice} />
+                      <input type="hidden" name="guests" value={form.guests} />
+                      <input type="hidden" name="colourIdeas" value={form.colourIdeas} />
+                      <input type="hidden" name="additional" value={form.additional} />
+                    </>
+                  )}
+                </div>
+
                 <p className="enquire-page__privacy">
-                  We’ll use your details to check availability and reply with a quote. See our{" "}
-                  <Link to="/privacy/">privacy policy</Link>.
+                  We’ll reply with availability and a clear quote.{" "}
+                  <Link to="/privacy/">Privacy</Link>
                 </p>
                 {status === "error" && errorMessage && (
                   <p className="form-error" role="alert">
@@ -385,8 +434,12 @@ export default function EnquirePage() {
                   disabled={status === "submitting"}
                   aria-busy={status === "submitting"}
                 >
-                  {status === "submitting" ? "Sending…" : "Send enquiry"}
+                  {status === "submitting" ? "Sending…" : "Check your date"}
                 </button>
+                <p className="enquire-page__help">
+                  Prefer to browse first?{" "}
+                  <Link to="/packages/">See packages</Link>
+                </p>
               </form>
             )}
           </div>

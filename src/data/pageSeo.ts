@@ -85,11 +85,11 @@ export const pageSeo = {
   },
   enquire: {
     path: "/enquire/",
-    title: "Enquire | The Little Market Co",
+    title: "Check Your Date | The Little Market Co",
     description:
-      "Enquire about flower bar hire in London. Share your date, venue and bouquet numbers for a tailored Little Bloom Market quote.",
-    h1: "Tell us about your celebration",
-    lead: "We’ll check availability and send a tailored quote. Submitting an enquiry does not reserve your date.",
+      "Check your date for a mobile flower market in London. Share your venue and bouquet numbers — we’ll reply with a clear quote.",
+    h1: "Check your date",
+    lead: "Three quick details. We’ll confirm availability and send package options.",
     inSitemap: true,
     changefreq: "monthly",
     priority: 0.8,

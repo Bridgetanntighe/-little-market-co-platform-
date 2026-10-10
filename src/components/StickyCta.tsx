@@ -57,7 +57,7 @@ export function StickyCta() {
     <div className={visible ? "sticky-cta is-visible" : "sticky-cta"} aria-hidden={!visible}>
       {visible ? (
         <Link className="btn btn-accent" to="/enquire/">
-          Check availability
+          Check your date
         </Link>
       ) : null}
     </div>

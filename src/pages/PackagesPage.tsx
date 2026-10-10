@@ -100,7 +100,7 @@ export default function PackagesPage() {
                     className="btn btn-accent"
                     to={enquireHref({ packageChoice: pkg.enquiryValue })}
                   >
-                    Check availability
+                    Check your date
                   </Link>
                 </article>
               ))}
@@ -170,7 +170,7 @@ export default function PackagesPage() {
             <h2 className="section-title">Package FAQs</h2>
             <FaqList items={packageFaqs} />
             <Link className="btn btn-primary" style={{ marginTop: "2rem" }} to={enquireHref()}>
-              Check availability
+              Check your date
             </Link>
           </div>
         </section>
